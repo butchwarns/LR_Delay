@@ -59,6 +59,15 @@ LR_DelayAudioProcessor::LR_DelayAudioProcessor() : parameters(*this, &undoManage
     cutoffHP_L = parameters.getRawParameterValue("cutoffHP_R");
 
     stereoWidth = parameters.getRawParameterValue("stereoWidth");
+
+    //==============================================================================
+
+    // Make faust objects
+    fDELAY = std::make_unique<::Delay>();
+    fUI = std::make_unique<::MapUI>();
+
+    // Attach UI to DSP
+    fDELAY->buildUserInterface(fUI.get());
 }
 
 LR_DelayAudioProcessor::~LR_DelayAudioProcessor()
@@ -130,8 +139,7 @@ void LR_DelayAudioProcessor::changeProgramName(int index, const juce::String &ne
 //==============================================================================
 void LR_DelayAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    fDELAY->init(sampleRate);
 }
 
 void LR_DelayAudioProcessor::releaseResources()
@@ -192,6 +200,14 @@ void LR_DelayAudioProcessor::processBlock(juce::AudioBuffer<float> &buffer, juce
 
         // ..do something to the data...
     }
+
+    //==============================================================================
+    // Faust DSP computation
+    const int bufferSize = buffer.getNumSamples();
+    faustIO = buffer.getArrayOfWritePointers();
+
+    fDELAY->compute(bufferSize, faustIO, faustIO); // Process!
+
 }
 
 //==============================================================================

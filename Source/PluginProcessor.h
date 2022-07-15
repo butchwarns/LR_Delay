@@ -9,6 +9,12 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "delay.h"
+
+//==============================================================================
+// Declarations needed for faust dsp integration to work
+class dsp;
+class MapUI;
 
 //==============================================================================
 /**
@@ -83,6 +89,13 @@ private:
     std::atomic<float> *cutoffHP_R;
 
     std::atomic<float> *stereoWidth;
+
+    //==============================================================================
+    // Faust dsp objects
+    std::unique_ptr<::Delay> fDELAY; // Delay dsp class
+    std::unique_ptr<::MapUI> fUI; // Parameter handling
+
+    float **faustIO; // Input/output arrays
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(LR_DelayAudioProcessor)
