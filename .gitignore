@@ -1,0 +1,68 @@
+################################################################################
+# C++
+################################################################################
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+################################################################################
+# JUCE
+################################################################################
+
+JuceLibraryCode/
+
+# Builds and CMake
+Builds/
+builds_cmake/*
+!builds_cmake/build_cmake.sh
+CMakeLists.txt
+
+################################################################################
+# Faust
+################################################################################
+
+dsp/*
+!dsp/delay.dsp
+!dsp/compile.sh
+!dsp/faust2jack_and_run.sh
+
+################################################################################
+# Misc
+################################################################################
+.DS_Store/
+
+.vscode/
+
+test/
+design/
+notes/
