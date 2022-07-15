@@ -61,8 +61,28 @@ private:
     juce::AudioProcessorValueTreeState parameters;
     juce::UndoManager undoManager;
     
+    //==============================================================================
+    // Parameters
+
     std::atomic<float> *inputVolume;
     std::atomic<float> *outputVolume;
+
+    std::atomic<float> *dryWet_L;
+    std::atomic<float> *dryWet_R;
+
+    std::atomic<float> *feedback_L;
+    std::atomic<float> *feedback_R;
+
+    std::atomic<float> *delayTime_L;
+    std::atomic<float> *delayTime_R;
+
+    std::atomic<float> *cutoffLP_L;
+    std::atomic<float> *cutoffLP_R;
+
+    std::atomic<float> *cutoffHP_L;
+    std::atomic<float> *cutoffHP_R;
+
+    std::atomic<float> *stereoWidth;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(LR_DelayAudioProcessor)
