@@ -64,5 +64,6 @@ dsp/*
 .vscode/
 
 test/
+host_test/
 design/
 notes/
