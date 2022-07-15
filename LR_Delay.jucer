@@ -11,6 +11,7 @@
               userNotes=":)">
   <MAINGROUP id="zB75Do" name="LR_Delay">
     <GROUP id="{43425943-A097-BEE0-498C-4421B96EFAE5}" name="Source">
+      <FILE id="fPYcLf" name="delay.h" compile="0" resource="0" file="Source/delay.h"/>
       <FILE id="GWuZkJ" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="D5xErQ" name="PluginProcessor.h" compile="0" resource="0"
