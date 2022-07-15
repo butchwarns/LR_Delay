@@ -58,6 +58,12 @@ public:
     void setStateInformation(const void *data, int sizeInBytes) override;
 
 private:
+    juce::AudioProcessorValueTreeState parameters;
+    juce::UndoManager undoManager;
+    
+    std::atomic<float> *inputVolume;
+    std::atomic<float> *outputVolume;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(LR_DelayAudioProcessor)
 };

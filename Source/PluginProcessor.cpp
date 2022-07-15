@@ -10,7 +10,11 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-LR_DelayAudioProcessor::LR_DelayAudioProcessor()
+LR_DelayAudioProcessor::LR_DelayAudioProcessor() : parameters(*this, &undoManager, "parameters",
+                                                              {
+                                                                  std::make_unique<juce::AudioParameterFloat>("inputVolume", "Input Volume", -24.0f, 12.0f, 0.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("outputVolume", "Output Volume", -24.0f, 12.0f, 0.0f),
+                                                              })
 #ifndef JucePlugin_PreferredChannelConfigurations
     : AudioProcessor(BusesProperties()
 #if !JucePlugin_IsMidiEffect
@@ -22,6 +26,10 @@ LR_DelayAudioProcessor::LR_DelayAudioProcessor()
       )
 #endif
 {
+    // parameters.createAndAddParameter(std::make_unique<juce::AudioParameterFloat>("inputVolume", "Input Volume", -24.0f, 12.0f, 0.0f));
+
+    inputVolume = parameters.getRawParameterValue("inputVolume");
+    outputVolume = parameters.getRawParameterValue("outputVolume");
 }
 
 LR_DelayAudioProcessor::~LR_DelayAudioProcessor()
