@@ -1280,6 +1280,22 @@ class Delay : public dsp {
 	
 	virtual void buildUserInterface(UI* ui_interface) {
 		ui_interface->openVerticalBox("delay");
+		ui_interface->declare(&fVslider5, "scale", "log");
+		ui_interface->declare(&fVslider5, "style", "knob");
+		ui_interface->declare(&fVslider5, "unit", "Hz");
+		ui_interface->addVerticalSlider("cutoffHP_L", &fVslider5, FAUSTFLOAT(20.0), FAUSTFLOAT(20.0), FAUSTFLOAT(20000.0), FAUSTFLOAT(0.10000000000000001));
+		ui_interface->declare(&fVslider10, "scale", "log");
+		ui_interface->declare(&fVslider10, "style", "knob");
+		ui_interface->declare(&fVslider10, "unit", "Hz");
+		ui_interface->addVerticalSlider("cutoffHP_R", &fVslider10, FAUSTFLOAT(20.0), FAUSTFLOAT(20.0), FAUSTFLOAT(20000.0), FAUSTFLOAT(0.10000000000000001));
+		ui_interface->declare(&fVslider3, "scale", "log");
+		ui_interface->declare(&fVslider3, "style", "knob");
+		ui_interface->declare(&fVslider3, "unit", "Hz");
+		ui_interface->addVerticalSlider("cutoffLP_L", &fVslider3, FAUSTFLOAT(20000.0), FAUSTFLOAT(20.0), FAUSTFLOAT(20000.0), FAUSTFLOAT(0.10000000000000001));
+		ui_interface->declare(&fVslider9, "scale", "log");
+		ui_interface->declare(&fVslider9, "style", "knob");
+		ui_interface->declare(&fVslider9, "unit", "Hz");
+		ui_interface->addVerticalSlider("cutoffLP_R", &fVslider9, FAUSTFLOAT(20000.0), FAUSTFLOAT(20.0), FAUSTFLOAT(20000.0), FAUSTFLOAT(0.10000000000000001));
 		ui_interface->declare(&fVslider6, "scale", "log");
 		ui_interface->declare(&fVslider6, "style", "knob");
 		ui_interface->declare(&fVslider6, "unit", "ms");
@@ -1294,22 +1310,6 @@ class Delay : public dsp {
 		ui_interface->declare(&fVslider12, "style", "knob");
 		ui_interface->declare(&fVslider12, "unit", "%");
 		ui_interface->addVerticalSlider("dryWet_R", &fVslider12, FAUSTFLOAT(0.0), FAUSTFLOAT(0.0), FAUSTFLOAT(100.0), FAUSTFLOAT(0.0));
-		ui_interface->declare(&fVslider5, "scale", "log");
-		ui_interface->declare(&fVslider5, "style", "knob");
-		ui_interface->declare(&fVslider5, "unit", "Hz");
-		ui_interface->addVerticalSlider("fcHP_L", &fVslider5, FAUSTFLOAT(20.0), FAUSTFLOAT(20.0), FAUSTFLOAT(20000.0), FAUSTFLOAT(0.10000000000000001));
-		ui_interface->declare(&fVslider10, "scale", "log");
-		ui_interface->declare(&fVslider10, "style", "knob");
-		ui_interface->declare(&fVslider10, "unit", "Hz");
-		ui_interface->addVerticalSlider("fcHP_R", &fVslider10, FAUSTFLOAT(20.0), FAUSTFLOAT(20.0), FAUSTFLOAT(20000.0), FAUSTFLOAT(0.10000000000000001));
-		ui_interface->declare(&fVslider3, "scale", "log");
-		ui_interface->declare(&fVslider3, "style", "knob");
-		ui_interface->declare(&fVslider3, "unit", "Hz");
-		ui_interface->addVerticalSlider("fcLP_L", &fVslider3, FAUSTFLOAT(20000.0), FAUSTFLOAT(20.0), FAUSTFLOAT(20000.0), FAUSTFLOAT(0.10000000000000001));
-		ui_interface->declare(&fVslider9, "scale", "log");
-		ui_interface->declare(&fVslider9, "style", "knob");
-		ui_interface->declare(&fVslider9, "unit", "Hz");
-		ui_interface->addVerticalSlider("fcLP_R", &fVslider9, FAUSTFLOAT(20000.0), FAUSTFLOAT(20.0), FAUSTFLOAT(20000.0), FAUSTFLOAT(0.10000000000000001));
 		ui_interface->declare(&fVslider2, "style", "knob");
 		ui_interface->declare(&fVslider2, "unit", "%");
 		ui_interface->addVerticalSlider("feedback_L", &fVslider2, FAUSTFLOAT(0.0), FAUSTFLOAT(0.0), FAUSTFLOAT(100.0), FAUSTFLOAT(1.0));

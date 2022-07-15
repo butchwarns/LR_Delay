@@ -38,27 +38,43 @@ LR_DelayAudioProcessor::LR_DelayAudioProcessor() : parameters(*this, &undoManage
 #endif
 {
     //==============================================================================
-    // Get pointers to all parameter values
+    // Get pointers to all parameter values and listen to value changes
 
     inputVolume = parameters.getRawParameterValue("inputVolume");
     outputVolume = parameters.getRawParameterValue("outputVolume");
+    parameters.addParameterListener("inputVolume", this);
+    parameters.addParameterListener("outputVolume", this);
 
     dryWet_L = parameters.getRawParameterValue("dryWet_L");
     dryWet_R = parameters.getRawParameterValue("dryWet_R");
+    parameters.addParameterListener("dryWet_L", this);
+    parameters.addParameterListener("dryWet_R", this);
 
     feedback_L = parameters.getRawParameterValue("feedback_L");
     feedback_R = parameters.getRawParameterValue("feedback_R");
+    parameters.addParameterListener("feedback_L", this);
+    parameters.addParameterListener("feedback_R", this);
 
     delayTime_L = parameters.getRawParameterValue("delayTime_L");
     delayTime_R = parameters.getRawParameterValue("delayTime_R");
+    parameters.addParameterListener("delayTime_L", this);
+    parameters.addParameterListener("delayTime_R", this);
 
     cutoffLP_L = parameters.getRawParameterValue("cutoffLP_L");
-    cutoffLP_L = parameters.getRawParameterValue("cutoffLP_R");
+    cutoffLP_R = parameters.getRawParameterValue("cutoffLP_R");
+    parameters.addParameterListener("cutoffLP_L", this);
+    parameters.addParameterListener("cutoffLP_R", this);
 
     cutoffHP_L = parameters.getRawParameterValue("cutoffHP_L");
-    cutoffHP_L = parameters.getRawParameterValue("cutoffHP_R");
+    cutoffHP_R = parameters.getRawParameterValue("cutoffHP_R");
+    parameters.addParameterListener("cutoffHP_L", this);
+    parameters.addParameterListener("cutoffHP_R", this);
 
     stereoWidth = parameters.getRawParameterValue("stereoWidth");
+    parameters.addParameterListener("stereoWidth", this);
+
+    //==============================================================================
+    // Listen to parameter changes
 
     //==============================================================================
 
@@ -207,7 +223,6 @@ void LR_DelayAudioProcessor::processBlock(juce::AudioBuffer<float> &buffer, juce
     faustIO = buffer.getArrayOfWritePointers();
 
     fDELAY->compute(bufferSize, faustIO, faustIO); // Process!
-
 }
 
 //==============================================================================
@@ -241,4 +256,11 @@ void LR_DelayAudioProcessor::setStateInformation(const void *data, int sizeInByt
 juce::AudioProcessor *JUCE_CALLTYPE createPluginFilter()
 {
     return new LR_DelayAudioProcessor();
+}
+
+//==============================================================================
+// Hand over parameter changes to Faust DSP code
+void LR_DelayAudioProcessor::parameterChanged(const juce::String &parameterId, float newValue)
+{
+    fUI->setParamValue(parameterId.toStdString(), newValue);
 }

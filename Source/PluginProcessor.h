@@ -19,7 +19,7 @@ class MapUI;
 //==============================================================================
 /**
  */
-class LR_DelayAudioProcessor : public juce::AudioProcessor
+class LR_DelayAudioProcessor : public juce::AudioProcessor, public juce::AudioProcessorValueTreeState::Listener
 #if JucePlugin_Enable_ARA
     ,
                                public juce::AudioProcessorARAExtension
@@ -63,6 +63,10 @@ public:
     void getStateInformation(juce::MemoryBlock &destData) override;
     void setStateInformation(const void *data, int sizeInBytes) override;
 
+    //==============================================================================
+    // juce::AudiopProcessorValueTree::Listener interface
+    void parameterChanged(const juce::String &parameterId, float newValue) override;
+
 private:
     juce::AudioProcessorValueTreeState parameters;
     juce::UndoManager undoManager;
@@ -92,6 +96,7 @@ private:
 
     //==============================================================================
     // Faust dsp objects
+
     std::unique_ptr<::Delay> fDELAY; // Delay dsp class
     std::unique_ptr<::MapUI> fUI; // Parameter handling
 
