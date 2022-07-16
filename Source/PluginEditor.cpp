@@ -10,12 +10,24 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcessor &p)
-    : AudioProcessorEditor(&p), audioProcessor(p)
+LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcessor &p, juce::AudioProcessorValueTreeState &apvts)
+    : AudioProcessorEditor(&p), audioProcessor(p), apvts(apvts)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize(400, 300);
+
+    inputVolumeSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
+    outputVolumeSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
+
+    inputVolumeSlider.setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
+    outputVolumeSlider.setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
+
+    inputVolumeAttachment.reset(new SliderAttachment(apvts, "inputVolume", inputVolumeSlider));
+    outputVolumeAttachment.reset(new SliderAttachment(apvts, "outputVolume", outputVolumeSlider));
+
+    addAndMakeVisible(&inputVolumeSlider);
+    addAndMakeVisible(&outputVolumeSlider);
 }
 
 LR_DelayAudioProcessorEditor::~LR_DelayAudioProcessorEditor()
@@ -37,4 +49,6 @@ void LR_DelayAudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
+    inputVolumeSlider.setBounds(0, 0, getWidth() / 2, getHeight());
+    outputVolumeSlider.setBounds(getWidth() / 2, 0, getWidth() / 2, getHeight());
 }

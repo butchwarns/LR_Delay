@@ -234,7 +234,7 @@ bool LR_DelayAudioProcessor::hasEditor() const
 juce::AudioProcessorEditor *LR_DelayAudioProcessor::createEditor()
 {
     // return new LR_DelayAudioProcessorEditor (*this);
-    return new juce::GenericAudioProcessorEditor(*this);
+    return new LR_DelayAudioProcessorEditor(*this, parameters);
 }
 
 //==============================================================================
@@ -243,12 +243,26 @@ void LR_DelayAudioProcessor::getStateInformation(juce::MemoryBlock &destData)
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+
+    juce::ValueTree state = parameters.copyState();
+    std::unique_ptr<juce::XmlElement> xml(state.createXml());
+    copyXmlToBinary(*xml, destData);
 }
 
 void LR_DelayAudioProcessor::setStateInformation(const void *data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+
+    std::unique_ptr<juce::XmlElement> xmlState(getXmlFromBinary(data, sizeInBytes));
+
+    if(xmlState.get() != nullptr)
+    {
+        if(xmlState->hasTagName(parameters.state.getType()))
+        {
+            parameters.replaceState(juce::ValueTree::fromXml(*xmlState));
+        }
+    }
 }
 
 //==============================================================================
