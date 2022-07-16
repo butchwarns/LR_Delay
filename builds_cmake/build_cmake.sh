@@ -6,4 +6,4 @@ cd "$scriptdir"
 
 cmake .. -GUnix\ Makefiles -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=Debug
 
-cmake --build . --parallel 
+cmake --build . --parallel --config Debug
