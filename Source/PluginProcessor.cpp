@@ -155,7 +155,14 @@ void LR_DelayAudioProcessor::changeProgramName(int index, const juce::String &ne
 //==============================================================================
 void LR_DelayAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
-    fDELAY->init(sampleRate);
+    // Init oversampling
+    typedef juce::dsp::Oversampling<float> Oversampling;
+    oversampling.addOversamplingStage(Oversampling::FilterType::filterHalfBandPolyphaseIIR, 0.1f, -68.0f, 0.1f, -68.0f);
+    oversampling.factorOversampling = OVERSAMPLING_FACTOR;
+    oversampledBuffer.setSize(getTotalNumInputChannels(), samplesPerBlock * OVERSAMPLING_FACTOR, false, true, false);
+
+    // Init Faust dsp
+    fDELAY->init(sampleRate * OVERSAMPLING_FACTOR);
 }
 
 void LR_DelayAudioProcessor::releaseResources()
@@ -218,11 +225,21 @@ void LR_DelayAudioProcessor::processBlock(juce::AudioBuffer<float> &buffer, juce
     }
 
     //==============================================================================
+    // Upsampling for antialiasing reasons
+    juce::dsp::AudioBlock<float> oversampledBlock(oversampledBuffer);
+    oversampledBlock = oversampling.processSamplesUp(buffer);
+
+    //==============================================================================
     // Faust DSP computation
     const int bufferSize = buffer.getNumSamples();
     faustIO = buffer.getArrayOfWritePointers();
 
     fDELAY->compute(bufferSize, faustIO, faustIO); // Process!
+
+    //==============================================================================
+    // Downsampling
+    juce::dsp::AudioBlock<float> IOBlock(buffer);
+    oversampling.processSamplesDown(IOBlock);
 }
 
 //==============================================================================

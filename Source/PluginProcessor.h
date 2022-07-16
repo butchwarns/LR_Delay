@@ -103,5 +103,11 @@ private:
     float **faustIO; // Input/output arrays
 
     //==============================================================================
+    // Oversampling to run Faust dsp at higher samplerate
+    juce::dsp::Oversampling<float> oversampling;
+    const int OVERSAMPLING_FACTOR = 4;
+    juce::AudioBuffer<float> oversampledBuffer;
+
+    //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(LR_DelayAudioProcessor)
 };
