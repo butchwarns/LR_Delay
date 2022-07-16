@@ -3,8 +3,8 @@ import("stdfaust.lib");
 maxDelay = 1.5 * ma.SR; // 1.5s max delay time
 interpTime = 42 * ma.SR / 1000; // 1ms interpolation time
 
-p_inputVolume = vslider("inputVolume[unit:dB][style:knob]", 0.0, -24.0, 12.0, 0.1) : ba.db2linear;
-p_outputVolume = vslider("outputVolume[unit:dB][style:knob]", 0.0, -24.0, 12.0, 0.1) : ba.db2linear;
+p_inputVolume = vslider("inputVolume[unit:dB][style:knob]", 0.0, -24.0, 12.0, 0.1) : ba.db2linear : si.smoo;
+p_outputVolume = vslider("outputVolume[unit:dB][style:knob]", 0.0, -24.0, 12.0, 0.1) : ba.db2linear : si.smoo;
 
 p_dryWet_L = vslider("dryWet_L[unit:%][style:knob]", 0, 0, 100, 0) / 100 : si.smoo;
 p_dryWet_R = vslider("dryWet_R[unit:%][style:knob]", 0, 0, 100, 0) / 100 : si.smoo;
