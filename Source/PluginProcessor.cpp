@@ -12,8 +12,8 @@
 //==============================================================================
 LR_DelayAudioProcessor::LR_DelayAudioProcessor() : parameters(*this, &undoManager, "parameters",
                                                               {
-                                                                  std::make_unique<juce::AudioParameterFloat>("inputVolume", "IN_VOLUME", -24.0f, 12.0f, 0.0f),
-                                                                  std::make_unique<juce::AudioParameterFloat>("outputVolume", "OUT_VOLUME", -24.0f, 12.0f, 0.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("drive", "DRIVE", -24.0f, 12.0f, 0.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("volume", "VOLUME", -24.0f, 12.0f, 0.0f),
                                                                   std::make_unique<juce::AudioParameterFloat>("dryWet_L", "DRY_WET_L", 0.0f, 100.0f, 0.0f),
                                                                   std::make_unique<juce::AudioParameterFloat>("dryWet_R", "DRY_WET_R", 0.0f, 100.0f, 0.0f),
                                                                   std::make_unique<juce::AudioParameterFloat>("feedback_L", "FEEDBACK_L", 0.0f, 100.0f, 0.0f),
@@ -40,10 +40,11 @@ LR_DelayAudioProcessor::LR_DelayAudioProcessor() : parameters(*this, &undoManage
     //==============================================================================
     // Get pointers to all parameter values and listen to value changes
 
-    inputVolume = parameters.getRawParameterValue("inputVolume");
-    outputVolume = parameters.getRawParameterValue("outputVolume");
-    parameters.addParameterListener("inputVolume", this);
-    parameters.addParameterListener("outputVolume", this);
+    drive = parameters.getRawParameterValue("drive");
+    parameters.addParameterListener("drive", this);
+
+    volume = parameters.getRawParameterValue("volume");
+    parameters.addParameterListener("volume", this);
 
     dryWet_L = parameters.getRawParameterValue("dryWet_L");
     dryWet_R = parameters.getRawParameterValue("dryWet_R");
@@ -74,7 +75,9 @@ LR_DelayAudioProcessor::LR_DelayAudioProcessor() : parameters(*this, &undoManage
     parameters.addParameterListener("stereoWidth", this);
 
     //==============================================================================
-    // Listen to parameter changes
+    // Oversampling
+    typedef juce::dsp::Oversampling<float> Oversampling;
+    oversampling.reset(new Oversampling(2, log2(OVERSAMPLING_FACTOR), Oversampling::FilterType::filterHalfBandPolyphaseIIR, true, true));
 
     //==============================================================================
 
@@ -156,13 +159,11 @@ void LR_DelayAudioProcessor::changeProgramName(int index, const juce::String &ne
 void LR_DelayAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
     // Init oversampling
-    typedef juce::dsp::Oversampling<float> Oversampling;
-    oversampling.addOversamplingStage(Oversampling::FilterType::filterHalfBandPolyphaseIIR, 0.1f, -68.0f, 0.1f, -68.0f);
-    oversampling.factorOversampling = OVERSAMPLING_FACTOR;
-    oversampledBuffer.setSize(getTotalNumInputChannels(), samplesPerBlock * OVERSAMPLING_FACTOR, false, true, false);
+    oversampling->initProcessing(static_cast<size_t>(samplesPerBlock));
+    oversampling->reset();
 
     // Init Faust dsp
-    fDELAY->init(sampleRate * OVERSAMPLING_FACTOR);
+    fDELAY->init(static_cast<int>(sampleRate * OVERSAMPLING_FACTOR));
 }
 
 void LR_DelayAudioProcessor::releaseResources()
@@ -217,29 +218,30 @@ void LR_DelayAudioProcessor::processBlock(juce::AudioBuffer<float> &buffer, juce
     // the samples and the outer loop is handling the channels.
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        auto *channelData = buffer.getWritePointer(channel);
+    // for (int channel = 0; channel < totalNumInputChannels; ++channel)
+    // {
+    //     auto *channelData = buffer.getWritePointer(channel);
 
-        // ..do something to the data...
-    }
+    //     // ..do something to the data...
+    // }
 
     //==============================================================================
     // Upsampling for antialiasing reasons
-    juce::dsp::AudioBlock<float> oversampledBlock(oversampledBuffer);
-    oversampledBlock = oversampling.processSamplesUp(buffer);
+    juce::dsp::AudioBlock<float> IOBlock(buffer);
+    juce::dsp::AudioBlock<float> oversampledBlock = oversampling->processSamplesUp(IOBlock);
 
+    buffer.clear();
     //==============================================================================
     // Faust DSP computation
-    const int bufferSize = buffer.getNumSamples();
-    faustIO = buffer.getArrayOfWritePointers();
+    float *faustIO[2]{0};
+    faustIO[0] = oversampledBlock.getChannelPointer(0);
+    faustIO[1] = oversampledBlock.getChannelPointer(1);
 
-    fDELAY->compute(bufferSize, faustIO, faustIO); // Process!
+    fDELAY->compute(buffer.getNumSamples() * OVERSAMPLING_FACTOR, faustIO, faustIO);
 
-    //==============================================================================
-    // Downsampling
-    juce::dsp::AudioBlock<float> IOBlock(buffer);
-    oversampling.processSamplesDown(IOBlock);
+    // //==============================================================================
+    // // Downsampling
+    oversampling->processSamplesDown(IOBlock);
 }
 
 //==============================================================================
@@ -273,9 +275,9 @@ void LR_DelayAudioProcessor::setStateInformation(const void *data, int sizeInByt
 
     std::unique_ptr<juce::XmlElement> xmlState(getXmlFromBinary(data, sizeInBytes));
 
-    if(xmlState.get() != nullptr)
+    if (xmlState.get() != nullptr)
     {
-        if(xmlState->hasTagName(parameters.state.getType()))
+        if (xmlState->hasTagName(parameters.state.getType()))
         {
             parameters.replaceState(juce::ValueTree::fromXml(*xmlState));
         }

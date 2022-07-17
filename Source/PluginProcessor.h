@@ -74,8 +74,8 @@ private:
     //==============================================================================
     // Parameters
 
-    std::atomic<float> *inputVolume;
-    std::atomic<float> *outputVolume;
+    std::atomic<float> *drive;
+    std::atomic<float> *volume;
 
     std::atomic<float> *dryWet_L;
     std::atomic<float> *dryWet_R;
@@ -100,13 +100,10 @@ private:
     std::unique_ptr<::Delay> fDELAY; // Delay dsp class
     std::unique_ptr<::MapUI> fUI; // Parameter handling
 
-    float **faustIO; // Input/output arrays
-
     //==============================================================================
     // Oversampling to run Faust dsp at higher samplerate
-    juce::dsp::Oversampling<float> oversampling;
+    std::unique_ptr<juce::dsp::Oversampling<float>> oversampling;
     const int OVERSAMPLING_FACTOR = 4;
-    juce::AudioBuffer<float> oversampledBuffer;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(LR_DelayAudioProcessor)
