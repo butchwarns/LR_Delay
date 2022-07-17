@@ -10,6 +10,22 @@
               pluginAAXCategory="0" includeBinaryInJuceHeader="1" cppLanguageStandard="17"
               userNotes=":)">
   <MAINGROUP id="zB75Do" name="LR_Delay">
+    <GROUP id="{771CC25F-F8F7-71F8-8910-6B8EB30AB347}" name="resources">
+      <FILE id="PDq8Uv" name="Manrope-Bold.ttf" compile="0" resource="1"
+            file="resources/font/manrope/Manrope-Bold.ttf"/>
+      <FILE id="DmnyvA" name="Manrope-ExtraBold.ttf" compile="0" resource="1"
+            file="resources/font/manrope/Manrope-ExtraBold.ttf"/>
+      <FILE id="IqBHKO" name="Manrope-ExtraLight.ttf" compile="0" resource="1"
+            file="resources/font/manrope/Manrope-ExtraLight.ttf"/>
+      <FILE id="u4R42p" name="Manrope-Light.ttf" compile="0" resource="1"
+            file="resources/font/manrope/Manrope-Light.ttf"/>
+      <FILE id="gA00p5" name="Manrope-Medium.ttf" compile="0" resource="1"
+            file="resources/font/manrope/Manrope-Medium.ttf"/>
+      <FILE id="CBRUFP" name="Manrope-Regular.ttf" compile="0" resource="1"
+            file="resources/font/manrope/Manrope-Regular.ttf"/>
+      <FILE id="QKkg8m" name="Manrope-SemiBold.ttf" compile="0" resource="1"
+            file="resources/font/manrope/Manrope-SemiBold.ttf"/>
+    </GROUP>
     <GROUP id="{43425943-A097-BEE0-498C-4421B96EFAE5}" name="Source">
       <FILE id="fPYcLf" name="delay.h" compile="0" resource="0" file="Source/delay.h"/>
       <FILE id="GWuZkJ" name="PluginProcessor.cpp" compile="1" resource="0"
