@@ -64,7 +64,7 @@ public:
     void setStateInformation(const void *data, int sizeInBytes) override;
 
     //==============================================================================
-    // juce::AudiopProcessorValueTree::Listener interface
+    juce::AudioProcessorValueTreeState::ParameterLayout getParameterLayout();
     void parameterChanged(const juce::String &parameterId, float newValue) override;
 
 private:
