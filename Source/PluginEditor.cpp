@@ -197,13 +197,13 @@ void LR_DelayAudioProcessorEditor::resized()
 
     volumeLabel.setBounds(0 * rotaryWidth, headerHeight + 1 * (rotaryHeight + labelHeight), rotaryWidth, labelHeight);
     volumeSlider.setBounds(0 * rotaryWidth, headerHeight + labelHeight + 1 * roLaHeight, rotaryWidth, rotaryHeight);
-    
+
     dryWet_L_Label.setBounds(1 * rotaryWidth, headerHeight + 0 * roLaHeight, rotaryWidth, labelHeight);
     dryWet_R_Label.setBounds(2 * rotaryWidth, headerHeight + 0 * roLaHeight, rotaryWidth, labelHeight);
 
     dryWet_L_Slider.setBounds(1 * rotaryWidth, headerHeight + labelHeight + 0 * roLaHeight, rotaryWidth, rotaryHeight);
     dryWet_R_Slider.setBounds(2 * rotaryWidth, headerHeight + labelHeight + 0 * roLaHeight, rotaryWidth, rotaryHeight);
-    
+
     feedback_L_Label.setBounds(1 * rotaryWidth, headerHeight + 1 * roLaHeight, rotaryWidth, labelHeight);
     feedback_R_Label.setBounds(2 * rotaryWidth, headerHeight + 1 * roLaHeight, rotaryWidth, labelHeight);
 

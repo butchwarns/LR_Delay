@@ -70,10 +70,9 @@ public:
 private:
     juce::AudioProcessorValueTreeState parameters;
     juce::UndoManager undoManager;
-    
+
     //==============================================================================
     // Parameters
-
     std::atomic<float> *drive;
     std::atomic<float> *volume;
 
@@ -96,9 +95,8 @@ private:
 
     //==============================================================================
     // Faust dsp objects
-
     std::unique_ptr<::Delay> fDELAY; // Delay dsp class
-    std::unique_ptr<::MapUI> fUI; // Parameter handling
+    std::unique_ptr<::MapUI> fUI;    // Parameter handling
 
     //==============================================================================
     // Oversampling to run Faust dsp at higher samplerate

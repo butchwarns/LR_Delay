@@ -36,7 +36,7 @@ private:
 
     juce::Slider volumeSlider;
     juce::Label volumeLabel;
-    
+
     juce::Slider dryWet_L_Slider;
     juce::Slider dryWet_R_Slider;
     juce::Label dryWet_L_Label;

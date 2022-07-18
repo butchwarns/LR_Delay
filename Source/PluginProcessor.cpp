@@ -278,6 +278,7 @@ juce::AudioProcessor *JUCE_CALLTYPE createPluginFilter()
 
 //==============================================================================
 // Parameters
+
 juce::AudioProcessorValueTreeState::ParameterLayout LR_DelayAudioProcessor::getParameterLayout()
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout(
