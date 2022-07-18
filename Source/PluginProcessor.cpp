@@ -12,19 +12,19 @@
 //==============================================================================
 LR_DelayAudioProcessor::LR_DelayAudioProcessor() : parameters(*this, &undoManager, "parameters",
                                                               {
-                                                                  std::make_unique<juce::AudioParameterFloat>("drive", "DRIVE", -24.0f, 12.0f, 0.0f),
-                                                                  std::make_unique<juce::AudioParameterFloat>("volume", "VOLUME", -24.0f, 12.0f, 0.0f),
-                                                                  std::make_unique<juce::AudioParameterFloat>("dryWet_L", "DRY_WET_L", 0.0f, 100.0f, 0.0f),
-                                                                  std::make_unique<juce::AudioParameterFloat>("dryWet_R", "DRY_WET_R", 0.0f, 100.0f, 0.0f),
-                                                                  std::make_unique<juce::AudioParameterFloat>("feedback_L", "FEEDBACK_L", 0.0f, 100.0f, 0.0f),
-                                                                  std::make_unique<juce::AudioParameterFloat>("feedback_R", "FEEDBACK_R", 0.0f, 100.0f, 0.0f),
-                                                                  std::make_unique<juce::AudioParameterFloat>("delayTime_L", "DELAY_TIME_L", 0.0f, 1500.0, 0.0f),
-                                                                  std::make_unique<juce::AudioParameterFloat>("delayTime_R", "DELAY_TIME_L", 0.0f, 1500.0, 0.0f),
-                                                                  std::make_unique<juce::AudioParameterFloat>("cutoffLP_L", "CUTOFF_LP_L", 20.0f, 20000.0f, 20000.0f),
-                                                                  std::make_unique<juce::AudioParameterFloat>("cutoffLP_R", "CUTOFF_LP_R", 20.0f, 20000.0f, 20000.0f),
-                                                                  std::make_unique<juce::AudioParameterFloat>("cutoffHP_L", "CUTOFF_HP_L", 20.0f, 20000.0f, 20.0f),
-                                                                  std::make_unique<juce::AudioParameterFloat>("cutoffHP_R", "CUTOFF_HP_R", 20.0f, 20000.0f, 20.0f),
-                                                                  std::make_unique<juce::AudioParameterFloat>("stereoWidth", "STEREO_WIDTH", 0.0f, 100.0f, 100.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("drive", "DRIVE", juce::NormalisableRange<float>(-12.0f, 36.0f, 0.1f, 1.0f), 0.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("volume", "VOLUME", juce::NormalisableRange<float>(-24.0f, 12.0f, 0.1f, 1.0f), 0.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("dryWet_L", "DRY_WET_L", juce::NormalisableRange<float>(0.0f, 100.0f, 0.1f), 0.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("dryWet_R", "DRY_WET_R", juce::NormalisableRange<float>(0.0f, 100.0f, 0.1f), 0.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("feedback_L", "FEEDBACK_L", juce::NormalisableRange<float>(0.0f, 100.0f, 0.1f), 0.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("feedback_R", "FEEDBACK_R", juce::NormalisableRange<float>(0.0f, 100.0f, 0.1f), 0.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("delayTime_L", "DELAY_TIME_L", juce::NormalisableRange<float>(0.0f, 1500.0f, 0.1f, 0.75f), 0.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("delayTime_R", "DELAY_TIME_L", juce::NormalisableRange<float>(0.0f, 1500.0f, 0.1f, 0.75f), 0.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("cutoffLP_L", "CUTOFF_LP_L", juce::NormalisableRange<float>(20.0f, 20000.0f, 0.1f, 0.33f), 20000.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("cutoffLP_R", "CUTOFF_LP_R", juce::NormalisableRange<float>(20.0f, 20000.0f, 0.1f, 0.33f), 20000.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("cutoffHP_L", "CUTOFF_HP_L", juce::NormalisableRange<float>(20.0f, 20000.0f, 0.1f, 0.33f), 20.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("cutoffHP_R", "CUTOFF_HP_R", juce::NormalisableRange<float>(20.0f, 20000.0f, 0.1f, 0.33f), 20.0f),
+                                                                  std::make_unique<juce::AudioParameterFloat>("stereoWidth", "STEREO_WIDTH", juce::NormalisableRange<float>(0.0f, 100.0f, 0.1f), 100.0f),
                                                               })
 #ifndef JucePlugin_PreferredChannelConfigurations
     : AudioProcessor(BusesProperties()
