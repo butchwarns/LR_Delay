@@ -32,6 +32,11 @@ private:
 
     //==============================================================================
     // UI elements
+    juce::Label titleLabel;
+    juce::Label versionLabel;
+    juce::Label coprLabel;
+    juce::Label websiteLabel;
+
     juce::Slider driveSlider;
     juce::Label driveLabel;
 
