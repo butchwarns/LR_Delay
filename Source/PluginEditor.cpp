@@ -18,11 +18,7 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
 
     //==============================================================================
     // Add children
-    addChildComponent(titleLabel);
-    addChildComponent(versionLabel);
-    addChildComponent(coprLabel);
-    addChildComponent(websiteLabel);
-
+    addChildComponent(header);
     addChildComponent(driveSlider);
     addChildComponent(volumeSlider);
     addChildComponent(dryWet_L_Slider);
@@ -40,16 +36,6 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
     //==============================================================================
     // Set "global" look and feel
     setLookAndFeel(&customLook);
-
-    //==============================================================================
-    // Header / footer setup
-    titleLabel.setText("LR_DELAY", juce::NotificationType::dontSendNotification);
-
-    versionLabel.setText("VERSION 0.1.0", juce::NotificationType::dontSendNotification);
-
-    coprLabel.setText("B.W.", juce::NotificationType::dontSendNotification);
-
-    websiteLabel.setText("HTTPS://BUTCHWARNS.DE/", juce::NotificationType::dontSendNotification);
 
     //==============================================================================
     // Make all sliders rotary knobs
@@ -172,10 +158,7 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
 
     //==============================================================================
     // Show all components
-    addAndMakeVisible(&titleLabel);
-    addAndMakeVisible(&versionLabel);
-    addAndMakeVisible(&coprLabel);
-    addAndMakeVisible(&websiteLabel);
+    addAndMakeVisible(&header);
 
     addAndMakeVisible(&driveSlider);
     addAndMakeVisible(&driveLabel);
@@ -226,20 +209,8 @@ void LR_DelayAudioProcessorEditor::paint(juce::Graphics &g)
 void LR_DelayAudioProcessorEditor::resized()
 {
     //==============================================================================
-    // Header / footer
-    titleLabel.setBounds(0, 0, 100, 25);
-    titleLabel.setJustificationType(juce::Justification::left);
-
-    const int versionLabelWidth = 100;
-    versionLabel.setBounds(width - versionLabelWidth, 0, versionLabelWidth, 25);
-    versionLabel.setJustificationType(juce::Justification::right);
-
-    coprLabel.setBounds(0, height - 25, 100, 25);
-    coprLabel.setJustificationType(juce::Justification::left);
-
-    const int websiteLabelWidth = 200;
-    websiteLabel.setBounds(width - websiteLabelWidth, height - 25, websiteLabelWidth, 25);
-    websiteLabel.setJustificationType(juce::Justification::right);
+    // Header
+    header.setBounds(0, 0, getLocalBounds().getWidth(), headerHeight);
 
     //==============================================================================
     // Slider and their labels

@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "CustomLookAndFeel.h"
+#include "Header.h"
 
 //==============================================================================
 /**
@@ -32,11 +33,11 @@ private:
 
     //==============================================================================
     // UI elements
-    juce::Label titleLabel;
-    juce::Label versionLabel;
-    juce::Label coprLabel;
-    juce::Label websiteLabel;
 
+    // Header
+    Header header;
+
+    // Slider and labels
     juce::Slider driveSlider;
     juce::Label driveLabel;
 
@@ -117,7 +118,7 @@ private:
     const int rotaryRows = 5;
 
     const int height = headerHeight + footerHeight + (rotaryRows * roLaHeight);
-    const int width = rotaryCols * rotaryWidth;
+    const int width = 300;
 
     //==============================================================================
     // UI styling
