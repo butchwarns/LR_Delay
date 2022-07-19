@@ -18,31 +18,44 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
 
     setSize(width, height);
     setLookAndFeel(&customLook);
-    customLook.setColour(juce::ResizableWindow::backgroundColourId, juce::Colours::darkgrey);
 
     //==============================================================================
     // Make all sliders rotary knobs
     typedef juce::Slider::SliderStyle SliderStyle;
 
     driveSlider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    driveSlider.setLookAndFeel(&customLook);
+
     volumeSlider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    volumeSlider.setLookAndFeel(&customLook);
 
     dryWet_L_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
     dryWet_R_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    dryWet_L_Slider.setLookAndFeel(&customLook);
+    dryWet_R_Slider.setLookAndFeel(&customLook);
 
     feedback_L_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
     feedback_R_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    feedback_L_Slider.setLookAndFeel(&customLook);
+    feedback_R_Slider.setLookAndFeel(&customLook);
 
     delayTime_L_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
     delayTime_R_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    delayTime_L_Slider.setLookAndFeel(&customLook);
+    delayTime_R_Slider.setLookAndFeel(&customLook);
 
     cutoffLP_L_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
     cutoffLP_R_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    cutoffLP_L_Slider.setLookAndFeel(&customLook);
+    cutoffLP_R_Slider.setLookAndFeel(&customLook);
 
     cutoffHP_L_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
     cutoffHP_R_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    cutoffHP_L_Slider.setLookAndFeel(&customLook);
+    cutoffHP_R_Slider.setLookAndFeel(&customLook);
 
     stereoWidthSlider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    stereoWidthSlider.setLookAndFeel(&customLook);
 
     //==============================================================================
     // Make text boxes

@@ -18,7 +18,14 @@ public:
     virtual ~CustomLookAndFeel();
 
 private:
-    void drawRotarySlider(juce::Graphics &g, int x, int y, int width, int height,
-                          float sliderPosProportional, float rotaryStartAngle,
-                          float rotaryEndAngle, juce::Slider &slider) override;
+    //==============================================================================
+    // Sliders
+    virtual void drawRotarySlider(juce::Graphics &g, int x, int y, int width, int height,
+                                  float sliderPosProportional, float rotaryStartAngle,
+                                  float rotaryEndAngle, juce::Slider &slider) override;
+
+    //==============================================================================
+    // Fonts
+    static const juce::Font &getManropeFont();
+    virtual juce::Font getLabelFont(juce::Label &l) override;
 };

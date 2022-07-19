@@ -11,10 +11,23 @@
 #include "CustomLookAndFeel.h"
 
 //==============================================================================
-CustomLookAndFeel::CustomLookAndFeel() {}
+CustomLookAndFeel::CustomLookAndFeel()
+{
+    //==============================================================================
+    // Colours
+    setColour(juce::ResizableWindow::backgroundColourId, juce::Colours::black);
+
+    setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::white);
+    setColour(juce::Slider::thumbColourId, juce::Colours::black);
+
+    setColour(juce::TextEditor::outlineColourId, juce::Colours::white);
+    setColour(juce::TextEditor::focusedOutlineColourId, juce::Colours::white);
+
+}
 CustomLookAndFeel::~CustomLookAndFeel() {}
 
 //==============================================================================
+// Sliders
 void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int width, int height,
                                          float sliderPosProportional, float rotaryStartAngle,
                                          float rotaryEndAngle, juce::Slider &slider)
@@ -30,8 +43,7 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     // Knob background
     juce::Path circlePath;
     circlePath.addEllipse(spacing, spacing, width - 2 * spacing, height - 2 * spacing);
-    circlePath.addEllipse(spacing + 2.0f *lineWidth, spacing + 2.0f * lineWidth, width - 2 * spacing + lineWidth * 0.5f, height - 2 * spacing + lineWidth * 0.5f);
-    g.setColour(juce::Colours::black);
+    g.setColour(findColour(juce::Slider::backgroundColourId));
     g.fillPath(circlePath);
 
     // Knob outline
@@ -49,4 +61,18 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     // g.fillPath(pointerPath);
     g.setColour(juce::Colours::white);
     g.strokePath(pointerPath, stroke);
+}
+
+//==============================================================================
+// Fonts
+juce::Font CustomLookAndFeel::getLabelFont(juce::Label &l)
+{
+    return getManropeFont().withHeight(20.0f);
+}
+
+const juce::Font &CustomLookAndFeel::getManropeFont()
+{
+    static juce::Font manrope(juce::Typeface::createSystemTypefaceFor(BinaryData::ManropeBold_ttf,
+                                                                      BinaryData::ManropeBold_ttfSize));
+    return manrope;
 }
