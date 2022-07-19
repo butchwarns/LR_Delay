@@ -27,6 +27,12 @@
             file="resources/font/manrope/Manrope-SemiBold.ttf"/>
     </GROUP>
     <GROUP id="{43425943-A097-BEE0-498C-4421B96EFAE5}" name="Source">
+      <GROUP id="{82CD6F29-B643-B2C9-803D-943B941DEFFF}" name="UI_styling">
+        <FILE id="hFObEv" name="CustomLookAndFeel.cpp" compile="1" resource="0"
+              file="Source/CustomLookAndFeel.cpp"/>
+        <FILE id="AGYZai" name="CustomLookAndFeel.h" compile="0" resource="0"
+              file="Source/CustomLookAndFeel.h"/>
+      </GROUP>
       <FILE id="fPYcLf" name="delay.h" compile="0" resource="0" file="Source/delay.h"/>
       <FILE id="GWuZkJ" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>

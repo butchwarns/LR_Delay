@@ -17,6 +17,8 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
     // editor's size to whatever you need it to be.
 
     setSize(width, height);
+    setLookAndFeel(&customLook);
+    customLook.setColour(juce::ResizableWindow::backgroundColourId, juce::Colours::darkgrey);
 
     //==============================================================================
     // Make all sliders rotary knobs
@@ -175,6 +177,8 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
 
 LR_DelayAudioProcessorEditor::~LR_DelayAudioProcessorEditor()
 {
+    //==============================================================================
+    setLookAndFeel(nullptr);
 }
 
 //==============================================================================
