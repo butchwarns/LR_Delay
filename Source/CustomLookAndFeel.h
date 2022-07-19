@@ -26,6 +26,6 @@ private:
 
     //==============================================================================
     // Fonts
-    static const juce::Font &getManropeFont();
+    juce::Typeface::Ptr manrope;
     virtual juce::Font getLabelFont(juce::Label &l) override;
 };

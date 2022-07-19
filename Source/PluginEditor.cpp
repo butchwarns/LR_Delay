@@ -13,9 +13,6 @@
 LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcessor &p, juce::AudioProcessorValueTreeState &apvts)
     : AudioProcessorEditor(&p), audioProcessor(p), apvts(apvts)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-
     setSize(width, height);
     setLookAndFeel(&customLook);
 
@@ -152,7 +149,7 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
     stereoWidthAttachment.reset(new SliderAttachment(apvts, "stereoWidth", stereoWidthSlider));
 
     //==============================================================================
-    // Show all the knobs and labels!
+    // Show all components
     addAndMakeVisible(&driveSlider);
     addAndMakeVisible(&driveLabel);
 
@@ -191,24 +188,31 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
 LR_DelayAudioProcessorEditor::~LR_DelayAudioProcessorEditor()
 {
     //==============================================================================
+    driveSlider.setLookAndFeel(nullptr);
+    volumeSlider.setLookAndFeel(nullptr);
+    dryWet_L_Slider.setLookAndFeel(nullptr);
+    dryWet_R_Slider.setLookAndFeel(nullptr);
+    feedback_L_Slider.setLookAndFeel(nullptr);
+    feedback_R_Slider.setLookAndFeel(nullptr);
+    delayTime_L_Slider.setLookAndFeel(nullptr);
+    delayTime_R_Slider.setLookAndFeel(nullptr);
+    cutoffLP_L_Slider.setLookAndFeel(nullptr);
+    cutoffLP_R_Slider.setLookAndFeel(nullptr);
+    cutoffHP_L_Slider.setLookAndFeel(nullptr);
+    cutoffHP_R_Slider.setLookAndFeel(nullptr);
+    stereoWidthSlider.setLookAndFeel(nullptr);
+
     setLookAndFeel(nullptr);
 }
 
 //==============================================================================
 void LR_DelayAudioProcessorEditor::paint(juce::Graphics &g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
-
-    g.setColour(juce::Colours::white);
-    g.setFont(15.0f);
-    g.drawFittedText("LR_DELAY", 5, 5, 100, 15, juce::Justification::left, 1);
 }
 
 void LR_DelayAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
     driveLabel.setBounds(0 * rotaryWidth, headerHeight + 0 * (rotaryHeight + labelHeight), rotaryWidth, labelHeight);
     driveSlider.setBounds(0 * rotaryWidth, headerHeight + labelHeight + 0 * roLaHeight, rotaryWidth, rotaryHeight);
 
