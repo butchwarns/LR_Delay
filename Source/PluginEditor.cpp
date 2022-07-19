@@ -13,60 +13,68 @@
 LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcessor &p, juce::AudioProcessorValueTreeState &apvts)
     : AudioProcessorEditor(&p), audioProcessor(p), apvts(apvts)
 {
+    // Set main window size
     setSize(width, height);
+
+    //==============================================================================
+    // Add children
+    addChildComponent(titleLabel);
+    addChildComponent(versionLabel);
+    addChildComponent(coprLabel);
+    addChildComponent(websiteLabel);
+
+    addChildComponent(driveSlider);
+    addChildComponent(volumeSlider);
+    addChildComponent(dryWet_L_Slider);
+    addChildComponent(dryWet_R_Slider);
+    addChildComponent(feedback_L_Slider);
+    addChildComponent(feedback_R_Slider);
+    addChildComponent(delayTime_L_Slider);
+    addChildComponent(delayTime_R_Slider);
+    addChildComponent(cutoffLP_L_Slider);
+    addChildComponent(cutoffLP_R_Slider);
+    addChildComponent(cutoffHP_L_Slider);
+    addChildComponent(cutoffHP_R_Slider);
+    addChildComponent(stereoWidthSlider);
+
+    //==============================================================================
+    // Set "global" look and feel
     setLookAndFeel(&customLook);
 
     //==============================================================================
     // Header / footer setup
     titleLabel.setText("LR_DELAY", juce::NotificationType::dontSendNotification);
-    titleLabel.setLookAndFeel(&customLook);
 
     versionLabel.setText("VERSION 0.1.0", juce::NotificationType::dontSendNotification);
-    versionLabel.setLookAndFeel(&customLook);
 
     coprLabel.setText("B.W.", juce::NotificationType::dontSendNotification);
-    coprLabel.setLookAndFeel(&customLook);
 
     websiteLabel.setText("HTTPS://BUTCHWARNS.DE/", juce::NotificationType::dontSendNotification);
-    websiteLabel.setLookAndFeel(&customLook);
 
     //==============================================================================
     // Make all sliders rotary knobs
     typedef juce::Slider::SliderStyle SliderStyle;
 
     driveSlider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
-    driveSlider.setLookAndFeel(&customLook);
 
     volumeSlider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
-    volumeSlider.setLookAndFeel(&customLook);
 
     dryWet_L_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
     dryWet_R_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
-    dryWet_L_Slider.setLookAndFeel(&customLook);
-    dryWet_R_Slider.setLookAndFeel(&customLook);
 
     feedback_L_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
     feedback_R_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
-    feedback_L_Slider.setLookAndFeel(&customLook);
-    feedback_R_Slider.setLookAndFeel(&customLook);
 
     delayTime_L_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
     delayTime_R_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
-    delayTime_L_Slider.setLookAndFeel(&customLook);
-    delayTime_R_Slider.setLookAndFeel(&customLook);
 
     cutoffLP_L_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
     cutoffLP_R_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
-    cutoffLP_L_Slider.setLookAndFeel(&customLook);
-    cutoffLP_R_Slider.setLookAndFeel(&customLook);
 
     cutoffHP_L_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
     cutoffHP_R_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
-    cutoffHP_L_Slider.setLookAndFeel(&customLook);
-    cutoffHP_R_Slider.setLookAndFeel(&customLook);
 
     stereoWidthSlider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
-    stereoWidthSlider.setLookAndFeel(&customLook);
 
     //==============================================================================
     // Make text boxes
@@ -206,27 +214,6 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
 
 LR_DelayAudioProcessorEditor::~LR_DelayAudioProcessorEditor()
 {
-    //==============================================================================
-    titleLabel.setLookAndFeel(nullptr);
-    versionLabel.setLookAndFeel(nullptr);
-    coprLabel.setLookAndFeel(nullptr);
-    websiteLabel.setLookAndFeel(nullptr);
-
-    //==============================================================================
-    driveSlider.setLookAndFeel(nullptr);
-    volumeSlider.setLookAndFeel(nullptr);
-    dryWet_L_Slider.setLookAndFeel(nullptr);
-    dryWet_R_Slider.setLookAndFeel(nullptr);
-    feedback_L_Slider.setLookAndFeel(nullptr);
-    feedback_R_Slider.setLookAndFeel(nullptr);
-    delayTime_L_Slider.setLookAndFeel(nullptr);
-    delayTime_R_Slider.setLookAndFeel(nullptr);
-    cutoffLP_L_Slider.setLookAndFeel(nullptr);
-    cutoffLP_R_Slider.setLookAndFeel(nullptr);
-    cutoffHP_L_Slider.setLookAndFeel(nullptr);
-    cutoffHP_R_Slider.setLookAndFeel(nullptr);
-    stereoWidthSlider.setLookAndFeel(nullptr);
-
     setLookAndFeel(nullptr);
 }
 
