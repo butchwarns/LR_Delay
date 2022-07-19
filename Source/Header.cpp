@@ -12,8 +12,10 @@ Header::Header()
     //==============================================================================
     // Setup Labels
     titleLabel.setText("LR_DELAY", juce::NotificationType::dontSendNotification);
+    titleLabel.setJustificationType(juce::Justification::left);
 
     versionLabel.setText("VERSION 0.1.0", juce::NotificationType::dontSendNotification);
+    versionLabel.setJustificationType(juce::Justification::right);
 
     //==============================================================================
     // Make components visible
@@ -29,13 +31,18 @@ void Header::paint(juce::Graphics &g) {}
 
 void Header::resized()
 {
+    //==============================================================================
+    const int width = getLocalBounds().getWidth();
+    const int height = getLocalBounds().getHeight();
+
+    //==============================================================================
     typedef juce::FlexBox FlexBox;
     FlexBox fb;
     fb.flexWrap = FlexBox::Wrap::noWrap;
     fb.justifyContent = FlexBox::JustifyContent::spaceBetween;
 
-    fb.items.add(juce::FlexItem(titleLabel).withMinWidth(MIN_LABEL_WIDTH).withMinHeight(MIN_LABEL_HEIGHT));
-    fb.items.add(juce::FlexItem(versionLabel).withMinWidth(MIN_LABEL_WIDTH).withMinHeight(MIN_LABEL_HEIGHT).withMaxHeight(MAX_HEIGHT));
+    fb.items.add(juce::FlexItem(titleLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_LABEL_HEIGHT));
+    fb.items.add(juce::FlexItem(versionLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_LABEL_HEIGHT).withMaxHeight(MAX_HEIGHT));
 
     fb.performLayout(getLocalBounds().toFloat());
 }
