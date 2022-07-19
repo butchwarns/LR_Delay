@@ -18,7 +18,8 @@ CustomLookAndFeel::CustomLookAndFeel()
     setColour(juce::ResizableWindow::backgroundColourId, juce::Colours::black);
 
     setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::white);
-    setColour(juce::Slider::thumbColourId, juce::Colours::black);
+    setColour(juce::Slider::rotarySliderOutlineColourId, juce::Colours::white);
+    setColour(juce::Slider::rotarySliderFillColourId, juce::Colours::black);
 
     setColour(juce::TextEditor::outlineColourId, juce::Colours::white);
     setColour(juce::TextEditor::focusedOutlineColourId, juce::Colours::white);
@@ -43,11 +44,11 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     // Knob background
     juce::Path circlePath;
     circlePath.addEllipse(spacing, spacing, width - 2 * spacing, height - 2 * spacing);
-    g.setColour(findColour(juce::Slider::backgroundColourId));
+    g.setColour(findColour(juce::Slider::rotarySliderFillColourId));
     g.fillPath(circlePath);
 
     // Knob outline
-    g.setColour(juce::Colours::white);
+    g.setColour(findColour(juce::Slider::rotarySliderOutlineColourId));
     juce::Path outlinePath;
     outlinePath.addEllipse(spacing, spacing, width - 2 * spacing, height - 2 * spacing);
     g.strokePath(outlinePath, stroke);
@@ -60,6 +61,7 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     pointerPath.applyTransform(juce::AffineTransform::rotation((rotaryEndAngle - rotaryStartAngle) * sliderPosProportional, width / 2, height / 2));
     // g.fillPath(pointerPath);
     g.setColour(juce::Colours::white);
+    g.setColour(findColour(juce::Slider::rotarySliderOutlineColourId));
     g.strokePath(pointerPath, stroke);
 }
 
