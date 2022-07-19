@@ -24,8 +24,9 @@ CustomLookAndFeel::CustomLookAndFeel()
     setColour(juce::TextEditor::outlineColourId, juce::Colours::white);
     setColour(juce::TextEditor::focusedOutlineColourId, juce::Colours::white);
 
-    manrope = juce::Typeface::createSystemTypefaceFor(BinaryData::ManropeExtraBold_ttf, BinaryData::ManropeExtraBold_ttfSize);
-    setDefaultSansSerifTypeface(manrope);
+    manropeExtraBold = juce::Typeface::createSystemTypefaceFor(BinaryData::ManropeExtraBold_ttf, BinaryData::ManropeExtraBold_ttfSize);
+    manropeLight = juce::Typeface::createSystemTypefaceFor(BinaryData::ManropeLight_ttf, BinaryData::ManropeLight_ttfSize);
+    setDefaultSansSerifTypeface(manropeExtraBold);
 }
 
 CustomLookAndFeel::~CustomLookAndFeel() {}
@@ -77,5 +78,17 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
 //==============================================================================
 juce::Font CustomLookAndFeel::getLabelFont(juce::Label &l)
 {
-    return juce::Font(manrope).withHeight(20.0f);
+    return getManropeExtraBoldFont().withHeight(20.0f);
+}
+
+juce::Font CustomLookAndFeel::getManropeLightFont()
+{
+    juce::Font manropeLightFont(manropeLight);
+    return manropeLightFont;
+}
+
+juce::Font CustomLookAndFeel::getManropeExtraBoldFont()
+{
+    juce::Font manropeExtraBoldFont(manropeExtraBold);
+    return manropeExtraBoldFont;
 }

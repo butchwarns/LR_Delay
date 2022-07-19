@@ -17,6 +17,8 @@ public:
     CustomLookAndFeel();
     virtual ~CustomLookAndFeel();
 
+    juce::Font getManropeLightFont();
+    juce::Font getManropeExtraBoldFont();
 private:
     //==============================================================================
     // Sliders
@@ -26,6 +28,8 @@ private:
 
     //==============================================================================
     // Fonts
-    juce::Typeface::Ptr manrope;
+    juce::Typeface::Ptr manropeExtraBold;
+    juce::Typeface::Ptr manropeLight;
+
     virtual juce::Font getLabelFont(juce::Label &l) override;
 };

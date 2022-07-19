@@ -18,7 +18,6 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
 
     //==============================================================================
     // Header / footer setup
-    titleLabel.setFont(25.0f);
     titleLabel.setText("LR_DELAY", juce::NotificationType::dontSendNotification);
     titleLabel.setLookAndFeel(&customLook);
 
