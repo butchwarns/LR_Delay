@@ -32,6 +32,8 @@
               file="Source/CustomLookAndFeel.cpp"/>
         <FILE id="AGYZai" name="CustomLookAndFeel.h" compile="0" resource="0"
               file="Source/CustomLookAndFeel.h"/>
+        <FILE id="oj0z1y" name="Header.cpp" compile="1" resource="0" file="Source/Header.cpp"/>
+        <FILE id="mQjt20" name="Header.h" compile="0" resource="0" file="Source/Header.h"/>
       </GROUP>
       <FILE id="fPYcLf" name="delay.h" compile="0" resource="0" file="Source/delay.h"/>
       <FILE id="GWuZkJ" name="PluginProcessor.cpp" compile="1" resource="0"
