@@ -19,6 +19,8 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
     //==============================================================================
     // Add children
     addChildComponent(header);
+    addChildComponent(footer);
+
     addChildComponent(driveSlider);
     addChildComponent(volumeSlider);
     addChildComponent(dryWet_L_Slider);
@@ -159,6 +161,7 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
     //==============================================================================
     // Show all components
     addAndMakeVisible(&header);
+    addAndMakeVisible(&footer);
 
     addAndMakeVisible(&driveSlider);
     addAndMakeVisible(&driveLabel);
@@ -209,47 +212,51 @@ void LR_DelayAudioProcessorEditor::paint(juce::Graphics &g)
 void LR_DelayAudioProcessorEditor::resized()
 {
     //==============================================================================
-    // Header
-    header.setBounds(0, 0, getLocalBounds().getWidth(), headerHeight);
+    // Header & footer
+    const int width = getLocalBounds().getWidth();
+    const int height = getLocalBounds().getHeight();
+
+    header.setBounds(0, 0, getLocalBounds().getWidth(), HEADER_HEIGHT);
+    footer.setBounds(0, height - HEADER_HEIGHT, width, HEADER_HEIGHT);
 
     //==============================================================================
     // Slider and their labels
-    driveLabel.setBounds(0 * rotaryWidth, headerHeight + 0 * (rotaryHeight + labelHeight), rotaryWidth, labelHeight);
-    driveSlider.setBounds(0 * rotaryWidth, headerHeight + labelHeight + 0 * roLaHeight, rotaryWidth, rotaryHeight);
+    driveLabel.setBounds(0 * rotaryWidth, HEADER_HEIGHT + 0 * (rotaryHeight + labelHeight), rotaryWidth, labelHeight);
+    driveSlider.setBounds(0 * rotaryWidth, HEADER_HEIGHT + labelHeight + 0 * roLaHeight, rotaryWidth, rotaryHeight);
 
-    volumeLabel.setBounds(0 * rotaryWidth, headerHeight + 1 * (rotaryHeight + labelHeight), rotaryWidth, labelHeight);
-    volumeSlider.setBounds(0 * rotaryWidth, headerHeight + labelHeight + 1 * roLaHeight, rotaryWidth, rotaryHeight);
+    volumeLabel.setBounds(0 * rotaryWidth, HEADER_HEIGHT + 1 * (rotaryHeight + labelHeight), rotaryWidth, labelHeight);
+    volumeSlider.setBounds(0 * rotaryWidth, HEADER_HEIGHT + labelHeight + 1 * roLaHeight, rotaryWidth, rotaryHeight);
 
-    dryWet_L_Label.setBounds(1 * rotaryWidth, headerHeight + 0 * roLaHeight, rotaryWidth, labelHeight);
-    dryWet_R_Label.setBounds(2 * rotaryWidth, headerHeight + 0 * roLaHeight, rotaryWidth, labelHeight);
+    dryWet_L_Label.setBounds(1 * rotaryWidth, HEADER_HEIGHT + 0 * roLaHeight, rotaryWidth, labelHeight);
+    dryWet_R_Label.setBounds(2 * rotaryWidth, HEADER_HEIGHT + 0 * roLaHeight, rotaryWidth, labelHeight);
 
-    dryWet_L_Slider.setBounds(1 * rotaryWidth, headerHeight + labelHeight + 0 * roLaHeight, rotaryWidth, rotaryHeight);
-    dryWet_R_Slider.setBounds(2 * rotaryWidth, headerHeight + labelHeight + 0 * roLaHeight, rotaryWidth, rotaryHeight);
+    dryWet_L_Slider.setBounds(1 * rotaryWidth, HEADER_HEIGHT + labelHeight + 0 * roLaHeight, rotaryWidth, rotaryHeight);
+    dryWet_R_Slider.setBounds(2 * rotaryWidth, HEADER_HEIGHT + labelHeight + 0 * roLaHeight, rotaryWidth, rotaryHeight);
 
-    feedback_L_Label.setBounds(1 * rotaryWidth, headerHeight + 1 * roLaHeight, rotaryWidth, labelHeight);
-    feedback_R_Label.setBounds(2 * rotaryWidth, headerHeight + 1 * roLaHeight, rotaryWidth, labelHeight);
+    feedback_L_Label.setBounds(1 * rotaryWidth, HEADER_HEIGHT + 1 * roLaHeight, rotaryWidth, labelHeight);
+    feedback_R_Label.setBounds(2 * rotaryWidth, HEADER_HEIGHT + 1 * roLaHeight, rotaryWidth, labelHeight);
 
-    feedback_L_Slider.setBounds(1 * rotaryWidth, headerHeight + labelHeight + 1 * roLaHeight, rotaryWidth, rotaryHeight);
-    feedback_R_Slider.setBounds(2 * rotaryWidth, headerHeight + labelHeight + 1 * roLaHeight, rotaryWidth, rotaryHeight);
+    feedback_L_Slider.setBounds(1 * rotaryWidth, HEADER_HEIGHT + labelHeight + 1 * roLaHeight, rotaryWidth, rotaryHeight);
+    feedback_R_Slider.setBounds(2 * rotaryWidth, HEADER_HEIGHT + labelHeight + 1 * roLaHeight, rotaryWidth, rotaryHeight);
 
-    delayTime_L_Label.setBounds(1 * rotaryWidth, headerHeight + 2 * roLaHeight, rotaryWidth, labelHeight);
-    delayTime_R_Label.setBounds(2 * rotaryWidth, headerHeight + 2 * roLaHeight, rotaryWidth, labelHeight);
+    delayTime_L_Label.setBounds(1 * rotaryWidth, HEADER_HEIGHT + 2 * roLaHeight, rotaryWidth, labelHeight);
+    delayTime_R_Label.setBounds(2 * rotaryWidth, HEADER_HEIGHT + 2 * roLaHeight, rotaryWidth, labelHeight);
 
-    delayTime_L_Slider.setBounds(1 * rotaryWidth, headerHeight + labelHeight + 2 * roLaHeight, rotaryWidth, rotaryHeight);
-    delayTime_R_Slider.setBounds(2 * rotaryWidth, headerHeight + labelHeight + 2 * roLaHeight, rotaryWidth, rotaryHeight);
+    delayTime_L_Slider.setBounds(1 * rotaryWidth, HEADER_HEIGHT + labelHeight + 2 * roLaHeight, rotaryWidth, rotaryHeight);
+    delayTime_R_Slider.setBounds(2 * rotaryWidth, HEADER_HEIGHT + labelHeight + 2 * roLaHeight, rotaryWidth, rotaryHeight);
 
-    cutoffLP_L_Label.setBounds(1 * rotaryWidth, headerHeight + 3 * roLaHeight, rotaryWidth, labelHeight);
-    cutoffLP_R_Label.setBounds(2 * rotaryWidth, headerHeight + 3 * roLaHeight, rotaryWidth, labelHeight);
+    cutoffLP_L_Label.setBounds(1 * rotaryWidth, HEADER_HEIGHT + 3 * roLaHeight, rotaryWidth, labelHeight);
+    cutoffLP_R_Label.setBounds(2 * rotaryWidth, HEADER_HEIGHT + 3 * roLaHeight, rotaryWidth, labelHeight);
 
-    cutoffLP_L_Slider.setBounds(1 * rotaryWidth, headerHeight + labelHeight + 3 * roLaHeight, rotaryWidth, rotaryHeight);
-    cutoffLP_R_Slider.setBounds(2 * rotaryWidth, headerHeight + labelHeight + 3 * roLaHeight, rotaryWidth, rotaryHeight);
+    cutoffLP_L_Slider.setBounds(1 * rotaryWidth, HEADER_HEIGHT + labelHeight + 3 * roLaHeight, rotaryWidth, rotaryHeight);
+    cutoffLP_R_Slider.setBounds(2 * rotaryWidth, HEADER_HEIGHT + labelHeight + 3 * roLaHeight, rotaryWidth, rotaryHeight);
 
-    cutoffHP_L_Label.setBounds(1 * rotaryWidth, headerHeight + 4 * roLaHeight, rotaryWidth, labelHeight);
-    cutoffHP_R_Label.setBounds(2 * rotaryWidth, headerHeight + 4 * roLaHeight, rotaryWidth, labelHeight);
+    cutoffHP_L_Label.setBounds(1 * rotaryWidth, HEADER_HEIGHT + 4 * roLaHeight, rotaryWidth, labelHeight);
+    cutoffHP_R_Label.setBounds(2 * rotaryWidth, HEADER_HEIGHT + 4 * roLaHeight, rotaryWidth, labelHeight);
 
-    cutoffHP_L_Slider.setBounds(1 * rotaryWidth, headerHeight + labelHeight + 4 * roLaHeight, rotaryWidth, rotaryHeight);
-    cutoffHP_R_Slider.setBounds(2 * rotaryWidth, headerHeight + labelHeight + 4 * roLaHeight, rotaryWidth, rotaryHeight);
+    cutoffHP_L_Slider.setBounds(1 * rotaryWidth, HEADER_HEIGHT + labelHeight + 4 * roLaHeight, rotaryWidth, rotaryHeight);
+    cutoffHP_R_Slider.setBounds(2 * rotaryWidth, HEADER_HEIGHT + labelHeight + 4 * roLaHeight, rotaryWidth, rotaryHeight);
 
-    stereoWidthLabel.setBounds(0 * rotaryWidth, headerHeight + 2 * roLaHeight, rotaryWidth, labelHeight);
-    stereoWidthSlider.setBounds(0 * rotaryWidth, headerHeight + labelHeight + 2 * roLaHeight, rotaryWidth, rotaryHeight);
+    stereoWidthLabel.setBounds(0 * rotaryWidth, HEADER_HEIGHT + 2 * roLaHeight, rotaryWidth, labelHeight);
+    stereoWidthSlider.setBounds(0 * rotaryWidth, HEADER_HEIGHT + labelHeight + 2 * roLaHeight, rotaryWidth, rotaryHeight);
 }

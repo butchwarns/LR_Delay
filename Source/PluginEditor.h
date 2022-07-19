@@ -12,6 +12,7 @@
 #include "PluginProcessor.h"
 #include "CustomLookAndFeel.h"
 #include "Header.h"
+#include "Footer.h"
 
 //==============================================================================
 /**
@@ -34,8 +35,9 @@ private:
     //==============================================================================
     // UI elements
 
-    // Header
+    // Header & footer
     Header header;
+    Footer footer;
 
     // Slider and labels
     juce::Slider driveSlider;
@@ -107,8 +109,8 @@ private:
     const int textBoxHeight = 25;
     const int rotaryHeight = 80 + textBoxHeight;
 
-    const int headerHeight = 25;
-    const int footerHeight = 25;
+    const int HEADER_HEIGHT = 50;
+    const int FOOTER_HEIGHT = 50;
 
     const int labelHeight = 25;
 
@@ -117,7 +119,7 @@ private:
     const int rotaryCols = 3;
     const int rotaryRows = 5;
 
-    const int height = headerHeight + footerHeight + (rotaryRows * roLaHeight);
+    const int height = HEADER_HEIGHT + FOOTER_HEIGHT + (rotaryRows * roLaHeight);
     const int width = 300;
 
     //==============================================================================
