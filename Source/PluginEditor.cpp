@@ -11,7 +11,7 @@
 
 //==============================================================================
 LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcessor &p)
-    : AudioProcessorEditor(&p), audioProcessor(p), rotaryGroupLR(p.getApvts())
+    : AudioProcessorEditor(&p), audioProcessor(p), rotaryGroupLR(p.getApvts()), utilityRotaryGroup(p.getApvts())
 {
     // Set main window size
     setSize(400, 900);
@@ -21,7 +21,7 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
     addAndMakeVisible(&header);
     addAndMakeVisible(&footer);
 
-    // addAndMakeVisible(&utilityRotaryGroup);
+    addAndMakeVisible(&utilityRotaryGroup);
     addAndMakeVisible(&rotaryGroupLR);
 
     //==============================================================================
@@ -48,7 +48,7 @@ void LR_DelayAudioProcessorEditor::resized()
     Rect headerArea = localBounds.removeFromTop(HEADER_HEIGHT);
     Rect footerArea = localBounds.removeFromBottom(FOOTER_HEIGHT);
 
-    // Rect utilArea = localBounds.removeFromLeft(100);
+    Rect utilArea = localBounds.removeFromLeft(100);
     Rect &rotaryLRArea = localBounds;
 
     //==============================================================================
@@ -56,6 +56,6 @@ void LR_DelayAudioProcessorEditor::resized()
     header.setBounds(headerArea);
     footer.setBounds(footerArea);
 
-    // utilityRotaryGroup.setBounds(utilArea);
+    utilityRotaryGroup.setBounds(utilArea);
     rotaryGroupLR.setBounds(rotaryLRArea);
 }

@@ -40,7 +40,7 @@ private:
     Header header;
     Footer footer;
 
-    // UtilityRotaryGroup utilityRotaryGroup;
+    UtilityRotaryGroup utilityRotaryGroup;
     LR_RotaryGroup rotaryGroupLR;
 
 
