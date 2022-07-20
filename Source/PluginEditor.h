@@ -50,6 +50,7 @@ private:
     const int HEADER_HEIGHT = 50;
     const int FOOTER_HEIGHT = 50;
 
+    const int PAD = 10;
     //==============================================================================
     // UI styling
     CustomLookAndFeel customLook;

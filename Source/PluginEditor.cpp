@@ -15,6 +15,7 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
 {
     // Set main window size
     setSize(400, 900);
+    setResizable(true, true);
 
     //==============================================================================
     // Add as children and show all components
@@ -47,9 +48,14 @@ void LR_DelayAudioProcessorEditor::resized()
 
     Rect headerArea = localBounds.removeFromTop(HEADER_HEIGHT);
     Rect footerArea = localBounds.removeFromBottom(FOOTER_HEIGHT);
-
     Rect utilArea = localBounds.removeFromLeft(100);
     Rect &rotaryLRArea = localBounds;
+
+    // Add padding
+    headerArea.reduce(PAD, PAD);
+    footerArea.reduce(PAD, PAD);
+    utilArea.reduce(PAD, PAD);
+    rotaryLRArea.reduce(PAD, PAD);
 
     //==============================================================================
     // Set bounds
