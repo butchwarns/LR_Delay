@@ -1,5 +1,6 @@
 #include <JuceHeader.h>
 #include "Header.h"
+#include "ComponentSizeConstraints.h"
 
 //==============================================================================
 Header::Header()
@@ -43,9 +44,10 @@ void Header::resized()
     FlexBox fb;
     fb.flexWrap = FlexBox::Wrap::noWrap;
     fb.justifyContent = FlexBox::JustifyContent::spaceBetween;
+    fb.alignItems = FlexBox::AlignItems::center;
 
-    fb.items.add(juce::FlexItem(titleLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_LABEL_HEIGHT));
-    fb.items.add(juce::FlexItem(versionLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_LABEL_HEIGHT).withMaxHeight(MAX_HEIGHT));
+    fb.items.add(juce::FlexItem(titleLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_HEADER_HEIGHT));
+    fb.items.add(juce::FlexItem(versionLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_HEADER_HEIGHT));
 
     fb.performLayout(getLocalBounds().toFloat());
 }

@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "Footer.h"
+#include "ComponentSizeConstraints.h"
 
 //==============================================================================
 Footer::Footer()
@@ -53,9 +54,10 @@ void Footer::resized()
     FlexBox fb;
     fb.flexWrap = FlexBox::Wrap::noWrap;
     fb.justifyContent = FlexBox::JustifyContent::spaceBetween;
+    fb.alignItems = FlexBox::AlignItems::center;
 
-    fb.items.add(juce::FlexItem(coprLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_LABEL_HEIGHT));
-    fb.items.add(juce::FlexItem(websiteLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_LABEL_HEIGHT).withMaxHeight(MAX_HEIGHT));
+    fb.items.add(juce::FlexItem(coprLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_FOOTER_HEIGHT));
+    fb.items.add(juce::FlexItem(websiteLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_FOOTER_HEIGHT).withMaxHeight(MAX_HEIGHT));
 
     fb.performLayout(getLocalBounds().toFloat());
 }
