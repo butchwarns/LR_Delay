@@ -26,14 +26,7 @@ public:
 
 private:
     //==============================================================================
-    const juce::AudioProcessorValueTreeState &apvts;
-
-    //==============================================================================
-    // Attachments to the parameters
-    typedef juce::AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
-    std::unique_ptr<SliderAttachment> driveAttachment;
-    std::unique_ptr<SliderAttachment> volumeAttachment;
-    std::unique_ptr<SliderAttachment> stereoWidthAttachment;
+    juce::AudioProcessorValueTreeState &apvts;
 
     //==============================================================================
     // Magic numbers for layout
@@ -54,6 +47,13 @@ private:
 
     juce::Slider stereoWidthSlider;
     juce::Label stereoWidthLabel;
+
+    //==============================================================================
+    // Attachments to the parameters
+    typedef juce::AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
+    std::unique_ptr<SliderAttachment> driveAttachment;
+    std::unique_ptr<SliderAttachment> volumeAttachment;
+    std::unique_ptr<SliderAttachment> stereoWidthAttachment;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(UtilityRotaryGroup)
