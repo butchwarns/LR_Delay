@@ -37,11 +37,7 @@ Footer::~Footer()
 {
 }
 
-void Footer::paint(juce::Graphics &g)
-{
-    g.setColour(juce::Colours::grey);
-    g.drawRect(getLocalBounds(), 1); // draw an outline around the component
-}
+void Footer::paint(juce::Graphics &g){}
 
 void Footer::resized()
 {

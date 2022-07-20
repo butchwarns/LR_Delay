@@ -136,13 +136,7 @@ LR_RotaryGroup::~LR_RotaryGroup()
 {
 }
 
-void LR_RotaryGroup::paint(juce::Graphics &g)
-{
-    //==============================================================================
-    // draw an outline around the component
-    g.setColour(juce::Colours::grey);
-    g.drawRect(getLocalBounds(), 1);
-}
+void LR_RotaryGroup::paint(juce::Graphics &g){}
 
 void LR_RotaryGroup::resized()
 {
