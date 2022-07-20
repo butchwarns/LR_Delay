@@ -36,6 +36,10 @@
         <FILE id="OPstPj" name="Footer.h" compile="0" resource="0" file="Source/Footer.h"/>
         <FILE id="oj0z1y" name="Header.cpp" compile="1" resource="0" file="Source/Header.cpp"/>
         <FILE id="mQjt20" name="Header.h" compile="0" resource="0" file="Source/Header.h"/>
+        <FILE id="JA4ywh" name="LR_RotaryGroup.cpp" compile="1" resource="0"
+              file="Source/LR_RotaryGroup.cpp"/>
+        <FILE id="FJnJqz" name="LR_RotaryGroup.h" compile="0" resource="0"
+              file="Source/LR_RotaryGroup.h"/>
         <FILE id="SzR7Pd" name="UtilityRotaryGroup.cpp" compile="1" resource="0"
               file="Source/UtilityRotaryGroup.cpp"/>
         <FILE id="TAjn08" name="UtilityRotaryGroup.h" compile="0" resource="0"
