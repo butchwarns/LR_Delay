@@ -14,7 +14,7 @@ Header::Header()
     titleLabel.setText("LR_DELAY", juce::NotificationType::dontSendNotification);
     titleLabel.setJustificationType(juce::Justification::left);
 
-    versionLabel.setText("VERSION 0.1.0", juce::NotificationType::dontSendNotification);
+    versionLabel.setText("V0.1.0", juce::NotificationType::dontSendNotification);
     versionLabel.setJustificationType(juce::Justification::right);
 
     //==============================================================================
