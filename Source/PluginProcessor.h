@@ -67,6 +67,9 @@ public:
     juce::AudioProcessorValueTreeState::ParameterLayout getParameterLayout();
     void parameterChanged(const juce::String &parameterId, float newValue) override;
 
+    //==============================================================================
+    juce::AudioProcessorValueTreeState &getApvts();
+
 private:
     juce::AudioProcessorValueTreeState parameters;
     juce::UndoManager undoManager;

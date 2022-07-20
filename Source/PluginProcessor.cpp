@@ -238,7 +238,7 @@ bool LR_DelayAudioProcessor::hasEditor() const
 juce::AudioProcessorEditor *LR_DelayAudioProcessor::createEditor()
 {
     // return new LR_DelayAudioProcessorEditor (*this);
-    return new LR_DelayAudioProcessorEditor(*this, parameters);
+    return new LR_DelayAudioProcessorEditor(*this);
 }
 
 //==============================================================================
@@ -305,4 +305,10 @@ juce::AudioProcessorValueTreeState::ParameterLayout LR_DelayAudioProcessor::getP
 void LR_DelayAudioProcessor::parameterChanged(const juce::String &parameterId, float newValue)
 {
     fUI->setParamValue(parameterId.toStdString(), newValue);
+}
+
+// Getter for the AudioProcessorValueTree handling all parameters to be passed to child components
+juce::AudioProcessorValueTreeState &LR_DelayAudioProcessor::getApvts()
+{
+    return parameters;
 }
