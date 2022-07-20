@@ -15,10 +15,8 @@
 #include "Footer.h"
 #include "UtilityRotaryGroup.h"
 #include "LR_RotaryGroup.h"
+#include "ComponentSizeConstraints.h"
 
-//==============================================================================
-/**
- */
 class LR_DelayAudioProcessorEditor : public juce::AudioProcessorEditor
 {
 public:
@@ -43,14 +41,6 @@ private:
     UtilityRotaryGroup utilityRotaryGroup;
     LR_RotaryGroup rotaryGroupLR;
 
-
-    //==============================================================================
-    // Magic numbers for UI layout
-
-    const int HEADER_HEIGHT = 50;
-    const int FOOTER_HEIGHT = 50;
-
-    const int PAD = 10;
     //==============================================================================
     // UI styling
     CustomLookAndFeel customLook;
