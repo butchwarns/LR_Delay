@@ -152,7 +152,7 @@ void LR_RotaryGroup::resized()
     const int sliderHeight = MIN_ROTARY_HEIGHT + MIN_TEXTBOX_HEIGHT;
 
     //==============================================================================
-    // Main FlexBox
+    // Stack all pairs vertically
     FlexBox fb;
     fb.flexDirection = FlexBox::Direction::column;
     fb.justifyContent = FlexBox::JustifyContent::spaceBetween;

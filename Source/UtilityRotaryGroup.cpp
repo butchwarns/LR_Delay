@@ -15,13 +15,15 @@
 UtilityRotaryGroup::UtilityRotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvts(apvts)
 {
     //==============================================================================
-    // Add children
-    addChildComponent(driveSlider);
-    addChildComponent(driveLabel);
-    addChildComponent(volumeSlider);
-    addChildComponent(volumeLabel);
-    addChildComponent(stereoWidthSlider);
-    addChildComponent(stereoWidthLabel);
+    // Add and show children
+    addAndMakeVisible(&driveSlider);
+    addAndMakeVisible(&driveLabel);
+
+    addAndMakeVisible(&volumeSlider);
+    addAndMakeVisible(&volumeLabel);
+
+    addAndMakeVisible(&stereoWidthSlider);
+    addAndMakeVisible(&stereoWidthLabel);
 
     //==============================================================================
     // Make rotary sliders
@@ -56,17 +58,6 @@ UtilityRotaryGroup::UtilityRotaryGroup(juce::AudioProcessorValueTreeState &apvts
     driveAttachment.reset(new SliderAttachment(apvts, "drive", driveSlider));
     volumeAttachment.reset(new SliderAttachment(apvts, "volume", volumeSlider));
     stereoWidthAttachment.reset(new SliderAttachment(apvts, "stereoWidth", stereoWidthSlider));
-
-    //==============================================================================
-    // Show components
-    addAndMakeVisible(&driveSlider);
-    addAndMakeVisible(&driveLabel);
-
-    addAndMakeVisible(&volumeSlider);
-    addAndMakeVisible(&volumeLabel);
-
-    addAndMakeVisible(&stereoWidthSlider);
-    addAndMakeVisible(&stereoWidthLabel);
 }
 
 UtilityRotaryGroup::~UtilityRotaryGroup() {}
@@ -82,6 +73,8 @@ void UtilityRotaryGroup::resized()
     typedef juce::FlexItem FlexItem;
     typedef juce::FlexBox FlexBox;
 
+    const int sliderHeight = MIN_ROTARY_HEIGHT + MIN_TEXTBOX_HEIGHT;
+
     // Stack all sliders vertically
     FlexBox fb;
     fb.flexDirection = FlexBox::Direction::column;
@@ -89,15 +82,27 @@ void UtilityRotaryGroup::resized()
     fb.alignItems = FlexBox::AlignItems::center;
     fb.flexWrap = FlexBox::Wrap::noWrap;
 
-    // FlexBoxes to group slider and labels
+    //=============================================================================
+    // FlexBoxes for rotary with label
     FlexBox volumeFB;
-    volumeFB.flexDirection = FlexBox::Direction::column;
-    volumeFB.justifyContent = FlexBox::JustifyContent::center;
-    volumeFB.flexWrap = FlexBox::Wrap::noWrap;
-    FlexBox driveFB = volumeFB;
-    FlexBox widthFB = volumeFB;
+    FlexBox driveFB;
+    FlexBox widthFB;
 
-    const int sliderHeight = MIN_ROTARY_HEIGHT + MIN_TEXTBOX_HEIGHT;
+    volumeFB.flexDirection = FlexBox::Direction::column;
+    driveFB.flexDirection = FlexBox::Direction::column;
+    widthFB.flexDirection = FlexBox::Direction::column;
+
+    volumeFB.justifyContent = FlexBox::JustifyContent::center;
+    driveFB.justifyContent = FlexBox::JustifyContent::center;
+    widthFB.justifyContent = FlexBox::JustifyContent::center;
+
+    volumeFB.alignItems = FlexBox::AlignItems::center;
+    driveFB.alignItems = FlexBox::AlignItems::center;
+    widthFB.alignItems = FlexBox::AlignItems::center;
+
+    volumeFB.flexWrap = FlexBox::Wrap::noWrap;
+    driveFB.flexWrap = FlexBox::Wrap::noWrap;
+    widthFB.flexWrap = FlexBox::Wrap::noWrap;
 
     volumeFB.items.add(FlexItem(volumeLabel).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
     volumeFB.items.add(FlexItem(volumeSlider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
@@ -109,9 +114,9 @@ void UtilityRotaryGroup::resized()
     widthFB.items.add(FlexItem(stereoWidthSlider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
 
     // Add to main FlexBox
-    fb.items.add(FlexItem(volumeFB).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT).withMaxHeight(sliderHeight + MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxWidth(MIN_ROTARY_WIDTH));
-    fb.items.add(FlexItem(driveFB).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT).withMaxHeight(sliderHeight + MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxWidth(MIN_ROTARY_WIDTH));
-    fb.items.add(FlexItem(widthFB).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT).withMaxHeight(sliderHeight + MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxWidth(MIN_ROTARY_WIDTH));
+    fb.items.add(FlexItem(volumeFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
+    fb.items.add(FlexItem(driveFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
+    fb.items.add(FlexItem(widthFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
 
     fb.performLayout(getLocalBounds().toFloat());
 }
