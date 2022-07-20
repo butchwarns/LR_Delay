@@ -65,7 +65,7 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     const int pointerWidth = 0.1 * width;
 
     // Outline
-    pointerPath.addEllipse((width - pointerWidth) * 0.5f, 1.25f * spacing, pointerWidth, pointerWidth);
+    pointerPath.addEllipse((width - pointerWidth) * 0.5f, 1.25f * spacing + 0.25 * pointerWidth, pointerWidth, pointerWidth);
     // Rotate to start angle (CCW)
     pointerPath.applyTransform(juce::AffineTransform::rotation(-0.5f * (rotaryEndAngle - rotaryStartAngle), width / 2, height / 2));
     // Apply rotation according to slider value
