@@ -74,7 +74,7 @@ void UtilityRotaryGroup::resized()
     // Stack all sliders vertically
     FlexBox fb;
     fb.flexDirection = FlexBox::Direction::column;
-    fb.justifyContent = FlexBox::JustifyContent::spaceBetween;
+    fb.justifyContent = FlexBox::JustifyContent::spaceAround;
     fb.alignItems = FlexBox::AlignItems::center;
     fb.flexWrap = FlexBox::Wrap::noWrap;
 
