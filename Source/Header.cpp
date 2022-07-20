@@ -27,7 +27,10 @@ Header::~Header()
 {
 }
 
-void Header::paint(juce::Graphics &g){}
+void Header::paint(juce::Graphics &g)
+{
+    g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
+}
 
 void Header::resized()
 {

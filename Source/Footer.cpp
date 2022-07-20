@@ -37,7 +37,10 @@ Footer::~Footer()
 {
 }
 
-void Footer::paint(juce::Graphics &g){}
+void Footer::paint(juce::Graphics &g)
+{
+    g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
+}
 
 void Footer::resized()
 {

@@ -38,6 +38,7 @@ LR_DelayAudioProcessorEditor::~LR_DelayAudioProcessorEditor()
 //==============================================================================
 void LR_DelayAudioProcessorEditor::paint(juce::Graphics &g)
 {
+    // g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
     g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
 }
 
