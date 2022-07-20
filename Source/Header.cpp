@@ -27,7 +27,11 @@ Header::~Header()
 {
 }
 
-void Header::paint(juce::Graphics &g){}
+void Header::paint(juce::Graphics &g)
+{
+    g.setColour(juce::Colours::grey);
+    g.drawRect(getLocalBounds(), 1); // draw an outline around the component
+}
 
 void Header::resized()
 {
