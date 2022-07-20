@@ -40,8 +40,8 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     const int centerX = static_cast<int>(width / 2.0f);
     const int centerY = static_cast<int>(height / 2.0f);
 
-    const int spacing = 10;
-    const float lineWidth = 2.0f;
+    const int spacing = 0.1 * width;
+    const float lineWidth = 0.02 * width;
 
     juce::PathStrokeType stroke(lineWidth);
 
@@ -62,10 +62,10 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     //==============================================================================
     // Pointer
     juce::Path pointerPath;
-    const int pointerWidth = 10;
+    const int pointerWidth = 0.1 * width;
 
     // Outline
-    pointerPath.addEllipse((width - pointerWidth) * 0.5f, 1.25f * spacing + 5.0f, pointerWidth, pointerWidth);
+    pointerPath.addEllipse((width - pointerWidth) * 0.5f, 1.25f * spacing, pointerWidth, pointerWidth);
     // Rotate to start angle (CCW)
     pointerPath.applyTransform(juce::AffineTransform::rotation(-0.5f * (rotaryEndAngle - rotaryStartAngle), width / 2, height / 2));
     // Apply rotation according to slider value
@@ -78,7 +78,7 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
 //==============================================================================
 juce::Font CustomLookAndFeel::getLabelFont(juce::Label &l)
 {
-    return getManropeExtraBoldFont().withHeight(20.0f);
+    return getManropeExtraBoldFont().withHeight(22.0f);
 }
 
 juce::Font CustomLookAndFeel::getManropeLightFont()
