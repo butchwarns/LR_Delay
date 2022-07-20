@@ -19,6 +19,7 @@ public:
 
     juce::Font getManropeLightFont();
     juce::Font getManropeExtraBoldFont();
+
 private:
     //==============================================================================
     // Sliders
