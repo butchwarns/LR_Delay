@@ -1,5 +1,6 @@
 #include <JuceHeader.h>
 #include "Header.h"
+#include "ComponentSizeConstraints.h"
 
 //==============================================================================
 Header::Header()
@@ -11,10 +12,10 @@ Header::Header()
 
     //==============================================================================
     // Setup Labels
-    titleLabel.setText("LR_DELAY", juce::NotificationType::dontSendNotification);
+    titleLabel.setText("LR DELAY", juce::NotificationType::dontSendNotification);
     titleLabel.setJustificationType(juce::Justification::left);
 
-    versionLabel.setText("VERSION 0.1.0", juce::NotificationType::dontSendNotification);
+    versionLabel.setText("V0.1.0", juce::NotificationType::dontSendNotification);
     versionLabel.setJustificationType(juce::Justification::right);
 
     //==============================================================================
@@ -40,12 +41,24 @@ void Header::resized()
 
     //==============================================================================
     typedef juce::FlexBox FlexBox;
+
     FlexBox fb;
     fb.flexWrap = FlexBox::Wrap::noWrap;
     fb.justifyContent = FlexBox::JustifyContent::spaceBetween;
+    fb.alignItems = FlexBox::AlignItems::center;
 
-    fb.items.add(juce::FlexItem(titleLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_LABEL_HEIGHT));
-    fb.items.add(juce::FlexItem(versionLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_LABEL_HEIGHT).withMaxHeight(MAX_HEIGHT));
+    juce::FlexItem flexTitleLabel = juce::FlexItem(titleLabel)
+                                        .withMinWidth(static_cast<float>(width) * 0.5f)
+                                        .withMinHeight(MIN_HEADER_HEIGHT)
+                                        .withFlex(1.0f);
+
+    juce::FlexItem flexVersionLabel = juce::FlexItem(versionLabel)
+                                        .withMinWidth(static_cast<float>(width) * 0.5f)
+                                        .withMinHeight(MIN_HEADER_HEIGHT)
+                                        .withFlex(1.0f);
+
+    fb.items.add(flexTitleLabel);
+    fb.items.add(flexVersionLabel);
 
     fb.performLayout(getLocalBounds().toFloat());
 }

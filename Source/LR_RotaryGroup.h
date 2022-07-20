@@ -12,9 +12,6 @@
 
 #include <JuceHeader.h>
 
-//==============================================================================
-/*
- */
 class LR_RotaryGroup : public juce::Component
 {
 public:
@@ -28,15 +25,6 @@ private:
     //==============================================================================
     // Connection to paramter handling
     juce::AudioProcessorValueTreeState &apvts;
-
-    //==============================================================================
-    // Magic numbers for layout
-    const int MIN_LABEL_HEIGHT = 25;
-
-    const int MIN_ROTARY_WIDTH = 80;
-    const int MIN_ROTARY_HEIGHT = MIN_ROTARY_WIDTH;
-
-    const int MIN_TEXTBOX_HEIGHT = 25;
 
     //==============================================================================
     // Slider and labels
@@ -83,6 +71,10 @@ private:
 
     std::unique_ptr<SliderAttachment> cutoffHP_L_Attachment;
     std::unique_ptr<SliderAttachment> cutoffHP_R_Attachment;
+
+    //==============================================================================
+    // FlexBox helpers
+    static void setupSliderAndLabel(juce::FlexBox &fb);
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(LR_RotaryGroup)

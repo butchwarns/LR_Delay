@@ -29,15 +29,6 @@ private:
     juce::AudioProcessorValueTreeState &apvts;
 
     //==============================================================================
-    // Magic numbers for layout
-    const int MIN_LABEL_HEIGHT = 25;
-
-    const int MIN_ROTARY_WIDTH = 80;
-    const int MIN_ROTARY_HEIGHT = MIN_ROTARY_WIDTH;
-
-    const int MIN_TEXTBOX_HEIGHT = 25;
-
-    //==============================================================================
     // Sliders and their labels
     juce::Slider driveSlider;
     juce::Label driveLabel;
@@ -54,6 +45,10 @@ private:
     std::unique_ptr<SliderAttachment> driveAttachment;
     std::unique_ptr<SliderAttachment> volumeAttachment;
     std::unique_ptr<SliderAttachment> stereoWidthAttachment;
+
+    //==============================================================================
+    // FlexBox helpers
+    static void setupSliderAndLabel(juce::FlexBox &fb);
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(UtilityRotaryGroup)
