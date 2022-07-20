@@ -12,9 +12,6 @@
 
 #include <JuceHeader.h>
 
-//==============================================================================
-/*
- */
 class LR_RotaryGroup : public juce::Component
 {
 public:
@@ -83,6 +80,10 @@ private:
 
     std::unique_ptr<SliderAttachment> cutoffHP_L_Attachment;
     std::unique_ptr<SliderAttachment> cutoffHP_R_Attachment;
+
+    //==============================================================================
+    // FlexBox helpers
+    static void setupSliderAndLabel(juce::FlexBox &fb);
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(LR_RotaryGroup)
