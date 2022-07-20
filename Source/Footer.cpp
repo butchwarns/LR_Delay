@@ -37,9 +37,7 @@ Footer::~Footer()
 {
 }
 
-void Footer::paint (juce::Graphics& g)
-{
-}
+void Footer::paint (juce::Graphics& g){}
 
 void Footer::resized()
 {

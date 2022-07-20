@@ -27,7 +27,7 @@ Header::~Header()
 {
 }
 
-void Header::paint(juce::Graphics &g) {}
+void Header::paint(juce::Graphics &g){}
 
 void Header::resized()
 {
