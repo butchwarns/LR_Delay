@@ -70,8 +70,6 @@ void UtilityRotaryGroup::resized()
     typedef juce::FlexItem FlexItem;
     typedef juce::FlexBox FlexBox;
 
-    const int sliderHeight = MIN_ROTARY_HEIGHT + MIN_SLIDER_TEXTBOX_HEIGHT;
-
     // Stack all sliders vertically
     FlexBox fb;
     fb.flexDirection = FlexBox::Direction::column;
@@ -89,19 +87,56 @@ void UtilityRotaryGroup::resized()
     setupSliderAndLabel(driveFB);
     setupSliderAndLabel(widthFB);
 
-    volumeFB.items.add(FlexItem(volumeLabel).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH));
-    volumeFB.items.add(FlexItem(volumeSlider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH));
+    //==============================================================================
+    // Make FlexItems and add to box
 
-    driveFB.items.add(FlexItem(driveLabel).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH));
-    driveFB.items.add(FlexItem(driveSlider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH));
+    // Volume
+    juce::FlexItem flexVolumeLabel = juce::FlexItem(volumeLabel)
+                                        .withMinWidth(MIN_ROTARY_WIDTH)
+                                        .withMinHeight(MIN_SLIDER_LABEL_HEIGHT)
+                                        .withFlex(1.0f);
 
-    widthFB.items.add(FlexItem(stereoWidthLabel).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH));
-    widthFB.items.add(FlexItem(stereoWidthSlider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH));
+    juce::FlexItem flexVolumeSlider = juce::FlexItem(volumeSlider)
+                                        .withMinWidth(MIN_ROTARY_WIDTH)
+                                        .withMinHeight(MIN_SLIDER_HEIGHT)
+                                        .withFlex(1.0f);
 
+    volumeFB.items.add(flexVolumeLabel);
+    volumeFB.items.add(flexVolumeSlider);
+
+    // Drive
+    juce::FlexItem flexDriveLabel = juce::FlexItem(driveLabel)
+                                        .withMinWidth(MIN_ROTARY_WIDTH)
+                                        .withMinHeight(MIN_SLIDER_LABEL_HEIGHT)
+                                        .withFlex(1.0f);
+
+    juce::FlexItem flexDriveSlider = juce::FlexItem(driveSlider)
+                                        .withMinWidth(MIN_ROTARY_WIDTH)
+                                        .withMinHeight(MIN_SLIDER_HEIGHT)
+                                        .withFlex(1.0f);
+
+    driveFB.items.add(flexDriveLabel);
+    driveFB.items.add(flexDriveSlider);
+
+    // Stereo width
+    juce::FlexItem flexWidthLabel = juce::FlexItem(stereoWidthLabel)
+                                        .withMinWidth(MIN_ROTARY_WIDTH)
+                                        .withMinHeight(MIN_SLIDER_LABEL_HEIGHT)
+                                        .withFlex(1.0f);
+
+    juce::FlexItem flexWidthSlider = juce::FlexItem(stereoWidthSlider)
+                                        .withMinWidth(MIN_ROTARY_WIDTH)
+                                        .withMinHeight(MIN_SLIDER_HEIGHT)
+                                        .withFlex(1.0f);
+
+    widthFB.items.add(flexWidthLabel);
+    widthFB.items.add(flexWidthSlider);
+
+    //==============================================================================
     // Add to main FlexBox
-    fb.items.add(FlexItem(volumeFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
-    fb.items.add(FlexItem(driveFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
-    fb.items.add(FlexItem(widthFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
+    fb.items.add(FlexItem(volumeFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_HEIGHT + MIN_SLIDER_LABEL_HEIGHT));
+    fb.items.add(FlexItem(driveFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_HEIGHT + MIN_SLIDER_LABEL_HEIGHT));
+    fb.items.add(FlexItem(widthFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_HEIGHT + MIN_SLIDER_LABEL_HEIGHT));
 
     fb.performLayout(getLocalBounds().toFloat());
 }
