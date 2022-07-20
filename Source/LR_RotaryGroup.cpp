@@ -273,7 +273,7 @@ void LR_RotaryGroup::resized()
     // Dry / wet pair
     FlexBox dryWetFB;
     dryWetFB.flexDirection = FlexBox::Direction::row;
-    dryWetFB.justifyContent = FlexBox::JustifyContent::spaceBetween;
+    dryWetFB.justifyContent = FlexBox::JustifyContent::spaceAround;
     dryWetFB.alignItems = FlexBox::AlignItems::center;
     dryWetFB.flexWrap = FlexBox::Wrap::noWrap;
 
@@ -283,7 +283,7 @@ void LR_RotaryGroup::resized()
     // Feedback pair
     FlexBox feedbackFB;
     feedbackFB.flexDirection = FlexBox::Direction::row;
-    feedbackFB.justifyContent = FlexBox::JustifyContent::spaceBetween;
+    feedbackFB.justifyContent = FlexBox::JustifyContent::spaceAround;
     feedbackFB.alignItems = FlexBox::AlignItems::center;
     feedbackFB.flexWrap = FlexBox::Wrap::noWrap;
 
@@ -293,7 +293,7 @@ void LR_RotaryGroup::resized()
     // Delay time pair
     FlexBox delayTimeFB;
     delayTimeFB.flexDirection = FlexBox::Direction::row;
-    delayTimeFB.justifyContent = FlexBox::JustifyContent::spaceBetween;
+    delayTimeFB.justifyContent = FlexBox::JustifyContent::spaceAround;
     delayTimeFB.alignItems = FlexBox::AlignItems::center;
     delayTimeFB.flexWrap = FlexBox::Wrap::noWrap;
 
@@ -303,7 +303,7 @@ void LR_RotaryGroup::resized()
     // Cutoff low-pass pair
     FlexBox cutoffLP_FB;
     cutoffLP_FB.flexDirection = FlexBox::Direction::row;
-    cutoffLP_FB.justifyContent = FlexBox::JustifyContent::spaceBetween;
+    cutoffLP_FB.justifyContent = FlexBox::JustifyContent::spaceAround;
     cutoffLP_FB.alignItems = FlexBox::AlignItems::center;
     cutoffLP_FB.flexWrap = FlexBox::Wrap::noWrap;
 
@@ -313,7 +313,7 @@ void LR_RotaryGroup::resized()
     // Cutoff high-pass pair
     FlexBox cutoffHP_FB;
     cutoffHP_FB.flexDirection = FlexBox::Direction::row;
-    cutoffHP_FB.justifyContent = FlexBox::JustifyContent::spaceBetween;
+    cutoffHP_FB.justifyContent = FlexBox::JustifyContent::spaceAround;
     cutoffHP_FB.alignItems = FlexBox::AlignItems::center;
     cutoffHP_FB.flexWrap = FlexBox::Wrap::noWrap;
 
@@ -322,7 +322,6 @@ void LR_RotaryGroup::resized()
     
     //==============================================================================
     // Make layout
-
     fb.items.add(FlexItem(dryWetFB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
     fb.items.add(FlexItem(feedbackFB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
     fb.items.add(FlexItem(delayTimeFB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
