@@ -59,17 +59,13 @@ void Footer::resized()
 
     juce::FlexItem flexCoprLabel = juce::FlexItem(coprLabel)
                                         .withMinWidth(static_cast<float>(width) * 0.5f)
-                                        .withMinHeight(MIN_HEADER_HEIGHT);
-
-    flexCoprLabel.flexGrow = 1.0f;
-    flexCoprLabel.flexShrink = 1.0f;
+                                        .withMinHeight(MIN_HEADER_HEIGHT)
+                                        .withFlex(1.0f);
 
     juce::FlexItem flexWebsiteLabel = juce::FlexItem(websiteLabel)
                                         .withMinWidth(static_cast<float>(width) * 0.5f)
-                                        .withMinHeight(MIN_HEADER_HEIGHT);
-
-    flexWebsiteLabel.flexGrow = 1.0f;
-    flexWebsiteLabel.flexShrink = 1.0f;
+                                        .withMinHeight(MIN_HEADER_HEIGHT)
+                                        .withFlex(1.0f);
 
     fb.items.add(flexCoprLabel);
     fb.items.add(flexWebsiteLabel);
