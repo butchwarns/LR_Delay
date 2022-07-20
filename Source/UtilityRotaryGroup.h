@@ -56,5 +56,9 @@ private:
     std::unique_ptr<SliderAttachment> stereoWidthAttachment;
 
     //==============================================================================
+    // FlexBox helpers
+    static void setupSliderAndLabel(juce::FlexBox &fb);
+
+    //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(UtilityRotaryGroup)
 };

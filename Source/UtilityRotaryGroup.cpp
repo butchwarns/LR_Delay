@@ -84,21 +84,9 @@ void UtilityRotaryGroup::resized()
     FlexBox driveFB;
     FlexBox widthFB;
 
-    volumeFB.flexDirection = FlexBox::Direction::column;
-    driveFB.flexDirection = FlexBox::Direction::column;
-    widthFB.flexDirection = FlexBox::Direction::column;
-
-    volumeFB.justifyContent = FlexBox::JustifyContent::center;
-    driveFB.justifyContent = FlexBox::JustifyContent::center;
-    widthFB.justifyContent = FlexBox::JustifyContent::center;
-
-    volumeFB.alignItems = FlexBox::AlignItems::center;
-    driveFB.alignItems = FlexBox::AlignItems::center;
-    widthFB.alignItems = FlexBox::AlignItems::center;
-
-    volumeFB.flexWrap = FlexBox::Wrap::noWrap;
-    driveFB.flexWrap = FlexBox::Wrap::noWrap;
-    widthFB.flexWrap = FlexBox::Wrap::noWrap;
+    setupSliderAndLabel(volumeFB);
+    setupSliderAndLabel(driveFB);
+    setupSliderAndLabel(widthFB);
 
     volumeFB.items.add(FlexItem(volumeLabel).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
     volumeFB.items.add(FlexItem(volumeSlider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
@@ -115,4 +103,14 @@ void UtilityRotaryGroup::resized()
     fb.items.add(FlexItem(widthFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
 
     fb.performLayout(getLocalBounds().toFloat());
+}
+
+//==============================================================================
+// FlexBox helper
+void UtilityRotaryGroup::setupSliderAndLabel(juce::FlexBox &fb)
+{
+    fb.flexDirection = juce::FlexBox::Direction::column;
+    fb.justifyContent = juce::FlexBox::JustifyContent::center;
+    fb.alignItems = juce::FlexBox::AlignItems::center;
+    fb.flexWrap = juce::FlexBox::Wrap::noWrap;
 }
