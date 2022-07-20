@@ -13,6 +13,7 @@
 #include "CustomLookAndFeel.h"
 #include "Header.h"
 #include "Footer.h"
+#include "UtilityRotaryGroup.h"
 
 //==============================================================================
 /**
@@ -35,17 +36,12 @@ private:
     //==============================================================================
     // UI elements
 
-    // Header & footer
     Header header;
     Footer footer;
 
+    UtilityRotaryGroup utilityRotaryGroup;
+
     // Slider and labels
-    juce::Slider driveSlider;
-    juce::Label driveLabel;
-
-    juce::Slider volumeSlider;
-    juce::Label volumeLabel;
-
     juce::Slider dryWet_L_Slider;
     juce::Slider dryWet_R_Slider;
     juce::Label dryWet_L_Label;
@@ -71,15 +67,9 @@ private:
     juce::Label cutoffHP_L_Label;
     juce::Label cutoffHP_R_Label;
 
-    juce::Slider stereoWidthSlider;
-    juce::Label stereoWidthLabel;
-
     //==============================================================================
     // Attachments to the parameters
     typedef juce::AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
-
-    std::unique_ptr<SliderAttachment> driveAttachment;
-    std::unique_ptr<SliderAttachment> volumeAttachment;
 
     std::unique_ptr<SliderAttachment> dryWet_L_Attachment;
     std::unique_ptr<SliderAttachment> dryWet_R_Attachment;
@@ -96,15 +86,12 @@ private:
     std::unique_ptr<SliderAttachment> cutoffHP_L_Attachment;
     std::unique_ptr<SliderAttachment> cutoffHP_R_Attachment;
 
-    std::unique_ptr<SliderAttachment> stereoWidthAttachment;
-
     //==============================================================================f
     // Reference to the AudioProcessorValueTreeState object in the Processor
     juce::AudioProcessorValueTreeState &apvts;
 
     //==============================================================================
     // Magic numbers for UI layout
-
     const int rotaryWidth = 80;
     const int textBoxHeight = 25;
     const int rotaryHeight = 80 + textBoxHeight;
