@@ -27,15 +27,6 @@ private:
     juce::AudioProcessorValueTreeState &apvts;
 
     //==============================================================================
-    // Magic numbers for layout
-    const int MIN_LABEL_HEIGHT = 25;
-
-    const int MIN_ROTARY_WIDTH = 80;
-    const int MIN_ROTARY_HEIGHT = MIN_ROTARY_WIDTH;
-
-    const int MIN_TEXTBOX_HEIGHT = 25;
-
-    //==============================================================================
     // Slider and labels
     juce::Slider dryWet_L_Slider;
     juce::Slider dryWet_R_Slider;

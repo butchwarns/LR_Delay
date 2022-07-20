@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "LR_RotaryGroup.h"
+#include "ComponentSizeConstraints.h"
 
 //==============================================================================
 LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvts(apvts)
@@ -62,28 +63,28 @@ LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvt
 
     //==============================================================================
     // Make text boxes
-    dryWet_L_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_TEXTBOX_HEIGHT);
-    dryWet_R_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_TEXTBOX_HEIGHT);
+    dryWet_L_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+    dryWet_R_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
     dryWet_L_Slider.setTextValueSuffix(" %");
     dryWet_R_Slider.setTextValueSuffix(" %");
 
-    feedback_L_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_TEXTBOX_HEIGHT);
-    feedback_R_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_TEXTBOX_HEIGHT);
+    feedback_L_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+    feedback_R_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
     feedback_L_Slider.setTextValueSuffix(" %");
     feedback_R_Slider.setTextValueSuffix(" %");
 
-    delayTime_L_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_TEXTBOX_HEIGHT);
-    delayTime_R_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_TEXTBOX_HEIGHT);
+    delayTime_L_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+    delayTime_R_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
     delayTime_L_Slider.setTextValueSuffix(" ms");
     delayTime_R_Slider.setTextValueSuffix(" ms");
 
-    cutoffLP_L_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_TEXTBOX_HEIGHT);
-    cutoffLP_R_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_TEXTBOX_HEIGHT);
+    cutoffLP_L_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+    cutoffLP_R_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
     cutoffLP_L_Slider.setTextValueSuffix(" Hz");
     cutoffLP_R_Slider.setTextValueSuffix(" Hz");
 
-    cutoffHP_L_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_TEXTBOX_HEIGHT);
-    cutoffHP_R_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_TEXTBOX_HEIGHT);
+    cutoffHP_L_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+    cutoffHP_R_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
     cutoffHP_L_Slider.setTextValueSuffix(" Hz");
     cutoffHP_R_Slider.setTextValueSuffix(" Hz");
 
@@ -141,7 +142,7 @@ void LR_RotaryGroup::resized()
     typedef juce::FlexItem FlexItem;
     typedef juce::FlexBox FlexBox;
 
-    const int sliderHeight = MIN_ROTARY_HEIGHT + MIN_TEXTBOX_HEIGHT;
+    const int sliderHeight = MIN_ROTARY_HEIGHT + MIN_SLIDER_TEXTBOX_HEIGHT;
 
     //==============================================================================
     // Stack all pairs vertically
@@ -161,10 +162,10 @@ void LR_RotaryGroup::resized()
     setupSliderAndLabel(dryWet_L_FB);
     setupSliderAndLabel(dryWet_R_FB);
 
-    dryWet_L_FB.items.add(FlexItem(dryWet_L_Label).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
+    dryWet_L_FB.items.add(FlexItem(dryWet_L_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
     dryWet_L_FB.items.add(FlexItem(dryWet_L_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
 
-    dryWet_R_FB.items.add(FlexItem(dryWet_R_Label).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
+    dryWet_R_FB.items.add(FlexItem(dryWet_R_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
     dryWet_R_FB.items.add(FlexItem(dryWet_R_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
 
     // Feedback
@@ -174,10 +175,10 @@ void LR_RotaryGroup::resized()
     setupSliderAndLabel(feedback_L_FB);
     setupSliderAndLabel(feedback_R_FB);
 
-    feedback_L_FB.items.add(FlexItem(feedback_L_Label).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
+    feedback_L_FB.items.add(FlexItem(feedback_L_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
     feedback_L_FB.items.add(FlexItem(feedback_L_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
 
-    feedback_R_FB.items.add(FlexItem(feedback_R_Label).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
+    feedback_R_FB.items.add(FlexItem(feedback_R_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
     feedback_R_FB.items.add(FlexItem(feedback_R_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
 
     // Delay time
@@ -187,10 +188,10 @@ void LR_RotaryGroup::resized()
     setupSliderAndLabel(delayTime_L_FB);
     setupSliderAndLabel(delayTime_R_FB);
 
-    delayTime_L_FB.items.add(FlexItem(delayTime_L_Label).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
+    delayTime_L_FB.items.add(FlexItem(delayTime_L_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
     delayTime_L_FB.items.add(FlexItem(delayTime_L_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
 
-    delayTime_R_FB.items.add(FlexItem(delayTime_R_Label).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
+    delayTime_R_FB.items.add(FlexItem(delayTime_R_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
     delayTime_R_FB.items.add(FlexItem(delayTime_R_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
 
     // Low-pass cutoff
@@ -200,10 +201,10 @@ void LR_RotaryGroup::resized()
     setupSliderAndLabel(cutoffLP_L_FB);
     setupSliderAndLabel(cutoffLP_R_FB);
 
-    cutoffLP_L_FB.items.add(FlexItem(cutoffLP_L_Label).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
+    cutoffLP_L_FB.items.add(FlexItem(cutoffLP_L_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
     cutoffLP_L_FB.items.add(FlexItem(cutoffLP_L_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
 
-    cutoffLP_R_FB.items.add(FlexItem(cutoffLP_R_Label).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
+    cutoffLP_R_FB.items.add(FlexItem(cutoffLP_R_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
     cutoffLP_R_FB.items.add(FlexItem(cutoffLP_R_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
 
     // High-pass cutoff
@@ -213,10 +214,10 @@ void LR_RotaryGroup::resized()
     setupSliderAndLabel(cutoffHP_L_FB);
     setupSliderAndLabel(cutoffHP_R_FB);
 
-    cutoffHP_L_FB.items.add(FlexItem(cutoffHP_L_Label).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
+    cutoffHP_L_FB.items.add(FlexItem(cutoffHP_L_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
     cutoffHP_L_FB.items.add(FlexItem(cutoffHP_L_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
 
-    cutoffHP_R_FB.items.add(FlexItem(cutoffHP_R_Label).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
+    cutoffHP_R_FB.items.add(FlexItem(cutoffHP_R_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
     cutoffHP_R_FB.items.add(FlexItem(cutoffHP_R_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
 
     //==============================================================================
@@ -275,11 +276,11 @@ void LR_RotaryGroup::resized()
 
     //==============================================================================
     // Make layout
-    fb.items.add(FlexItem(dryWetFB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
-    fb.items.add(FlexItem(feedbackFB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
-    fb.items.add(FlexItem(delayTimeFB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
-    fb.items.add(FlexItem(cutoffLP_FB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
-    fb.items.add(FlexItem(cutoffHP_FB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
+    fb.items.add(FlexItem(dryWetFB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
+    fb.items.add(FlexItem(feedbackFB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
+    fb.items.add(FlexItem(delayTimeFB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
+    fb.items.add(FlexItem(cutoffLP_FB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
+    fb.items.add(FlexItem(cutoffHP_FB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
 
     fb.performLayout(getLocalBounds().toFloat());
 }

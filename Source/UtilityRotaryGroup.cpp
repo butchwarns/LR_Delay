@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "UtilityRotaryGroup.h"
+#include "ComponentSizeConstraints.h"
 
 //==============================================================================
 UtilityRotaryGroup::UtilityRotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvts(apvts)
@@ -33,13 +34,13 @@ UtilityRotaryGroup::UtilityRotaryGroup(juce::AudioProcessorValueTreeState &apvts
 
     //==============================================================================
     // Setup slider text boxes
-    driveSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_TEXTBOX_HEIGHT);
+    driveSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
     driveSlider.setTextValueSuffix(" dB");
 
-    volumeSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_TEXTBOX_HEIGHT);
+    volumeSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
     volumeSlider.setTextValueSuffix(" dB");
 
-    stereoWidthSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_TEXTBOX_HEIGHT);
+    stereoWidthSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
     stereoWidthSlider.setTextValueSuffix(" %");
 
     //==============================================================================
@@ -69,7 +70,7 @@ void UtilityRotaryGroup::resized()
     typedef juce::FlexItem FlexItem;
     typedef juce::FlexBox FlexBox;
 
-    const int sliderHeight = MIN_ROTARY_HEIGHT + MIN_TEXTBOX_HEIGHT;
+    const int sliderHeight = MIN_ROTARY_HEIGHT + MIN_SLIDER_TEXTBOX_HEIGHT;
 
     // Stack all sliders vertically
     FlexBox fb;
@@ -88,19 +89,19 @@ void UtilityRotaryGroup::resized()
     setupSliderAndLabel(driveFB);
     setupSliderAndLabel(widthFB);
 
-    volumeFB.items.add(FlexItem(volumeLabel).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH));
+    volumeFB.items.add(FlexItem(volumeLabel).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH));
     volumeFB.items.add(FlexItem(volumeSlider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH));
 
-    driveFB.items.add(FlexItem(driveLabel).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH));
+    driveFB.items.add(FlexItem(driveLabel).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH));
     driveFB.items.add(FlexItem(driveSlider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH));
 
-    widthFB.items.add(FlexItem(stereoWidthLabel).withMinHeight(MIN_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH));
+    widthFB.items.add(FlexItem(stereoWidthLabel).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH));
     widthFB.items.add(FlexItem(stereoWidthSlider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH));
 
     // Add to main FlexBox
-    fb.items.add(FlexItem(volumeFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
-    fb.items.add(FlexItem(driveFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
-    fb.items.add(FlexItem(widthFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(sliderHeight + MIN_LABEL_HEIGHT));
+    fb.items.add(FlexItem(volumeFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
+    fb.items.add(FlexItem(driveFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
+    fb.items.add(FlexItem(widthFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
 
     fb.performLayout(getLocalBounds().toFloat());
 }
