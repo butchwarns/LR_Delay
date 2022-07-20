@@ -41,13 +41,28 @@ void Header::resized()
 
     //==============================================================================
     typedef juce::FlexBox FlexBox;
+
     FlexBox fb;
     fb.flexWrap = FlexBox::Wrap::noWrap;
     fb.justifyContent = FlexBox::JustifyContent::spaceBetween;
     fb.alignItems = FlexBox::AlignItems::center;
 
-    fb.items.add(juce::FlexItem(titleLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_HEADER_HEIGHT));
-    fb.items.add(juce::FlexItem(versionLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_HEADER_HEIGHT));
+    juce::FlexItem flexTitleLabel = juce::FlexItem(titleLabel)
+                                        .withMinWidth(static_cast<float>(width) * 0.5f)
+                                        .withMinHeight(MIN_HEADER_HEIGHT);
+
+    flexTitleLabel.flexGrow = 1.0f;
+    flexTitleLabel.flexShrink = 1.0f;
+
+    juce::FlexItem flexVersionLabel = juce::FlexItem(versionLabel)
+                                        .withMinWidth(static_cast<float>(width) * 0.5f)
+                                        .withMinHeight(MIN_HEADER_HEIGHT);
+
+    flexVersionLabel.flexGrow = 1.0f;
+    flexVersionLabel.flexShrink = 1.0f;
+
+    fb.items.add(flexTitleLabel);
+    fb.items.add(flexVersionLabel);
 
     fb.performLayout(getLocalBounds().toFloat());
 }

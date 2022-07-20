@@ -51,13 +51,28 @@ void Footer::resized()
 
     //==============================================================================
     typedef juce::FlexBox FlexBox;
+
     FlexBox fb;
     fb.flexWrap = FlexBox::Wrap::noWrap;
     fb.justifyContent = FlexBox::JustifyContent::spaceBetween;
     fb.alignItems = FlexBox::AlignItems::center;
 
-    fb.items.add(juce::FlexItem(coprLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_FOOTER_HEIGHT));
-    fb.items.add(juce::FlexItem(websiteLabel).withMinWidth(static_cast<float>(width) * 0.5f).withMinHeight(MIN_FOOTER_HEIGHT).withMaxHeight(MAX_HEIGHT));
+    juce::FlexItem flexCoprLabel = juce::FlexItem(coprLabel)
+                                        .withMinWidth(static_cast<float>(width) * 0.5f)
+                                        .withMinHeight(MIN_HEADER_HEIGHT);
+
+    flexCoprLabel.flexGrow = 1.0f;
+    flexCoprLabel.flexShrink = 1.0f;
+
+    juce::FlexItem flexWebsiteLabel = juce::FlexItem(websiteLabel)
+                                        .withMinWidth(static_cast<float>(width) * 0.5f)
+                                        .withMinHeight(MIN_HEADER_HEIGHT);
+
+    flexWebsiteLabel.flexGrow = 1.0f;
+    flexWebsiteLabel.flexShrink = 1.0f;
+
+    fb.items.add(flexCoprLabel);
+    fb.items.add(flexWebsiteLabel);
 
     fb.performLayout(getLocalBounds().toFloat());
 }
