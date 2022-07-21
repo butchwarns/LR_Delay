@@ -10,9 +10,9 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-LR_DelayAudioProcessor::LR_DelayAudioProcessor() : parameters(*this, &undoManager, "parameters", getParameterLayout())
+LR_DelayAudioProcessor::LR_DelayAudioProcessor() : parameters(*this, &undoManager, "parameters", getParameterLayout()),
 #ifndef JucePlugin_PreferredChannelConfigurations
-    : AudioProcessor(BusesProperties()
+    AudioProcessor(BusesProperties()
 #if !JucePlugin_IsMidiEffect
 #if !JucePlugin_IsSynth
                          .withInput("Input", juce::AudioChannelSet::stereo(), true)
