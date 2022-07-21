@@ -1,6 +1,5 @@
 #include <JuceHeader.h>
 #include "Header.h"
-#include "ComponentSizeConstraints.h"
 
 //==============================================================================
 Header::Header()
@@ -60,5 +59,5 @@ void Header::resized()
     fb.items.add(flexTitleLabel);
     fb.items.add(flexVersionLabel);
 
-    fb.performLayout(getLocalBounds().toFloat());
+    fb.performLayout(getLocalBounds());
 }
