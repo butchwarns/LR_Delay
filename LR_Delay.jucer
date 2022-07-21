@@ -42,6 +42,10 @@
               file="Source/LR_RotaryGroup.cpp"/>
         <FILE id="FJnJqz" name="LR_RotaryGroup.h" compile="0" resource="0"
               file="Source/LR_RotaryGroup.h"/>
+        <FILE id="e0E0D3" name="RotaryWithLabel.cpp" compile="1" resource="0"
+              file="Source/RotaryWithLabel.cpp"/>
+        <FILE id="DaoUKC" name="RotaryWithLabel.h" compile="0" resource="0"
+              file="Source/RotaryWithLabel.h"/>
         <FILE id="SzR7Pd" name="UtilityRotaryGroup.cpp" compile="1" resource="0"
               file="Source/UtilityRotaryGroup.cpp"/>
         <FILE id="TAjn08" name="UtilityRotaryGroup.h" compile="0" resource="0"
