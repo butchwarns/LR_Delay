@@ -10,7 +10,6 @@
 
 #include <JuceHeader.h>
 #include "Footer.h"
-#include "ComponentSizeConstraints.h"
 
 //==============================================================================
 Footer::Footer()
@@ -70,5 +69,5 @@ void Footer::resized()
     fb.items.add(flexCoprLabel);
     fb.items.add(flexWebsiteLabel);
 
-    fb.performLayout(getLocalBounds().toFloat());
+    fb.performLayout(getLocalBounds());
 }

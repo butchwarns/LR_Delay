@@ -10,143 +10,71 @@
 
 #include <JuceHeader.h>
 #include "UtilityRotaryGroup.h"
-#include "ComponentSizeConstraints.h"
 
 //==============================================================================
 UtilityRotaryGroup::UtilityRotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvts(apvts)
 {
     //==============================================================================
     // Add and show children
-    addAndMakeVisible(&driveSlider);
-    addAndMakeVisible(&driveLabel);
-
-    addAndMakeVisible(&volumeSlider);
-    addAndMakeVisible(&volumeLabel);
-
-    addAndMakeVisible(&stereoWidthSlider);
-    addAndMakeVisible(&stereoWidthLabel);
-
-    //==============================================================================
-    // Make rotary sliders
-    driveSlider.setSliderStyle(juce::Slider::RotaryVerticalDrag);
-    volumeSlider.setSliderStyle(juce::Slider::RotaryVerticalDrag);
-    stereoWidthSlider.setSliderStyle(juce::Slider::RotaryVerticalDrag);
+    addAndMakeVisible(&volumeRWL);
+    addAndMakeVisible(&driveRWL);
+    addAndMakeVisible(&stereoWidthRWL);
 
     //==============================================================================
     // Setup slider text boxes
-    driveSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
-    driveSlider.setTextValueSuffix(" dB");
-
-    volumeSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
-    volumeSlider.setTextValueSuffix(" dB");
-
-    stereoWidthSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
-    stereoWidthSlider.setTextValueSuffix(" %");
+    volumeRWL.rotary.setTextValueSuffix(" dB");
+    driveRWL.rotary.setTextValueSuffix(" dB");
+    stereoWidthRWL.rotary.setTextValueSuffix(" %");
 
     //==============================================================================
     // Label the sliders
-    driveLabel.setText("DRIVE", juce::NotificationType::dontSendNotification);
-    driveLabel.setJustificationType(juce::Justification::centred);
-
-    volumeLabel.setText("VOLUME", juce::NotificationType::dontSendNotification);
-    volumeLabel.setJustificationType(juce::Justification::centred);
-
-    stereoWidthLabel.setText("WIDTH", juce::NotificationType::dontSendNotification);
-    stereoWidthLabel.setJustificationType(juce::Justification::centred);
+    volumeRWL.label.setText("VOLUME", juce::NotificationType::dontSendNotification);
+    driveRWL.label.setText("DRIVE", juce::NotificationType::dontSendNotification);
+    stereoWidthRWL.label.setText("WIDTH", juce::NotificationType::dontSendNotification);
 
     //==============================================================================
     // Attach sliders to parameters
-    driveAttachment.reset(new SliderAttachment(apvts, "drive", driveSlider));
-    volumeAttachment.reset(new SliderAttachment(apvts, "volume", volumeSlider));
-    stereoWidthAttachment.reset(new SliderAttachment(apvts, "stereoWidth", stereoWidthSlider));
+    typedef juce::AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
+    volumeRWL.sliderAttachment.reset(new SliderAttachment(apvts, "volume", volumeRWL.rotary));
+    driveRWL.sliderAttachment.reset(new SliderAttachment(apvts, "drive", driveRWL.rotary));
+    stereoWidthRWL.sliderAttachment.reset(new SliderAttachment(apvts, "stereoWidth", stereoWidthRWL.rotary));
 }
 
 UtilityRotaryGroup::~UtilityRotaryGroup() {}
 
-void UtilityRotaryGroup::paint(juce::Graphics &g){}
+void UtilityRotaryGroup::paint(juce::Graphics &g){
+    g.setColour(juce::Colours::white);
+    g.drawRect(getLocalBounds());
+}
 
 void UtilityRotaryGroup::resized()
 {
-    typedef juce::FlexItem FlexItem;
-    typedef juce::FlexBox FlexBox;
-
     // Stack all sliders vertically
+    typedef juce::FlexBox FlexBox;
     FlexBox fb;
     fb.flexDirection = FlexBox::Direction::column;
     fb.justifyContent = FlexBox::JustifyContent::spaceAround;
     fb.alignItems = FlexBox::AlignItems::center;
     fb.flexWrap = FlexBox::Wrap::noWrap;
 
-    //=============================================================================
-    // FlexBoxes for rotary with label
-    FlexBox volumeFB;
-    FlexBox driveFB;
-    FlexBox widthFB;
+    //==============================================================================
+    // FlexItems for the box
+    typedef juce::FlexItem FlexItem;
+    FlexItem flexVolumeRWL(volumeRWL);
+    FlexItem flexDriveRWL(driveRWL);
+    FlexItem flexStereoWidthRWL(stereoWidthRWL);
 
-    setupSliderAndLabel(volumeFB);
-    setupSliderAndLabel(driveFB);
-    setupSliderAndLabel(widthFB);
+    flexVolumeRWL = flexVolumeRWL.withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
+    flexDriveRWL = flexDriveRWL.withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
+    flexStereoWidthRWL = flexStereoWidthRWL.withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
+
+    // flexVolumeRWL = flexVolumeRWL.withFlex(1.0f, 0.0f, 0.0f);
+    // flexDriveRWL = flexDriveRWL.withFlex(1.0f, 0.0f, 0.0f);
+    // flexStereoWidthRWL = flexStereoWidthRWL.withFlex(1.0f, 0.0f, 0.0f);
 
     //==============================================================================
-    // Make FlexItems and add to box
+    // Add to FlexBox and layout
+    fb.items.add(flexVolumeRWL, flexDriveRWL, flexStereoWidthRWL);
 
-    // Volume
-    juce::FlexItem flexVolumeLabel = juce::FlexItem(volumeLabel)
-                                        .withMinWidth(MIN_ROTARY_WIDTH)
-                                        .withMinHeight(MIN_SLIDER_LABEL_HEIGHT)
-                                        .withFlex(1.0f);
-
-    juce::FlexItem flexVolumeSlider = juce::FlexItem(volumeSlider)
-                                        .withMinWidth(MIN_ROTARY_WIDTH)
-                                        .withMinHeight(MIN_SLIDER_HEIGHT)
-                                        .withFlex(1.0f);
-
-    volumeFB.items.add(flexVolumeLabel);
-    volumeFB.items.add(flexVolumeSlider);
-
-    // Drive
-    juce::FlexItem flexDriveLabel = juce::FlexItem(driveLabel)
-                                        .withMinWidth(MIN_ROTARY_WIDTH)
-                                        .withMinHeight(MIN_SLIDER_LABEL_HEIGHT)
-                                        .withFlex(1.0f);
-
-    juce::FlexItem flexDriveSlider = juce::FlexItem(driveSlider)
-                                        .withMinWidth(MIN_ROTARY_WIDTH)
-                                        .withMinHeight(MIN_SLIDER_HEIGHT)
-                                        .withFlex(1.0f);
-
-    driveFB.items.add(flexDriveLabel);
-    driveFB.items.add(flexDriveSlider);
-
-    // Stereo width
-    juce::FlexItem flexWidthLabel = juce::FlexItem(stereoWidthLabel)
-                                        .withMinWidth(MIN_ROTARY_WIDTH)
-                                        .withMinHeight(MIN_SLIDER_LABEL_HEIGHT)
-                                        .withFlex(1.0f);
-
-    juce::FlexItem flexWidthSlider = juce::FlexItem(stereoWidthSlider)
-                                        .withMinWidth(MIN_ROTARY_WIDTH)
-                                        .withMinHeight(MIN_SLIDER_HEIGHT)
-                                        .withFlex(1.0f);
-
-    widthFB.items.add(flexWidthLabel);
-    widthFB.items.add(flexWidthSlider);
-
-    //==============================================================================
-    // Add to main FlexBox
-    fb.items.add(FlexItem(volumeFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_HEIGHT + MIN_SLIDER_LABEL_HEIGHT));
-    fb.items.add(FlexItem(driveFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_HEIGHT + MIN_SLIDER_LABEL_HEIGHT));
-    fb.items.add(FlexItem(widthFB).withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_HEIGHT + MIN_SLIDER_LABEL_HEIGHT));
-
-    fb.performLayout(getLocalBounds().toFloat());
-}
-
-//==============================================================================
-// FlexBox helper
-void UtilityRotaryGroup::setupSliderAndLabel(juce::FlexBox &fb)
-{
-    fb.flexDirection = juce::FlexBox::Direction::column;
-    fb.justifyContent = juce::FlexBox::JustifyContent::center;
-    fb.alignItems = juce::FlexBox::AlignItems::center;
-    fb.flexWrap = juce::FlexBox::Wrap::noWrap;
+    fb.performLayout(getLocalBounds());
 }

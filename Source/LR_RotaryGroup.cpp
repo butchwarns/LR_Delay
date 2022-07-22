@@ -19,28 +19,23 @@ LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvt
     // Add and show all child components
     addAndMakeVisible(&dryWet_L_Slider);
     addAndMakeVisible(&dryWet_R_Slider);
-    addAndMakeVisible(&dryWet_L_Label);
-    addAndMakeVisible(&dryWet_R_Label);
+    addAndMakeVisible(&dryWetLabel);
 
     addAndMakeVisible(&feedback_L_Slider);
     addAndMakeVisible(&feedback_R_Slider);
-    addAndMakeVisible(&feedback_L_Label);
-    addAndMakeVisible(&feedback_R_Label);
+    addAndMakeVisible(&feedbackLabel);
 
     addAndMakeVisible(&delayTime_L_Slider);
     addAndMakeVisible(&delayTime_R_Slider);
-    addAndMakeVisible(&delayTime_L_Label);
-    addAndMakeVisible(&delayTime_R_Label);
+    addAndMakeVisible(&delayTimeLabel);
 
     addAndMakeVisible(&cutoffLP_L_Slider);
     addAndMakeVisible(&cutoffLP_R_Slider);
-    addAndMakeVisible(&cutoffLP_L_Label);
-    addAndMakeVisible(&cutoffLP_R_Label);
+    addAndMakeVisible(&cutoffLP_Label);
 
     addAndMakeVisible(&cutoffHP_L_Slider);
     addAndMakeVisible(&cutoffHP_R_Slider);
-    addAndMakeVisible(&cutoffHP_L_Label);
-    addAndMakeVisible(&cutoffHP_R_Label);
+    addAndMakeVisible(&cutoffHP_Label);
 
     //==============================================================================
     // Make all sliders rotary knobs
@@ -90,30 +85,20 @@ LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvt
 
     //==============================================================================
     // Label the sliders
-    dryWet_L_Label.setText("DRY/WET L", juce::NotificationType::dontSendNotification);
-    dryWet_L_Label.setJustificationType(juce::Justification::centred);
-    dryWet_R_Label.setText("DRY/WET R", juce::NotificationType::dontSendNotification);
-    dryWet_R_Label.setJustificationType(juce::Justification::centred);
+    dryWetLabel.setText("DRY / WET", juce::NotificationType::dontSendNotification);
+    dryWetLabel.setJustificationType(juce::Justification::centred);
 
-    feedback_L_Label.setText("FDBK L", juce::NotificationType::dontSendNotification);
-    feedback_L_Label.setJustificationType(juce::Justification::centred);
-    feedback_R_Label.setText("FDBK R", juce::NotificationType::dontSendNotification);
-    feedback_R_Label.setJustificationType(juce::Justification::centred);
+    feedbackLabel.setText("FEEDBACK", juce::NotificationType::dontSendNotification);
+    feedbackLabel.setJustificationType(juce::Justification::centred);
 
-    delayTime_L_Label.setText("TIME L", juce::NotificationType::dontSendNotification);
-    delayTime_L_Label.setJustificationType(juce::Justification::centred);
-    delayTime_R_Label.setText("TIME R", juce::NotificationType::dontSendNotification);
-    delayTime_R_Label.setJustificationType(juce::Justification::centred);
+    delayTimeLabel.setText("DELAY TIME", juce::NotificationType::dontSendNotification);
+    delayTimeLabel.setJustificationType(juce::Justification::centred);
 
-    cutoffLP_L_Label.setText("LP L", juce::NotificationType::dontSendNotification);
-    cutoffLP_L_Label.setJustificationType(juce::Justification::centred);
-    cutoffLP_R_Label.setText("LP R", juce::NotificationType::dontSendNotification);
-    cutoffLP_R_Label.setJustificationType(juce::Justification::centred);
+    cutoffLP_Label.setText("LP CUTOFF", juce::NotificationType::dontSendNotification);
+    cutoffLP_Label.setJustificationType(juce::Justification::centred);
 
-    cutoffHP_L_Label.setText("HP L", juce::NotificationType::dontSendNotification);
-    cutoffHP_L_Label.setJustificationType(juce::Justification::centred);
-    cutoffHP_R_Label.setText("HP R", juce::NotificationType::dontSendNotification);
-    cutoffHP_R_Label.setJustificationType(juce::Justification::centred);
+    cutoffHP_Label.setText("HP CUTOFF", juce::NotificationType::dontSendNotification);
+    cutoffHP_Label.setJustificationType(juce::Justification::centred);
 
     //==============================================================================
     // Attach parameters in processor to sliders
@@ -133,164 +118,199 @@ LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvt
     cutoffHP_R_Attachment.reset(new SliderAttachment(apvts, "cutoffHP_R", cutoffHP_R_Slider));
 }
 
-LR_RotaryGroup::~LR_RotaryGroup(){}
+LR_RotaryGroup::~LR_RotaryGroup() {}
 
-void LR_RotaryGroup::paint(juce::Graphics &g){}
+void LR_RotaryGroup::paint(juce::Graphics &g) {}
 
 void LR_RotaryGroup::resized()
 {
     typedef juce::FlexItem FlexItem;
     typedef juce::FlexBox FlexBox;
 
-    const int sliderHeight = MIN_ROTARY_HEIGHT + MIN_SLIDER_TEXTBOX_HEIGHT;
-
     //==============================================================================
     // Stack all pairs vertically
     FlexBox fb;
     fb.flexDirection = FlexBox::Direction::column;
-    fb.justifyContent = FlexBox::JustifyContent::spaceBetween;
+    fb.justifyContent = FlexBox::JustifyContent::spaceAround;
     fb.alignItems = FlexBox::AlignItems::center;
     fb.flexWrap = FlexBox::Wrap::noWrap;
 
     //=============================================================================
-    // FlexBoxes for rotary with label
 
-    // Dry / wet
-    FlexBox dryWet_L_FB;
-    FlexBox dryWet_R_FB;
-
-    setupSliderAndLabel(dryWet_L_FB);
-    setupSliderAndLabel(dryWet_R_FB);
-
-    dryWet_L_FB.items.add(FlexItem(dryWet_L_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
-    dryWet_L_FB.items.add(FlexItem(dryWet_L_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
-
-    dryWet_R_FB.items.add(FlexItem(dryWet_R_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
-    dryWet_R_FB.items.add(FlexItem(dryWet_R_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
-
-    // Feedback
-    FlexBox feedback_L_FB;
-    FlexBox feedback_R_FB;
-
-    setupSliderAndLabel(feedback_L_FB);
-    setupSliderAndLabel(feedback_R_FB);
-
-    feedback_L_FB.items.add(FlexItem(feedback_L_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
-    feedback_L_FB.items.add(FlexItem(feedback_L_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
-
-    feedback_R_FB.items.add(FlexItem(feedback_R_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
-    feedback_R_FB.items.add(FlexItem(feedback_R_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
-
-    // Delay time
-    FlexBox delayTime_L_FB;
-    FlexBox delayTime_R_FB;
-
-    setupSliderAndLabel(delayTime_L_FB);
-    setupSliderAndLabel(delayTime_R_FB);
-
-    delayTime_L_FB.items.add(FlexItem(delayTime_L_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
-    delayTime_L_FB.items.add(FlexItem(delayTime_L_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
-
-    delayTime_R_FB.items.add(FlexItem(delayTime_R_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
-    delayTime_R_FB.items.add(FlexItem(delayTime_R_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
-
-    // Low-pass cutoff
-    FlexBox cutoffLP_L_FB;
-    FlexBox cutoffLP_R_FB;
-
-    setupSliderAndLabel(cutoffLP_L_FB);
-    setupSliderAndLabel(cutoffLP_R_FB);
-
-    cutoffLP_L_FB.items.add(FlexItem(cutoffLP_L_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
-    cutoffLP_L_FB.items.add(FlexItem(cutoffLP_L_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
-
-    cutoffLP_R_FB.items.add(FlexItem(cutoffLP_R_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
-    cutoffLP_R_FB.items.add(FlexItem(cutoffLP_R_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
-
-    // High-pass cutoff
-    FlexBox cutoffHP_L_FB;
-    FlexBox cutoffHP_R_FB;
-
-    setupSliderAndLabel(cutoffHP_L_FB);
-    setupSliderAndLabel(cutoffHP_R_FB);
-
-    cutoffHP_L_FB.items.add(FlexItem(cutoffHP_L_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
-    cutoffHP_L_FB.items.add(FlexItem(cutoffHP_L_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
-
-    cutoffHP_R_FB.items.add(FlexItem(cutoffHP_R_Label).withMinHeight(MIN_SLIDER_LABEL_HEIGHT).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(MIN_SLIDER_LABEL_HEIGHT).withMaxWidth(MIN_ROTARY_WIDTH));
-    cutoffHP_R_FB.items.add(FlexItem(cutoffHP_R_Slider).withMinHeight(sliderHeight).withMinWidth(MIN_ROTARY_WIDTH).withMaxHeight(sliderHeight).withMaxWidth(MIN_ROTARY_WIDTH));
-
-    //==============================================================================
-    // Flexboxes for the individual LR rotary pairs
-    const int minPairWidth = 2 * MIN_ROTARY_WIDTH;
-
-    // Dry / wet pair
+    // FlexBoxes for rotary pairs with label
     FlexBox dryWetFB;
-    dryWetFB.flexDirection = FlexBox::Direction::row;
-    dryWetFB.justifyContent = FlexBox::JustifyContent::spaceAround;
-    dryWetFB.alignItems = FlexBox::AlignItems::center;
-    dryWetFB.flexWrap = FlexBox::Wrap::noWrap;
-
-    dryWetFB.items.add(dryWet_L_FB);
-    dryWetFB.items.add(dryWet_R_FB);
-
-    // Feedback pair
     FlexBox feedbackFB;
-    feedbackFB.flexDirection = FlexBox::Direction::row;
-    feedbackFB.justifyContent = FlexBox::JustifyContent::spaceAround;
-    feedbackFB.alignItems = FlexBox::AlignItems::center;
-    feedbackFB.flexWrap = FlexBox::Wrap::noWrap;
-
-    feedbackFB.items.add(feedback_L_FB);
-    feedbackFB.items.add(feedback_R_FB);
-
-    // Delay time pair
     FlexBox delayTimeFB;
-    delayTimeFB.flexDirection = FlexBox::Direction::row;
-    delayTimeFB.justifyContent = FlexBox::JustifyContent::spaceAround;
-    delayTimeFB.alignItems = FlexBox::AlignItems::center;
-    delayTimeFB.flexWrap = FlexBox::Wrap::noWrap;
-
-    delayTimeFB.items.add(delayTime_L_FB);
-    delayTimeFB.items.add(delayTime_R_FB);
-
-    // Cutoff low-pass pair
     FlexBox cutoffLP_FB;
-    cutoffLP_FB.flexDirection = FlexBox::Direction::row;
-    cutoffLP_FB.justifyContent = FlexBox::JustifyContent::spaceAround;
-    cutoffLP_FB.alignItems = FlexBox::AlignItems::center;
-    cutoffLP_FB.flexWrap = FlexBox::Wrap::noWrap;
-
-    cutoffLP_FB.items.add(cutoffLP_L_FB);
-    cutoffLP_FB.items.add(cutoffLP_R_FB);
-
-    // Cutoff high-pass pair
     FlexBox cutoffHP_FB;
-    cutoffHP_FB.flexDirection = FlexBox::Direction::row;
-    cutoffHP_FB.justifyContent = FlexBox::JustifyContent::spaceAround;
-    cutoffHP_FB.alignItems = FlexBox::AlignItems::center;
-    cutoffHP_FB.flexWrap = FlexBox::Wrap::noWrap;
 
-    cutoffHP_FB.items.add(cutoffHP_L_FB);
-    cutoffHP_FB.items.add(cutoffHP_R_FB);
+    setupSliderPairAndLabel(dryWetFB);
+    setupSliderPairAndLabel(feedbackFB);
+    setupSliderPairAndLabel(delayTimeFB);
+    setupSliderPairAndLabel(cutoffLP_FB);
+    setupSliderPairAndLabel(cutoffHP_FB);
+
+    // Pairs of rotary sliders for L / R
+    FlexBox dryWetPair;
+    FlexBox feedbackPair;
+    FlexBox delayTimePair;
+    FlexBox cutoffLP_Pair;
+    FlexBox cutoffHP_Pair;
+
+    setupSliderPair(dryWetPair);
+    setupSliderPair(feedbackPair);
+    setupSliderPair(delayTimePair);
+    setupSliderPair(cutoffLP_Pair);
+    setupSliderPair(cutoffHP_Pair);
+
+    // Individual sliders and labels as FlexItems
+    FlexItem flexDryWet_L_Slider = makeFlexSlider(dryWet_L_Slider);
+    FlexItem flexDryWet_R_Slider = makeFlexSlider(dryWet_R_Slider);
+
+    FlexItem flexFeedback_L_Slider = makeFlexSlider(feedback_L_Slider);
+    FlexItem flexFeedback_R_Slider = makeFlexSlider(feedback_R_Slider);
+
+    FlexItem flexDelayTime_L_Slider = makeFlexSlider(delayTime_L_Slider);
+    FlexItem flexDelayTime_R_Slider = makeFlexSlider(delayTime_R_Slider);
+
+    FlexItem flexCutoffLP_L_Slider = makeFlexSlider(cutoffLP_L_Slider);
+    FlexItem flexCutoffLP_R_Slider = makeFlexSlider(cutoffLP_R_Slider);
+
+    FlexItem flexCutoffHP_L_Slider = makeFlexSlider(cutoffHP_L_Slider);
+    FlexItem flexCutoffHP_R_Slider = makeFlexSlider(cutoffHP_R_Slider);
+
+    // Add sliders to the pair boxes
+    dryWetPair.items.add(flexDryWet_L_Slider);
+    dryWetPair.items.add(flexDryWet_R_Slider);
+
+    feedbackPair.items.add(flexFeedback_L_Slider);
+    feedbackPair.items.add(flexFeedback_R_Slider);
+
+    delayTimePair.items.add(flexDelayTime_L_Slider);
+    delayTimePair.items.add(flexDelayTime_R_Slider);
+
+    cutoffLP_Pair.items.add(flexCutoffLP_L_Slider);
+    cutoffLP_Pair.items.add(flexCutoffLP_R_Slider);
+
+    cutoffHP_Pair.items.add(flexCutoffHP_L_Slider);
+    cutoffHP_Pair.items.add(flexCutoffHP_R_Slider);
+
+    // Labels for the rotary pairs as FlexItems
+    FlexItem flexDryWetLabel = makeFlexLabel(dryWetLabel);
+    FlexItem flexFeedbackLabel = makeFlexLabel(feedbackLabel);
+    FlexItem flexDelayTimeLabel = makeFlexLabel(delayTimeLabel);
+    FlexItem flexCutoffLP_Label = makeFlexLabel(cutoffLP_Label);
+    FlexItem flexCutoffHP_Label = makeFlexLabel(cutoffHP_Label);
+
+    // Pairs of rotary encoders as FlexItems
+    FlexItem flexDryWetPair = makeFlexPair(dryWetPair);
+    FlexItem flexFeedbackPair = makeFlexPair(feedbackPair);
+    FlexItem flexDelayTimePair = makeFlexPair(delayTimePair);
+    FlexItem flexCutoffLP_Pair = makeFlexPair(cutoffLP_Pair);
+    FlexItem flexCutoffHP_Pair = makeFlexPair(cutoffHP_Pair);
+
+    // Add pairs and labels to their FlexBoxes
+    dryWetFB.items.add(flexDryWetLabel);
+    dryWetFB.items.add(flexDryWetPair);
+
+    feedbackFB.items.add(flexFeedbackLabel);
+    feedbackFB.items.add(flexFeedbackPair);
+
+    delayTimeFB.items.add(flexDelayTimeLabel);
+    delayTimeFB.items.add(flexDelayTimePair);
+
+    cutoffLP_FB.items.add(flexCutoffLP_Label);
+    cutoffLP_FB.items.add(flexCutoffLP_Pair);
+
+    cutoffHP_FB.items.add(flexCutoffHP_Label);
+    cutoffHP_FB.items.add(flexCutoffHP_Pair);
+
+    // Pairs and labels as FlexItems
+    FlexItem flexDryWetFB = makeFlexPairAndLabel(dryWetFB);
+    FlexItem flexFeedbackFB = makeFlexPairAndLabel(feedbackFB);
+    FlexItem flexDelayTimeFB = makeFlexPairAndLabel(delayTimeFB);
+    FlexItem flexCutoffLP_FB = makeFlexPairAndLabel(cutoffLP_FB);
+    FlexItem flexCutoffHP_FB = makeFlexPairAndLabel(cutoffHP_FB);
 
     //==============================================================================
-    // Make layout
-    fb.items.add(FlexItem(dryWetFB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
-    fb.items.add(FlexItem(feedbackFB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
-    fb.items.add(FlexItem(delayTimeFB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
-    fb.items.add(FlexItem(cutoffLP_FB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
-    fb.items.add(FlexItem(cutoffHP_FB).withMinWidth(minPairWidth).withMinHeight(sliderHeight + MIN_SLIDER_LABEL_HEIGHT));
+    // Add rotary pairs with labels to layout
+    fb.items.add(flexDryWetFB);
+    fb.items.add(flexFeedbackFB);
+    fb.items.add(flexDelayTimeFB);
+    fb.items.add(flexCutoffLP_FB);
+    fb.items.add(flexCutoffHP_FB);
 
-    fb.performLayout(getLocalBounds().toFloat());
+    //==============================================================================
+    fb.performLayout(getLocalBounds());
 }
 
 //==============================================================================
-// FlexBox helper
+// FlexBox helpers
+
 void LR_RotaryGroup::setupSliderAndLabel(juce::FlexBox &fb)
 {
     fb.flexDirection = juce::FlexBox::Direction::column;
     fb.justifyContent = juce::FlexBox::JustifyContent::center;
     fb.alignItems = juce::FlexBox::AlignItems::center;
     fb.flexWrap = juce::FlexBox::Wrap::noWrap;
+}
+
+void LR_RotaryGroup::setupSliderPair(juce::FlexBox &fb)
+{
+    fb.flexDirection = juce::FlexBox::Direction::row;
+    fb.justifyContent = juce::FlexBox::JustifyContent::center;
+    fb.alignItems = juce::FlexBox::AlignItems::center;
+    fb.flexWrap = juce::FlexBox::Wrap::noWrap;
+}
+
+void LR_RotaryGroup::setupSliderPairAndLabel(juce::FlexBox &fb)
+{
+    fb.flexDirection = juce::FlexBox::Direction::column;
+    fb.justifyContent = juce::FlexBox::JustifyContent::spaceAround;
+    fb.alignItems = juce::FlexBox::AlignItems::center;
+    fb.flexWrap = juce::FlexBox::Wrap::noWrap;
+}
+
+juce::FlexItem LR_RotaryGroup::makeFlexSlider(juce::Slider &s)
+{
+    juce::FlexItem flexItem(s);
+
+    flexItem = flexItem.withMinWidth(MIN_ROTARY_WIDTH)
+                   .withMinHeight(MIN_SLIDER_HEIGHT)
+                   .withFlex(1.0f);
+
+    return flexItem;
+}
+
+juce::FlexItem LR_RotaryGroup::makeFlexLabel(juce::Label &l)
+{
+    juce::FlexItem flexItem(l);
+
+    flexItem = flexItem.withMinWidth(MIN_ROTARY_WIDTH)
+                   .withMinHeight(MIN_SLIDER_LABEL_HEIGHT)
+                   .withFlex(1.0f);
+
+    return flexItem;
+}
+
+juce::FlexItem LR_RotaryGroup::makeFlexPair(juce::FlexBox &pair)
+{
+    juce::FlexItem flexItem(pair);
+
+    flexItem = flexItem.withMinWidth(2 * MIN_ROTARY_WIDTH)
+                   .withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT)
+                   .withFlex(1.0f);
+
+    return flexItem;
+}
+
+juce::FlexItem LR_RotaryGroup::makeFlexPairAndLabel(juce::FlexBox &pairAndLabel)
+{
+    juce::FlexItem flexItem(pairAndLabel);
+
+    flexItem = flexItem.withMinWidth(2 * MIN_ROTARY_WIDTH)
+                   .withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT)
+                   .withFlex(1.0f);
+
+    return flexItem;
 }

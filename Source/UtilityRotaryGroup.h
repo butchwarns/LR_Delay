@@ -11,6 +11,8 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "ComponentSizeConstraints.h"
+#include "RotaryWithLabel.h"
 
 //==============================================================================
 /*
@@ -30,25 +32,9 @@ private:
 
     //==============================================================================
     // Sliders and their labels
-    juce::Slider driveSlider;
-    juce::Label driveLabel;
-
-    juce::Slider volumeSlider;
-    juce::Label volumeLabel;
-
-    juce::Slider stereoWidthSlider;
-    juce::Label stereoWidthLabel;
-
-    //==============================================================================
-    // Attachments to the parameters
-    typedef juce::AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
-    std::unique_ptr<SliderAttachment> driveAttachment;
-    std::unique_ptr<SliderAttachment> volumeAttachment;
-    std::unique_ptr<SliderAttachment> stereoWidthAttachment;
-
-    //==============================================================================
-    // FlexBox helpers
-    static void setupSliderAndLabel(juce::FlexBox &fb);
+    RotaryWithLabel volumeRWL;
+    RotaryWithLabel driveRWL;
+    RotaryWithLabel stereoWidthRWL;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(UtilityRotaryGroup)

@@ -1,8 +1,8 @@
 /*
   ==============================================================================
 
-    Footer.h
-    Created: 19 Jul 2022 8:18:10pm
+    RotaryWithLabel.h
+    Created: 21 Jul 2022 9:36:04am
     Author:  butch
 
   ==============================================================================
@@ -11,31 +11,29 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "ComponentSizeConstraints.h"
 
 //==============================================================================
 /*
-*/
-class Footer  : public juce::Component
+ */
+class RotaryWithLabel : public juce::Component
 {
 public:
-    Footer();
-    ~Footer() override;
+    RotaryWithLabel();
+    ~RotaryWithLabel() override;
 
-    void paint (juce::Graphics&) override;
+    void paint(juce::Graphics &) override;
     void resized() override;
 
+    //==============================================================================
+    // UI components
+    juce::Slider rotary;
+    juce::Label label;
+
+    //==============================================================================
+    // Attachment to a parameter
+    typedef juce::AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
+    std::unique_ptr<SliderAttachment> sliderAttachment;
+
 private:
-    juce::Label coprLabel; // Copyright
-    juce::Label websiteLabel; // Website address
-
-    //==============================================================================
-    // Flexbox constraints
-    const int MAX_HEIGHT = 50.0f;
-
-    const int MIN_LABEL_HEIGHT = 25.0f;
-    const int MIN_LABEL_WIDTH = 150.0f;
-
-    //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Footer)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(RotaryWithLabel)
 };

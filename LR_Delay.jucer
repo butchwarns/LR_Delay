@@ -5,10 +5,9 @@
               companyName="Butch Warns" companyCopyright="Copr. 2022 Butch Warns"
               companyWebsite="https://butchwarns.de/" companyEmail="contact@butchwarns.de"
               displaySplashScreen="0" pluginFormats="buildVST3" pluginManufacturerCode="Buwa"
-              pluginCode="Lrdl" pluginChannelConfigs="{1, 1}, {2, 2}" pluginAUMainType="'aufx'"
-              pluginVST3Category="Delay,Fx" pluginVSTCategory="kPlugCategEffect"
-              pluginAAXCategory="0" includeBinaryInJuceHeader="1" cppLanguageStandard="17"
-              userNotes=":)">
+              pluginCode="Lrdl" pluginAUMainType="'aufx'" pluginVST3Category="Delay,Fx"
+              pluginVSTCategory="kPlugCategEffect" pluginAAXCategory="0" includeBinaryInJuceHeader="1"
+              cppLanguageStandard="17" userNotes=":)">
   <MAINGROUP id="zB75Do" name="LR_Delay">
     <GROUP id="{771CC25F-F8F7-71F8-8910-6B8EB30AB347}" name="resources">
       <FILE id="PDq8Uv" name="Manrope-Bold.ttf" compile="0" resource="1"
@@ -42,6 +41,10 @@
               file="Source/LR_RotaryGroup.cpp"/>
         <FILE id="FJnJqz" name="LR_RotaryGroup.h" compile="0" resource="0"
               file="Source/LR_RotaryGroup.h"/>
+        <FILE id="e0E0D3" name="RotaryWithLabel.cpp" compile="1" resource="0"
+              file="Source/RotaryWithLabel.cpp"/>
+        <FILE id="DaoUKC" name="RotaryWithLabel.h" compile="0" resource="0"
+              file="Source/RotaryWithLabel.h"/>
         <FILE id="SzR7Pd" name="UtilityRotaryGroup.cpp" compile="1" resource="0"
               file="Source/UtilityRotaryGroup.cpp"/>
         <FILE id="TAjn08" name="UtilityRotaryGroup.h" compile="0" resource="0"
