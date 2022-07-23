@@ -15,10 +15,14 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
 {
     // Set main window size
     setSize(400, 900);
-    setResizable(false, true);
+    setResizable(true, true);
     const int minWidth = static_cast<int>(1.15f * (MIN_UTIL_WIDTH + MIN_LR_WIDTH));
     const int minHeight = static_cast<int>(1.15f * (MIN_HEADER_HEIGHT + MIN_FOOTER_HEIGHT + 5 * MIN_SLIDER_WITH_LABEL_HEIGHT));
-    setResizeLimits(minWidth, minHeight, getScreenBounds().getWidth(), getScreenBounds().getHeight());
+
+    const juce::Rectangle<int> screenBounds = juce::Desktop::getInstance().getDisplays().getMainDisplay().userArea;
+    const int screenWidth = screenBounds.getWidth();
+    const int screenHeight = screenBounds.getHeight();
+    setResizeLimits(minWidth, minHeight, screenWidth, screenHeight);
 
     //==============================================================================
     // Add as children and show all components
