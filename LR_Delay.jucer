@@ -5,10 +5,9 @@
               companyName="Butch Warns" companyCopyright="Copr. 2022 Butch Warns"
               companyWebsite="https://butchwarns.de/" companyEmail="contact@butchwarns.de"
               displaySplashScreen="0" pluginFormats="buildVST3" pluginManufacturerCode="Buwa"
-              pluginCode="Lrdl" pluginChannelConfigs="{1, 1}, {2, 2}" pluginAUMainType="'aufx'"
-              pluginVST3Category="Delay,Fx" pluginVSTCategory="kPlugCategEffect"
-              pluginAAXCategory="0" includeBinaryInJuceHeader="1" cppLanguageStandard="17"
-              userNotes=":)">
+              pluginCode="Lrdl" pluginAUMainType="'aufx'" pluginVST3Category="Delay,Fx"
+              pluginVSTCategory="kPlugCategEffect" pluginAAXCategory="0" includeBinaryInJuceHeader="1"
+              cppLanguageStandard="17" userNotes=":)">
   <MAINGROUP id="zB75Do" name="LR_Delay">
     <GROUP id="{771CC25F-F8F7-71F8-8910-6B8EB30AB347}" name="resources">
       <FILE id="PDq8Uv" name="Manrope-Bold.ttf" compile="0" resource="1"
@@ -27,6 +26,34 @@
             file="resources/font/manrope/Manrope-SemiBold.ttf"/>
     </GROUP>
     <GROUP id="{43425943-A097-BEE0-498C-4421B96EFAE5}" name="Source">
+      <GROUP id="{82CD6F29-B643-B2C9-803D-943B941DEFFF}" name="UI">
+        <FILE id="l5c2AJ" name="ComponentSizeConstraints.h" compile="0" resource="0"
+              file="Source/ComponentSizeConstraints.h"/>
+        <FILE id="hFObEv" name="CustomLookAndFeel.cpp" compile="1" resource="0"
+              file="Source/CustomLookAndFeel.cpp"/>
+        <FILE id="AGYZai" name="CustomLookAndFeel.h" compile="0" resource="0"
+              file="Source/CustomLookAndFeel.h"/>
+        <FILE id="JbhzRN" name="Footer.cpp" compile="1" resource="0" file="Source/Footer.cpp"/>
+        <FILE id="OPstPj" name="Footer.h" compile="0" resource="0" file="Source/Footer.h"/>
+        <FILE id="oj0z1y" name="Header.cpp" compile="1" resource="0" file="Source/Header.cpp"/>
+        <FILE id="mQjt20" name="Header.h" compile="0" resource="0" file="Source/Header.h"/>
+        <FILE id="JA4ywh" name="LR_RotaryGroup.cpp" compile="1" resource="0"
+              file="Source/LR_RotaryGroup.cpp"/>
+        <FILE id="FJnJqz" name="LR_RotaryGroup.h" compile="0" resource="0"
+              file="Source/LR_RotaryGroup.h"/>
+        <FILE id="yphAOF" name="RotaryPairWithLabel.cpp" compile="1" resource="0"
+              file="Source/RotaryPairWithLabel.cpp"/>
+        <FILE id="a5yqaP" name="RotaryPairWithLabel.h" compile="0" resource="0"
+              file="Source/RotaryPairWithLabel.h"/>
+        <FILE id="e0E0D3" name="RotaryWithLabel.cpp" compile="1" resource="0"
+              file="Source/RotaryWithLabel.cpp"/>
+        <FILE id="DaoUKC" name="RotaryWithLabel.h" compile="0" resource="0"
+              file="Source/RotaryWithLabel.h"/>
+        <FILE id="SzR7Pd" name="UtilityRotaryGroup.cpp" compile="1" resource="0"
+              file="Source/UtilityRotaryGroup.cpp"/>
+        <FILE id="TAjn08" name="UtilityRotaryGroup.h" compile="0" resource="0"
+              file="Source/UtilityRotaryGroup.h"/>
+      </GROUP>
       <FILE id="fPYcLf" name="delay.h" compile="0" resource="0" file="Source/delay.h"/>
       <FILE id="GWuZkJ" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
