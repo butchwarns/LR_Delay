@@ -29,7 +29,8 @@ Header::~Header()
 
 void Header::paint(juce::Graphics &g)
 {
-    g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
+    g.setColour(juce::Colours::white);
+    g.drawRect(getLocalBounds());
 }
 
 void Header::resized()

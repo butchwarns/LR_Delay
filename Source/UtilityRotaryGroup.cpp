@@ -42,7 +42,8 @@ UtilityRotaryGroup::UtilityRotaryGroup(juce::AudioProcessorValueTreeState &apvts
 
 UtilityRotaryGroup::~UtilityRotaryGroup() {}
 
-void UtilityRotaryGroup::paint(juce::Graphics &g){
+void UtilityRotaryGroup::paint(juce::Graphics &g)
+{
     g.setColour(juce::Colours::white);
     g.drawRect(getLocalBounds());
 }
