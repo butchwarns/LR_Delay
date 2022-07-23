@@ -44,15 +44,24 @@ void RotaryPairWithLabel::paint(juce::Graphics &g)
 
 void RotaryPairWithLabel::resized()
 {
-    // FlexBox to stack rotary and label vertically
+    //==============================================================================
+    // FlexBox to stack rotary pair and label vertically
     typedef juce::FlexBox FB;
     FB fb;
     fb.flexDirection = FB::Direction::column;
-    fb.justifyContent = FB::JustifyContent::flexEnd;
+    fb.justifyContent = FB::JustifyContent::center;
     fb.alignItems = FB::AlignItems::center;
     fb.alignContent = FB::AlignContent::center;
-    fb.flexWrap = FB::Wrap::wrap;
+    fb.flexWrap = FB::Wrap::noWrap;
 
+    // FlexBox to stack the two rotaries horizontally
+    FB pairFB;
+    pairFB.flexDirection = FB::Direction::row;
+    pairFB.justifyContent = FB::JustifyContent::center;
+    pairFB.alignItems = FB::AlignItems::center;
+    pairFB.flexWrap = FB::Wrap::noWrap;
+
+    //==============================================================================
     // Make FlexItems
     typedef juce::FlexItem FI;
     FI flexSlider1(rotary1);
@@ -68,8 +77,14 @@ void RotaryPairWithLabel::resized()
     flexLabel = flexLabel.withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_LABEL_HEIGHT);
     flexLabel = flexLabel.withFlex(2.0f, 0.0f, 0.0f).withAlignSelf(FI::AlignSelf::center);
 
+    // Make flex rotary pair
+    pairFB.items.add(flexSlider1, flexSlider2);
+
+    FI flexPairFB(pairFB);
+    flexPairFB = flexPairFB.withMinWidth(2 * MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_HEIGHT);
+
     // Add to the box
-    fb.items.add(flexLabel, flexSlider1, flexSlider2);
+    fb.items.add(flexLabel, flexPairFB);
 
     // Layout!
     fb.performLayout(getLocalBounds());
