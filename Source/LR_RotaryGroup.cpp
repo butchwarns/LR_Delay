@@ -65,14 +65,14 @@ LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvt
     feedbackRPWL.rotary1.setTextValueSuffix(" %");
     feedbackRPWL.rotary2.setTextValueSuffix(" %");
 
-    delayTimeRPWL.rotary1.setTextValueSuffix(" %");
-    delayTimeRPWL.rotary2.setTextValueSuffix(" %");
+    delayTimeRPWL.rotary1.setTextValueSuffix(" ms");
+    delayTimeRPWL.rotary2.setTextValueSuffix(" ms");
 
-    cutoffLP_RPWL.rotary1.setTextValueSuffix(" %");
-    cutoffLP_RPWL.rotary2.setTextValueSuffix(" %");
+    cutoffLP_RPWL.rotary1.setTextValueSuffix(" Hz");
+    cutoffLP_RPWL.rotary2.setTextValueSuffix(" Hz");
 
-    cutoffHP_RPWL.rotary1.setTextValueSuffix(" %");
-    cutoffHP_RPWL.rotary2.setTextValueSuffix(" %");
+    cutoffHP_RPWL.rotary1.setTextValueSuffix(" Hz");
+    cutoffHP_RPWL.rotary2.setTextValueSuffix(" Hz");
 
     //==============================================================================
     // Label the sliders
@@ -112,7 +112,11 @@ LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvt
 
 LR_RotaryGroup::~LR_RotaryGroup() {}
 
-void LR_RotaryGroup::paint(juce::Graphics &g) {}
+void LR_RotaryGroup::paint(juce::Graphics &g) 
+{
+    g.setColour(juce::Colours::white);
+    g.drawRect(getLocalBounds());
+}
 
 void LR_RotaryGroup::resized()
 {
