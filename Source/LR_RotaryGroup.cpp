@@ -18,25 +18,10 @@ LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvt
     //==============================================================================
     // Add and show all child components
     addAndMakeVisible(&dryWetRPWL);
-    // addAndMakeVisible(&dryWet_L_Slider);
-    // addAndMakeVisible(&dryWet_R_Slider);
-    // addAndMakeVisible(&dryWetLabel);
-
-    // addAndMakeVisible(&feedback_L_Slider);
-    // addAndMakeVisible(&feedback_R_Slider);
-    // addAndMakeVisible(&feedbackLabel);
-
-    // addAndMakeVisible(&delayTime_L_Slider);
-    // addAndMakeVisible(&delayTime_R_Slider);
-    // addAndMakeVisible(&delayTimeLabel);
-
-    // addAndMakeVisible(&cutoffLP_L_Slider);
-    // addAndMakeVisible(&cutoffLP_R_Slider);
-    // addAndMakeVisible(&cutoffLP_Label);
-
-    // addAndMakeVisible(&cutoffHP_L_Slider);
-    // addAndMakeVisible(&cutoffHP_R_Slider);
-    // addAndMakeVisible(&cutoffHP_Label);
+    addAndMakeVisible(&feedbackRPWL);
+    addAndMakeVisible(&delayTimeRPWL);
+    addAndMakeVisible(&cutoffLP_RPWL);
+    addAndMakeVisible(&cutoffHP_RPWL);
 
     //==============================================================================
     // Make all sliders rotary knobs
@@ -45,79 +30,84 @@ LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvt
     dryWetRPWL.rotary1.setSliderStyle(SliderStyle::RotaryVerticalDrag);
     dryWetRPWL.rotary2.setSliderStyle(SliderStyle::RotaryVerticalDrag);
 
-    // feedback_L_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
-    // feedback_R_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    feedbackRPWL.rotary1.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    feedbackRPWL.rotary2.setSliderStyle(SliderStyle::RotaryVerticalDrag);
 
-    // delayTime_L_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
-    // delayTime_R_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    delayTimeRPWL.rotary1.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    delayTimeRPWL.rotary2.setSliderStyle(SliderStyle::RotaryVerticalDrag);
 
-    // cutoffLP_L_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
-    // cutoffLP_R_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    cutoffLP_RPWL.rotary1.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    cutoffLP_RPWL.rotary2.setSliderStyle(SliderStyle::RotaryVerticalDrag);
 
-    // cutoffHP_L_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
-    // cutoffHP_R_Slider.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    cutoffHP_RPWL.rotary1.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    cutoffHP_RPWL.rotary2.setSliderStyle(SliderStyle::RotaryVerticalDrag);
 
     //==============================================================================
     // Make text boxes
     dryWetRPWL.rotary1.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
     dryWetRPWL.rotary2.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
 
+    feedbackRPWL.rotary1.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+    feedbackRPWL.rotary2.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+
+    delayTimeRPWL.rotary1.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+    delayTimeRPWL.rotary2.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+
+    cutoffLP_RPWL.rotary1.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+    cutoffLP_RPWL.rotary2.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+
+    cutoffHP_RPWL.rotary1.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+    cutoffHP_RPWL.rotary2.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+
     dryWetRPWL.rotary1.setTextValueSuffix(" %");
     dryWetRPWL.rotary2.setTextValueSuffix(" %");
 
-    // feedback_L_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
-    // feedback_R_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
-    // feedback_L_Slider.setTextValueSuffix(" %");
-    // feedback_R_Slider.setTextValueSuffix(" %");
+    feedbackRPWL.rotary1.setTextValueSuffix(" %");
+    feedbackRPWL.rotary2.setTextValueSuffix(" %");
 
-    // delayTime_L_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
-    // delayTime_R_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
-    // delayTime_L_Slider.setTextValueSuffix(" ms");
-    // delayTime_R_Slider.setTextValueSuffix(" ms");
+    delayTimeRPWL.rotary1.setTextValueSuffix(" %");
+    delayTimeRPWL.rotary2.setTextValueSuffix(" %");
 
-    // cutoffLP_L_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
-    // cutoffLP_R_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
-    // cutoffLP_L_Slider.setTextValueSuffix(" Hz");
-    // cutoffLP_R_Slider.setTextValueSuffix(" Hz");
+    cutoffLP_RPWL.rotary1.setTextValueSuffix(" %");
+    cutoffLP_RPWL.rotary2.setTextValueSuffix(" %");
 
-    // cutoffHP_L_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
-    // cutoffHP_R_Slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
-    // cutoffHP_L_Slider.setTextValueSuffix(" Hz");
-    // cutoffHP_R_Slider.setTextValueSuffix(" Hz");
+    cutoffHP_RPWL.rotary1.setTextValueSuffix(" %");
+    cutoffHP_RPWL.rotary2.setTextValueSuffix(" %");
 
     //==============================================================================
     // Label the sliders
     dryWetRPWL.label.setText("DRY / WET", juce::NotificationType::dontSendNotification);
     dryWetRPWL.label.setJustificationType(juce::Justification::centred);
 
-    // feedbackLabel.setText("FEEDBACK", juce::NotificationType::dontSendNotification);
-    // feedbackLabel.setJustificationType(juce::Justification::centred);
+    feedbackRPWL.label.setText("FEEDBACK", juce::NotificationType::dontSendNotification);
+    feedbackRPWL.label.setJustificationType(juce::Justification::centred);
 
-    // delayTimeLabel.setText("DELAY TIME", juce::NotificationType::dontSendNotification);
-    // delayTimeLabel.setJustificationType(juce::Justification::centred);
+    delayTimeRPWL.label.setText("DELAY TIME", juce::NotificationType::dontSendNotification);
+    delayTimeRPWL.label.setJustificationType(juce::Justification::centred);
 
-    // cutoffLP_Label.setText("LP CUTOFF", juce::NotificationType::dontSendNotification);
-    // cutoffLP_Label.setJustificationType(juce::Justification::centred);
+    cutoffLP_RPWL.label.setText("LP CUTOFF", juce::NotificationType::dontSendNotification);
+    cutoffLP_RPWL.label.setJustificationType(juce::Justification::centred);
 
-    // cutoffHP_Label.setText("HP CUTOFF", juce::NotificationType::dontSendNotification);
-    // cutoffHP_Label.setJustificationType(juce::Justification::centred);
+    cutoffHP_RPWL.label.setText("HP CUTOFF", juce::NotificationType::dontSendNotification);
+    cutoffHP_RPWL.label.setJustificationType(juce::Justification::centred);
 
     //==============================================================================
     // Attach parameters in processor to sliders
+    typedef juce::AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
     dryWetRPWL.sliderAttachment1.reset(new SliderAttachment(apvts, "dryWet_L", dryWetRPWL.rotary1));
     dryWetRPWL.sliderAttachment2.reset(new SliderAttachment(apvts, "dryWet_R", dryWetRPWL.rotary2));
 
-    // feedback_L_Attachment.reset(new SliderAttachment(apvts, "feedback_L", feedback_L_Slider));
-    // feedback_R_Attachment.reset(new SliderAttachment(apvts, "feedback_R", feedback_R_Slider));
+    feedbackRPWL.sliderAttachment1.reset(new SliderAttachment(apvts, "feedback_L", feedbackRPWL.rotary1));
+    feedbackRPWL.sliderAttachment2.reset(new SliderAttachment(apvts, "feedback_R", feedbackRPWL.rotary2));
 
-    // delayTime_L_Attachment.reset(new SliderAttachment(apvts, "delayTime_L", delayTime_L_Slider));
-    // delayTime_R_Attachment.reset(new SliderAttachment(apvts, "delayTime_R", delayTime_R_Slider));
+    delayTimeRPWL.sliderAttachment1.reset(new SliderAttachment(apvts, "delayTime_L", delayTimeRPWL.rotary1));
+    delayTimeRPWL.sliderAttachment2.reset(new SliderAttachment(apvts, "delayTime_R", delayTimeRPWL.rotary2));
 
-    // cutoffLP_L_Attachment.reset(new SliderAttachment(apvts, "cutoffLP_L", cutoffLP_L_Slider));
-    // cutoffLP_R_Attachment.reset(new SliderAttachment(apvts, "cutoffLP_R", cutoffLP_R_Slider));
+    cutoffLP_RPWL.sliderAttachment1.reset(new SliderAttachment(apvts, "cutoffLP_L", cutoffLP_RPWL.rotary1));
+    cutoffLP_RPWL.sliderAttachment2.reset(new SliderAttachment(apvts, "cutoffLP_R", cutoffLP_RPWL.rotary2));
 
-    // cutoffHP_L_Attachment.reset(new SliderAttachment(apvts, "cutoffHP_L", cutoffHP_L_Slider));
-    // cutoffHP_R_Attachment.reset(new SliderAttachment(apvts, "cutoffHP_R", cutoffHP_R_Slider));
+    cutoffHP_RPWL.sliderAttachment1.reset(new SliderAttachment(apvts, "cutoffHP_L", cutoffHP_RPWL.rotary1));
+    cutoffHP_RPWL.sliderAttachment2.reset(new SliderAttachment(apvts, "cutoffHP_R", cutoffHP_RPWL.rotary2));
 }
 
 LR_RotaryGroup::~LR_RotaryGroup() {}
@@ -140,184 +130,18 @@ void LR_RotaryGroup::resized()
     //=============================================================================
     // Make flexitems to add to the box
     FlexItem flexDryWetRPWL(dryWetRPWL);
+    FlexItem flexFeedbackRPWL(feedbackRPWL);
+    FlexItem flexDelayTimeRPWL(delayTimeRPWL);
+    FlexItem flexCutoffLP_RPWL(cutoffLP_RPWL);
+    FlexItem flexCutoffHP_RPWL(cutoffHP_RPWL);
+
     flexDryWetRPWL = flexDryWetRPWL.withMinWidth(2 * MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
+    flexFeedbackRPWL = flexFeedbackRPWL.withMinWidth(2 * MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
+    flexDelayTimeRPWL = flexDelayTimeRPWL.withMinWidth(2 * MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
+    flexCutoffLP_RPWL = flexCutoffLP_RPWL.withMinWidth(2 * MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
+    flexCutoffHP_RPWL = flexCutoffHP_RPWL.withMinWidth(2 * MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
 
     //==============================================================================
     // Add to box and layout
-    fb.items.add(flexDryWetRPWL);
-    fb.performLayout(getLocalBounds());
-    
-    // FlexBoxes for rotary pairs with label
-    // FlexBox dryWetFB;
-    // FlexBox feedbackFB;
-    // FlexBox delayTimeFB;
-    // FlexBox cutoffLP_FB;
-    // FlexBox cutoffHP_FB;
-
-    // setupSliderPairAndLabel(dryWetFB);
-    // setupSliderPairAndLabel(feedbackFB);
-    // setupSliderPairAndLabel(delayTimeFB);
-    // setupSliderPairAndLabel(cutoffLP_FB);
-    // setupSliderPairAndLabel(cutoffHP_FB);
-
-    // Pairs of rotary sliders for L / R
-    // FlexBox dryWetPair;
-    // FlexBox feedbackPair;
-    // FlexBox delayTimePair;
-    // FlexBox cutoffLP_Pair;
-    // FlexBox cutoffHP_Pair;
-
-    // setupSliderPair(dryWetPair);
-    // setupSliderPair(feedbackPair);
-    // setupSliderPair(delayTimePair);
-    // setupSliderPair(cutoffLP_Pair);
-    // setupSliderPair(cutoffHP_Pair);
-
-    // Individual sliders and labels as FlexItems
-    // FlexItem flexDryWet_L_Slider = makeFlexSlider(dryWet_L_Slider);
-    // FlexItem flexDryWet_R_Slider = makeFlexSlider(dryWet_R_Slider);
-
-    // FlexItem flexFeedback_L_Slider = makeFlexSlider(feedback_L_Slider);
-    // FlexItem flexFeedback_R_Slider = makeFlexSlider(feedback_R_Slider);
-
-    // FlexItem flexDelayTime_L_Slider = makeFlexSlider(delayTime_L_Slider);
-    // FlexItem flexDelayTime_R_Slider = makeFlexSlider(delayTime_R_Slider);
-
-    // FlexItem flexCutoffLP_L_Slider = makeFlexSlider(cutoffLP_L_Slider);
-    // FlexItem flexCutoffLP_R_Slider = makeFlexSlider(cutoffLP_R_Slider);
-
-    // FlexItem flexCutoffHP_L_Slider = makeFlexSlider(cutoffHP_L_Slider);
-    // FlexItem flexCutoffHP_R_Slider = makeFlexSlider(cutoffHP_R_Slider);
-
-    // Add sliders to the pair boxes
-    // dryWetPair.items.add(flexDryWet_L_Slider);
-    // dryWetPair.items.add(flexDryWet_R_Slider);
-
-    // feedbackPair.items.add(flexFeedback_L_Slider);
-    // feedbackPair.items.add(flexFeedback_R_Slider);
-
-    // delayTimePair.items.add(flexDelayTime_L_Slider);
-    // delayTimePair.items.add(flexDelayTime_R_Slider);
-
-    // cutoffLP_Pair.items.add(flexCutoffLP_L_Slider);
-    // cutoffLP_Pair.items.add(flexCutoffLP_R_Slider);
-
-    // cutoffHP_Pair.items.add(flexCutoffHP_L_Slider);
-    // cutoffHP_Pair.items.add(flexCutoffHP_R_Slider);
-
-    // Labels for the rotary pairs as FlexItems
-    // FlexItem flexDryWetLabel = makeFlexLabel(dryWetLabel);
-    // FlexItem flexFeedbackLabel = makeFlexLabel(feedbackLabel);
-    // FlexItem flexDelayTimeLabel = makeFlexLabel(delayTimeLabel);
-    // FlexItem flexCutoffLP_Label = makeFlexLabel(cutoffLP_Label);
-    // FlexItem flexCutoffHP_Label = makeFlexLabel(cutoffHP_Label);
-
-    // // Pairs of rotary encoders as FlexItems
-    // FlexItem flexDryWetPair = makeFlexPair(dryWetPair);
-    // FlexItem flexFeedbackPair = makeFlexPair(feedbackPair);
-    // FlexItem flexDelayTimePair = makeFlexPair(delayTimePair);
-    // FlexItem flexCutoffLP_Pair = makeFlexPair(cutoffLP_Pair);
-    // FlexItem flexCutoffHP_Pair = makeFlexPair(cutoffHP_Pair);
-
-    // // Add pairs and labels to their FlexBoxes
-    // dryWetFB.items.add(flexDryWetLabel);
-    // dryWetFB.items.add(flexDryWetPair);
-
-    // feedbackFB.items.add(flexFeedbackLabel);
-    // feedbackFB.items.add(flexFeedbackPair);
-
-    // delayTimeFB.items.add(flexDelayTimeLabel);
-    // delayTimeFB.items.add(flexDelayTimePair);
-
-    // cutoffLP_FB.items.add(flexCutoffLP_Label);
-    // cutoffLP_FB.items.add(flexCutoffLP_Pair);
-
-    // cutoffHP_FB.items.add(flexCutoffHP_Label);
-    // cutoffHP_FB.items.add(flexCutoffHP_Pair);
-
-    // // Pairs and labels as FlexItems
-    // FlexItem flexDryWetFB = makeFlexPairAndLabel(dryWetFB);
-    // FlexItem flexFeedbackFB = makeFlexPairAndLabel(feedbackFB);
-    // FlexItem flexDelayTimeFB = makeFlexPairAndLabel(delayTimeFB);
-    // FlexItem flexCutoffLP_FB = makeFlexPairAndLabel(cutoffLP_FB);
-    // FlexItem flexCutoffHP_FB = makeFlexPairAndLabel(cutoffHP_FB);
-
-    //==============================================================================
-    // Add rotary pairs with labels to layout
-    // fb.items.add(flexDryWetFB);
-    // fb.items.add(flexFeedbackFB);
-    // fb.items.add(flexDelayTimeFB);
-    // fb.items.add(flexCutoffLP_FB);
-    // fb.items.add(flexCutoffHP_FB);
-}
-
-//==============================================================================
-// FlexBox helpers
-
-void LR_RotaryGroup::setupSliderAndLabel(juce::FlexBox &fb)
-{
-    fb.flexDirection = juce::FlexBox::Direction::column;
-    fb.justifyContent = juce::FlexBox::JustifyContent::center;
-    fb.alignItems = juce::FlexBox::AlignItems::center;
-    fb.flexWrap = juce::FlexBox::Wrap::noWrap;
-}
-
-void LR_RotaryGroup::setupSliderPair(juce::FlexBox &fb)
-{
-    fb.flexDirection = juce::FlexBox::Direction::row;
-    fb.justifyContent = juce::FlexBox::JustifyContent::center;
-    fb.alignItems = juce::FlexBox::AlignItems::center;
-    fb.flexWrap = juce::FlexBox::Wrap::noWrap;
-}
-
-void LR_RotaryGroup::setupSliderPairAndLabel(juce::FlexBox &fb)
-{
-    fb.flexDirection = juce::FlexBox::Direction::column;
-    fb.justifyContent = juce::FlexBox::JustifyContent::spaceAround;
-    fb.alignItems = juce::FlexBox::AlignItems::center;
-    fb.flexWrap = juce::FlexBox::Wrap::noWrap;
-}
-
-juce::FlexItem LR_RotaryGroup::makeFlexSlider(juce::Slider &s)
-{
-    juce::FlexItem flexItem(s);
-
-    flexItem = flexItem.withMinWidth(MIN_ROTARY_WIDTH)
-                   .withMinHeight(MIN_SLIDER_HEIGHT)
-                   .withFlex(1.0f);
-
-    return flexItem;
-}
-
-juce::FlexItem LR_RotaryGroup::makeFlexLabel(juce::Label &l)
-{
-    juce::FlexItem flexItem(l);
-
-    flexItem = flexItem.withMinWidth(MIN_ROTARY_WIDTH)
-                   .withMinHeight(MIN_SLIDER_LABEL_HEIGHT)
-                   .withFlex(1.0f);
-
-    return flexItem;
-}
-
-juce::FlexItem LR_RotaryGroup::makeFlexPair(juce::FlexBox &pair)
-{
-    juce::FlexItem flexItem(pair);
-
-    flexItem = flexItem.withMinWidth(2 * MIN_ROTARY_WIDTH)
-                   .withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT)
-                   .withFlex(1.0f);
-
-    return flexItem;
-}
-
-juce::FlexItem LR_RotaryGroup::makeFlexPairAndLabel(juce::FlexBox &pairAndLabel)
-{
-    juce::FlexItem flexItem(pairAndLabel);
-
-    flexItem = flexItem.withMinWidth(2 * MIN_ROTARY_WIDTH)
-                   .withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT)
-                   .withFlex(1.0f);
-
-    return flexItem;
+    fb.items.add(flexDryWetRPWL, flexFeedbackRPWL, flexDelayTimeRPWL, flexCutoffLP_RPWL, flexCutoffHP_RPWL); fb.performLayout(getLocalBounds());
 }
