@@ -40,7 +40,7 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     const int centerX = static_cast<int>(width / 2.0f);
     const int centerY = static_cast<int>(height / 2.0f);
 
-    const int spacing = 0.1 * width;
+    const int spacing = 0.13 * width;
     const float lineWidth = 0.02 * width;
 
     juce::PathStrokeType stroke(lineWidth);
@@ -50,13 +50,6 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     height = juce::jmin(width, height);
 
     //==============================================================================
-    // Knob background
-    juce::Path circlePath;
-    circlePath.addEllipse(spacing, spacing, width - 2 * spacing, height - 2 * spacing);
-    g.setColour(findColour(juce::Slider::rotarySliderFillColourId));
-    g.fillPath(circlePath);
-
-    //==============================================================================
     // Knob outline
     g.setColour(findColour(juce::Slider::rotarySliderOutlineColourId));
     juce::Path outlinePath;
@@ -64,9 +57,16 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     g.strokePath(outlinePath, stroke);
 
     //==============================================================================
+    // Knob background
+    juce::Path circlePath;
+    circlePath.addEllipse(spacing, spacing, width - 2 * spacing, height - 2 * spacing);
+    g.setColour(findColour(juce::Slider::rotarySliderFillColourId));
+    g.fillPath(circlePath);
+
+    //==============================================================================
     // Pointer
     juce::Path pointerPath;
-    const int pointerWidth = 0.1 * width;
+    const int pointerWidth = 0.075 * width;
 
     // Outline
     pointerPath.addEllipse((width - pointerWidth) * 0.5f, 1.25f * spacing + 0.25 * pointerWidth, pointerWidth, pointerWidth);
