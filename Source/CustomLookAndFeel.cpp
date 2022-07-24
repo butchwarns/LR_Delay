@@ -41,7 +41,7 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     const int centerY = static_cast<int>(height / 2.0f);
 
     const int spacing = 0.13 * width;
-    const float lineWidth = 0.02 * width;
+    const float lineWidth = 0.04 * width;
 
     juce::PathStrokeType stroke(lineWidth);
 
@@ -76,6 +76,7 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     pointerPath.applyTransform(juce::AffineTransform::rotation((rotaryEndAngle - rotaryStartAngle) * sliderPosProportional, width / 2, height / 2));
 
     g.setColour(findColour(juce::Slider::rotarySliderOutlineColourId));
+    stroke.setStrokeThickness(lineWidth / 2.0f);
     g.strokePath(pointerPath, stroke);
 }
 
