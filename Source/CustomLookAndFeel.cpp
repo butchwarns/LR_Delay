@@ -45,6 +45,10 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
 
     juce::PathStrokeType stroke(lineWidth);
 
+    // Set height and width so that the rotary will always be drawn as a circle, and not elliptical
+    width = juce::jmin(width, height);
+    height = juce::jmin(width, height);
+
     //==============================================================================
     // Knob background
     juce::Path circlePath;
