@@ -69,10 +69,6 @@ void UtilityRotaryGroup::resized()
     flexDriveRWL = flexDriveRWL.withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
     flexStereoWidthRWL = flexStereoWidthRWL.withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
 
-    // flexVolumeRWL = flexVolumeRWL.withFlex(1.0f, 0.0f, 0.0f);
-    // flexDriveRWL = flexDriveRWL.withFlex(1.0f, 0.0f, 0.0f);
-    // flexStereoWidthRWL = flexStereoWidthRWL.withFlex(1.0f, 0.0f, 0.0f);
-
     //==============================================================================
     // Add to FlexBox and layout
     fb.items.add(flexVolumeRWL, flexDriveRWL, flexStereoWidthRWL);
