@@ -82,7 +82,7 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
 //==============================================================================
 juce::Font CustomLookAndFeel::getLabelFont(juce::Label &l)
 {
-    return getManropeExtraBoldFont().withHeight(22.0f);
+    return getManropeExtraBoldFont().withHeight(22.0f).withExtraKerningFactor(0.03f);
 }
 
 juce::Font CustomLookAndFeel::getManropeLightFont()
