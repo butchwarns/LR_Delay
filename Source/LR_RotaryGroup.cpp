@@ -114,8 +114,8 @@ LR_RotaryGroup::~LR_RotaryGroup() {}
 
 void LR_RotaryGroup::paint(juce::Graphics &g) 
 {
-    g.setColour(juce::Colours::white);
-    g.drawRect(getLocalBounds());
+    // g.setColour(juce::Colours::white);
+    // g.drawRect(getLocalBounds());
 }
 
 void LR_RotaryGroup::resized()

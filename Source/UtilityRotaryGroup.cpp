@@ -44,8 +44,8 @@ UtilityRotaryGroup::~UtilityRotaryGroup() {}
 
 void UtilityRotaryGroup::paint(juce::Graphics &g)
 {
-    g.setColour(juce::Colours::white);
-    g.drawRect(getLocalBounds());
+    // g.setColour(juce::Colours::white);
+    // g.drawRect(getLocalBounds());
 }
 
 void UtilityRotaryGroup::resized()
