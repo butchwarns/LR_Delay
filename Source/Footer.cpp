@@ -58,12 +58,12 @@ void Footer::resized()
     fb.alignItems = FlexBox::AlignItems::center;
 
     juce::FlexItem flexCoprLabel = juce::FlexItem(coprLabel)
-                                        .withMinWidth(static_cast<float>(width) * 0.5f)
+                                        .withMinWidth(static_cast<float>(width) * 0.25f)
                                         .withMinHeight(MIN_HEADER_HEIGHT)
                                         .withFlex(1.0f);
 
     juce::FlexItem flexWebsiteLabel = juce::FlexItem(websiteLabel)
-                                        .withMinWidth(static_cast<float>(width) * 0.5f)
+                                        .withMinWidth(static_cast<float>(width) * 0.75f)
                                         .withMinHeight(MIN_HEADER_HEIGHT)
                                         .withFlex(1.0f);
 

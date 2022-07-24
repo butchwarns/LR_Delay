@@ -11,7 +11,7 @@ Header::Header()
 
     //==============================================================================
     // Setup Labels
-    titleLabel.setText("LR DELAY", juce::NotificationType::dontSendNotification);
+    titleLabel.setText("LR_DELAY", juce::NotificationType::dontSendNotification);
     titleLabel.setJustificationType(juce::Justification::left);
 
     versionLabel.setText("V0.1.0", juce::NotificationType::dontSendNotification);
@@ -48,12 +48,12 @@ void Header::resized()
     fb.alignItems = FlexBox::AlignItems::center;
 
     juce::FlexItem flexTitleLabel = juce::FlexItem(titleLabel)
-                                        .withMinWidth(static_cast<float>(width) * 0.5f)
+                                        .withMinWidth(static_cast<float>(width) * 0.75f)
                                         .withMinHeight(MIN_HEADER_HEIGHT)
                                         .withFlex(1.0f);
 
     juce::FlexItem flexVersionLabel = juce::FlexItem(versionLabel)
-                                        .withMinWidth(static_cast<float>(width) * 0.5f)
+                                        .withMinWidth(static_cast<float>(width) * 0.25f)
                                         .withMinHeight(MIN_HEADER_HEIGHT)
                                         .withFlex(1.0f);
 

@@ -40,17 +40,14 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     const int centerX = static_cast<int>(width / 2.0f);
     const int centerY = static_cast<int>(height / 2.0f);
 
-    const int spacing = 0.1 * width;
-    const float lineWidth = 0.02 * width;
+    const int spacing = 0.13 * width;
+    const float lineWidth = 0.04 * width;
 
     juce::PathStrokeType stroke(lineWidth);
 
-    //==============================================================================
-    // Knob background
-    juce::Path circlePath;
-    circlePath.addEllipse(spacing, spacing, width - 2 * spacing, height - 2 * spacing);
-    g.setColour(findColour(juce::Slider::rotarySliderFillColourId));
-    g.fillPath(circlePath);
+    // Set height and width so that the rotary will always be drawn as a circle, and not elliptical
+    width = juce::jmin(width, height);
+    height = juce::jmin(width, height);
 
     //==============================================================================
     // Knob outline
@@ -60,9 +57,16 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     g.strokePath(outlinePath, stroke);
 
     //==============================================================================
+    // Knob background
+    juce::Path circlePath;
+    circlePath.addEllipse(spacing, spacing, width - 2 * spacing, height - 2 * spacing);
+    g.setColour(findColour(juce::Slider::rotarySliderFillColourId));
+    g.fillPath(circlePath);
+
+    //==============================================================================
     // Pointer
     juce::Path pointerPath;
-    const int pointerWidth = 0.1 * width;
+    const int pointerWidth = 0.075 * width;
 
     // Outline
     pointerPath.addEllipse((width - pointerWidth) * 0.5f, 1.25f * spacing + 0.25 * pointerWidth, pointerWidth, pointerWidth);
@@ -72,13 +76,14 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics &g, int x, int y, int wi
     pointerPath.applyTransform(juce::AffineTransform::rotation((rotaryEndAngle - rotaryStartAngle) * sliderPosProportional, width / 2, height / 2));
 
     g.setColour(findColour(juce::Slider::rotarySliderOutlineColourId));
+    stroke.setStrokeThickness(lineWidth / 2.0f);
     g.strokePath(pointerPath, stroke);
 }
 
 //==============================================================================
 juce::Font CustomLookAndFeel::getLabelFont(juce::Label &l)
 {
-    return getManropeExtraBoldFont().withHeight(22.0f);
+    return getManropeExtraBoldFont().withHeight(22.0f).withExtraKerningFactor(0.03f);
 }
 
 juce::Font CustomLookAndFeel::getManropeLightFont()

@@ -12,14 +12,14 @@
 //==============================================================================
 LR_DelayAudioProcessor::LR_DelayAudioProcessor() : parameters(*this, &undoManager, "parameters", getParameterLayout()),
 #ifndef JucePlugin_PreferredChannelConfigurations
-    AudioProcessor(BusesProperties()
+                                                   AudioProcessor(BusesProperties()
 #if !JucePlugin_IsMidiEffect
 #if !JucePlugin_IsSynth
-                         .withInput("Input", juce::AudioChannelSet::stereo(), true)
+                                                                      .withInput("Input", juce::AudioChannelSet::stereo(), true)
 #endif
-                         .withOutput("Output", juce::AudioChannelSet::stereo(), true)
+                                                                      .withOutput("Output", juce::AudioChannelSet::stereo(), true)
 #endif
-      )
+                                                   )
 #endif
 {
     //==============================================================================
@@ -149,6 +149,21 @@ void LR_DelayAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBloc
 
     // Init Faust dsp
     fDELAY->init(static_cast<int>(sampleRate * OVERSAMPLING_FACTOR));
+
+    // "Touch" all parameters to propagate the restored state
+    parameterChanged("drive", *drive);
+    parameterChanged("volume", *volume);
+    parameterChanged("dryWet_L", *dryWet_L);
+    parameterChanged("dryWet_R", *dryWet_R);
+    parameterChanged("feedback_L", *feedback_L);
+    parameterChanged("feedback_R", *feedback_R);
+    parameterChanged("delayTime_L", *delayTime_L);
+    parameterChanged("delayTime_R", *delayTime_R);
+    parameterChanged("cutoffLP_L", *cutoffLP_L);
+    parameterChanged("cutoffLP_R", *cutoffLP_R);
+    parameterChanged("cutoffHP_L", *cutoffHP_L);
+    parameterChanged("cutoffHP_R", *cutoffHP_R);
+    parameterChanged("stereoWidth", *stereoWidth);
 }
 
 void LR_DelayAudioProcessor::releaseResources()
@@ -264,7 +279,8 @@ void LR_DelayAudioProcessor::setStateInformation(const void *data, int sizeInByt
     {
         if (xmlState->hasTagName(parameters.state.getType()))
         {
-            parameters.replaceState(juce::ValueTree::fromXml(*xmlState));
+            juce::ValueTree state = juce::ValueTree::fromXml(*xmlState);
+            parameters.replaceState(state);
         }
     }
 }
@@ -283,6 +299,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout LR_DelayAudioProcessor::getP
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout(
         {
+            // Do not forget to add new parameters to setStateInformation() to enable restoring the state!
             std::make_unique<juce::AudioParameterFloat>("drive", "DRIVE", juce::NormalisableRange<float>(-12.0f, 36.0f, 0.1f, 1.0f), 0.0f),
             std::make_unique<juce::AudioParameterFloat>("volume", "VOLUME", juce::NormalisableRange<float>(-24.0f, 12.0f, 0.1f, 1.0f), 0.0f),
             std::make_unique<juce::AudioParameterFloat>("dryWet_L", "DRY_WET_L", juce::NormalisableRange<float>(0.0f, 100.0f, 0.1f), 0.0f),

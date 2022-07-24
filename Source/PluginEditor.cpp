@@ -13,12 +13,17 @@
 LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcessor &p)
     : AudioProcessorEditor(&p), audioProcessor(p), rotaryGroupLR(p.getApvts()), utilityRotaryGroup(p.getApvts())
 {
-    // Set main window size
-    setSize(400, 900);
-    setResizable(false, true);
-    const int minWidth = static_cast<int>(1.15f * (MIN_UTIL_WIDTH + MIN_LR_WIDTH));
-    const int minHeight = static_cast<int>(1.15f * (MIN_HEADER_HEIGHT + MIN_FOOTER_HEIGHT + 5 * MIN_SLIDER_WITH_LABEL_HEIGHT));
-    setResizeLimits(minWidth, minHeight, getScreenBounds().getWidth(), getScreenBounds().getHeight());
+    // Set main window size behaviour
+    setResizable(true, true);
+    const int minWidth = MIN_UTIL_WIDTH + MIN_LR_WIDTH;
+    const int minHeight = MIN_HEADER_HEIGHT + MIN_FOOTER_HEIGHT + 5 * MIN_SLIDER_WITH_LABEL_HEIGHT;
+
+    const juce::Rectangle<int> screenBounds = juce::Desktop::getInstance().getDisplays().getDisplayForPoint(juce::Point<int>(0, 0))->userArea;
+    const int screenWidth = screenBounds.getWidth();
+    const int screenHeight = screenBounds.getHeight();
+    setResizeLimits(minWidth, minHeight, screenWidth, screenHeight);
+
+    setSize(minWidth, minHeight);
 
     //==============================================================================
     // Add as children and show all components
@@ -58,14 +63,15 @@ void LR_DelayAudioProcessorEditor::resized()
     const float height = localBoundsFloat.getHeight();
 
     // Layout header and footer
-    const int headerHeight = juce::jmax(static_cast<int>(0.05f * height), MIN_HEADER_HEIGHT);
-    const int footerHeight = juce::jmax(static_cast<int>(0.05f * height), MIN_FOOTER_HEIGHT);
+    const int headerHeight = juce::jmax(static_cast<int>(0.02f * height), MIN_HEADER_HEIGHT);
+    const int footerHeight = juce::jmax(static_cast<int>(0.02f * height), MIN_FOOTER_HEIGHT);
 
     Rect headerArea = localBounds.removeFromTop(headerHeight);
     Rect footerArea = localBounds.removeFromBottom(footerHeight);
 
     // Layout utility area (minimum size)
-    const int utilWidth = juce::jmax(static_cast<int>(width * (1.0f - 1.0f / PHI)), MIN_UTIL_WIDTH);
+    // const int utilWidth = juce::jmax(static_cast<int>(width * (1.0f - 1.0f / PHI)), MIN_UTIL_WIDTH);
+    const int utilWidth = juce::jmax(MIN_UTIL_WIDTH, static_cast<int>(width / 3.0f));
     Rect utilArea = localBounds.removeFromLeft(utilWidth);
     Rect &rotaryLRArea = localBounds;
 

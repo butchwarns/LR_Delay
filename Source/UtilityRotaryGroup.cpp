@@ -44,8 +44,8 @@ UtilityRotaryGroup::~UtilityRotaryGroup() {}
 
 void UtilityRotaryGroup::paint(juce::Graphics &g)
 {
-    g.setColour(juce::Colours::white);
-    g.drawRect(getLocalBounds());
+    // g.setColour(juce::Colours::white);
+    // g.drawRect(getLocalBounds());
 }
 
 void UtilityRotaryGroup::resized()
@@ -68,10 +68,6 @@ void UtilityRotaryGroup::resized()
     flexVolumeRWL = flexVolumeRWL.withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
     flexDriveRWL = flexDriveRWL.withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
     flexStereoWidthRWL = flexStereoWidthRWL.withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
-
-    // flexVolumeRWL = flexVolumeRWL.withFlex(1.0f, 0.0f, 0.0f);
-    // flexDriveRWL = flexDriveRWL.withFlex(1.0f, 0.0f, 0.0f);
-    // flexStereoWidthRWL = flexStereoWidthRWL.withFlex(1.0f, 0.0f, 0.0f);
 
     //==============================================================================
     // Add to FlexBox and layout
