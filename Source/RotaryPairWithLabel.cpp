@@ -74,7 +74,7 @@ void RotaryPairWithLabel::resized()
     flexSlider1 = flexSlider1.withFlex(8.0f, 0.0f, 0.0f);
     flexSlider2 = flexSlider2.withFlex(8.0f, 0.0f, 0.0f);
 
-    flexLabel = flexLabel.withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_LABEL_HEIGHT);
+    flexLabel = flexLabel.withMinWidth(2 * MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_LABEL_HEIGHT);
     flexLabel = flexLabel.withFlex(2.0f, 0.0f, 0.0f).withAlignSelf(FI::AlignSelf::center);
 
     // Make flex rotary pair
