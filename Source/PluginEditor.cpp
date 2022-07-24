@@ -13,16 +13,17 @@
 LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcessor &p)
     : AudioProcessorEditor(&p), audioProcessor(p), rotaryGroupLR(p.getApvts()), utilityRotaryGroup(p.getApvts())
 {
-    // Set main window size
+    // Set main window size behaviour
     setResizable(true, true);
     const int minWidth = MIN_UTIL_WIDTH + MIN_LR_WIDTH;
     const int minHeight = MIN_HEADER_HEIGHT + MIN_FOOTER_HEIGHT + 5 * MIN_SLIDER_WITH_LABEL_HEIGHT;
-    setSize(minWidth, minHeight);
 
     const juce::Rectangle<int> screenBounds = juce::Desktop::getInstance().getDisplays().getDisplayForPoint(juce::Point<int>(0, 0))->userArea;
     const int screenWidth = screenBounds.getWidth();
     const int screenHeight = screenBounds.getHeight();
     setResizeLimits(minWidth, minHeight, screenWidth, screenHeight);
+
+    setSize(minWidth, minHeight);
 
     //==============================================================================
     // Add as children and show all components
