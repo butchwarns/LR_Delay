@@ -300,7 +300,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout LR_DelayAudioProcessor::getP
     juce::AudioProcessorValueTreeState::ParameterLayout layout(
         {
             // Do not forget to add new parameters to setStateInformation() to enable restoring the state!
-            std::make_unique<juce::AudioParameterFloat>("drive", "DRIVE", juce::NormalisableRange<float>(-12.0f, 36.0f, 0.1f, 1.0f), 0.0f),
+            std::make_unique<juce::AudioParameterFloat>("drive", "DRIVE", juce::NormalisableRange<float>(-12.0f, 16.0f, 0.1f, 1.0f), 0.0f),
             std::make_unique<juce::AudioParameterFloat>("volume", "VOLUME", juce::NormalisableRange<float>(-24.0f, 12.0f, 0.1f, 1.0f), 0.0f),
             std::make_unique<juce::AudioParameterFloat>("dryWet_L", "DRY_WET_L", juce::NormalisableRange<float>(0.0f, 100.0f, 0.1f), 0.0f),
             std::make_unique<juce::AudioParameterFloat>("dryWet_R", "DRY_WET_R", juce::NormalisableRange<float>(0.0f, 100.0f, 0.1f), 0.0f),
