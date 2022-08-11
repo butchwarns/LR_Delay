@@ -55,10 +55,10 @@ void RotaryWithLabel::resized()
     FI flexLabel(label);
 
     flexSlider = flexSlider.withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_HEIGHT);
-    flexSlider = flexSlider.withFlex(8.0f, 0.0f, 0.0f);
+    flexSlider = flexSlider.withFlex(8.0f);
 
     flexLabel = flexLabel.withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_LABEL_HEIGHT);
-    flexLabel = flexLabel.withFlex(2.0f, 0.0f, 0.0f);
+    flexLabel = flexLabel.withFlex(2.0f);
 
     // Add to the box
     fb.items.add(flexLabel, flexSlider);
