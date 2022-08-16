@@ -48,9 +48,9 @@ All single controls on the left affect both channels. The dual controls are sepa
 Faust is a great tool for writing music DSP code and integrates nicely with C++ projects, but it has its drawbacks. Prototyping is fast and easy with Faust and getting visual output in the form of block diagrams can be most helpful. You can create a working standalone app with user interface in no time. One of the biggest lacking features of the Faust language is multirate support. The LR_Delay plugin therefore runs the whole algorithm at an oversampled rate to reduce aliasing introduced by the nonlinearities. The Faust devs are well aware of this and language extensions have been proposed. (At the time of being this is still the only option though as far as I'm aware.) For more complex setups, the way to go I reckon is using multiple Faust DSP objects with surrounding C++ code.
 
 ## License
-All JUCE code files are released under the GPLv3 license.  
-Faust code and it's generated C++ code file are licensed under the [MIT](https://opensource.org/licenses/MIT) license.  
-The Manrope font files are released under the SIL Open Font License, version 1.1.  
+All JUCE code files are released under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.en.html).  
+Faust code and it's generated C++ code file are licensed under the [MIT license](https://opensource.org/licenses/MIT).  
+The Manrope font files are released under the [SIL Open Font License, version 1.1](https://opensource.org/licenses/OFL-1.1).  
 
 The graphics, my name and any logos present are proprietary and fall under copyright.  
 
