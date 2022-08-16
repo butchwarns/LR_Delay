@@ -4,7 +4,7 @@
 A stereo delay plugin which emphasizes free (non beat-synced) controls for the individual channels. Built with [Faust](https://faust.grame.fr/) and [JUCE](https://juce.com/).
 
 ## Motivation
-Delay effects always seemed kind of interesting to me, so when I wanted to see how possible it is to create an audio plugin with DSP written in Faust, it was naturally one of the choices. Also, I believe that delays have a much stronger effect in a musical context if they are not synced exactly to the beat or inbetween channels. 
+Delay effects always seemed kind of interesting to me. I wanted to see how possible it is to create an audio plugin with DSP written in Faust. A delay was naturally one of the choices for a project. Design of the plugin architecture was based on my belief that delays have a much stronger effect in a musical context if they are not synced exactly to the beat or inbetween channels.
 
 ## A word of caution
 The project is currently in pre-release state and there might be breaking changes. I do my best to test everything, but the occasional bug can still find it's way into the plugin. Please don't hesitate to report bugs if you find some!
