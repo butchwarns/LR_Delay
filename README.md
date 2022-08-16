@@ -52,4 +52,6 @@ All JUCE code files are released under the GPLv3 license.
 Faust code and it's generated C++ code file are licensed under the [MIT](https://opensource.org/licenses/MIT) license.
 The Manrope font files are released under the SIL Open Font License, version 1.1.  
 
+The graphics, my name any logos present are proprietary and fall under copyright.
+
 Copyright © 2022 Butch Warns
