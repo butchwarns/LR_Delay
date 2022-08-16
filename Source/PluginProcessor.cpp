@@ -1,7 +1,23 @@
 /*
   ==============================================================================
 
-    This file contains the basic framework code for a JUCE plugin processor.
+    PluginProcessor.cpp
+
+    Copyright (C) 2022 Butch Warns
+    contact@butchwarns.de
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
   ==============================================================================
 */
@@ -300,7 +316,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout LR_DelayAudioProcessor::getP
     juce::AudioProcessorValueTreeState::ParameterLayout layout(
         {
             // Do not forget to add new parameters to setStateInformation() to enable restoring the state!
-            std::make_unique<juce::AudioParameterFloat>("drive", "DRIVE", juce::NormalisableRange<float>(-12.0f, 36.0f, 0.1f, 1.0f), 0.0f),
+            std::make_unique<juce::AudioParameterFloat>("drive", "DRIVE", juce::NormalisableRange<float>(-12.0f, 16.0f, 0.1f, 1.0f), 0.0f),
             std::make_unique<juce::AudioParameterFloat>("volume", "VOLUME", juce::NormalisableRange<float>(-24.0f, 12.0f, 0.1f, 1.0f), 0.0f),
             std::make_unique<juce::AudioParameterFloat>("dryWet_L", "DRY_WET_L", juce::NormalisableRange<float>(0.0f, 100.0f, 0.1f), 0.0f),
             std::make_unique<juce::AudioParameterFloat>("dryWet_R", "DRY_WET_R", juce::NormalisableRange<float>(0.0f, 100.0f, 0.1f), 0.0f),

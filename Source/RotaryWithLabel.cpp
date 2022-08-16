@@ -2,8 +2,22 @@
   ==============================================================================
 
     RotaryWithLabel.cpp
-    Created: 21 Jul 2022 9:36:05am
-    Author:  butch
+
+    Copyright (C) 2022 Butch Warns
+    contact@butchwarns.de
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
   ==============================================================================
 */
@@ -55,10 +69,10 @@ void RotaryWithLabel::resized()
     FI flexLabel(label);
 
     flexSlider = flexSlider.withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_HEIGHT);
-    flexSlider = flexSlider.withFlex(8.0f, 0.0f, 0.0f);
+    flexSlider = flexSlider.withFlex(8.0f);
 
     flexLabel = flexLabel.withMinWidth(MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_LABEL_HEIGHT);
-    flexLabel = flexLabel.withFlex(2.0f, 0.0f, 0.0f);
+    flexLabel = flexLabel.withFlex(2.0f);
 
     // Add to the box
     fb.items.add(flexLabel, flexSlider);
