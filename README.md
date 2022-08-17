@@ -41,7 +41,7 @@ The project comes preconfigured for a unix-based system! Here you need to only i
 If you make any changes to the Faust code the compilation script in the `dsp` directory can be used to generate the appropriate C++ header.  
 
 ## How to use?
-Turn the knobs and listen..
+Turn the knobs and listen..  
 All single controls on the left affect both channels. The dual controls are separated for L and R.
 
 ## What about Faust?
