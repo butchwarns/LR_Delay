@@ -20,16 +20,19 @@ p_feedback_R = vslider("feedback_R[unit:%][style:knob]", 0.0, 0.0, 100.0, 0.1) /
 p_delayTime_L = vslider("delayTime_L[unit:ms][style:knob][scale:log]", 0.0, 0.0, 1500.0, 0.01) * ma.SR / 1000.0 : si.smoo;
 p_delayTime_R = vslider("delayTime_R[unit:ms][style:knob][scale:log]", 0.0, 0.0, 1500.0, 0.01) * ma.SR / 1000.0 : si.smoo;
 
+p_preDelay_L = vslider("preDelay_L[unit:ms][style:knob][scale:log]", 0.0, 0.0, 1500.0, 0.01) * ma.SR / 1000.0 : si.smoo;
+p_preDelay_R = vslider("preDelay_R[unit:ms][style:knob][scale:log]", 0.0, 0.0, 1500.0, 0.01) * ma.SR / 1000.0 : si.smoo;
+
 p_width = vslider("stereoWidth[unit:%][style:knob]", 100, 0, 100, 1) / 100;
 
 // Left channel
-voice_L = _ <: delayLoop_L * p_dryWet_L, *(1 - p_dryWet_L) :> *(p_volume);
+voice_L = _ <: (de.sdelay(maxDelay, interpTime, p_preDelay_L) : delayLoop_L) * p_dryWet_L, *(1 - p_dryWet_L) :> *(p_volume);
 delayLoop_L = *(p_drive) : aa.tanh1 : /(p_drive) : (+ : delay_L) ~ (*(p_feedback_L) : feedbackChain_L);
 feedbackChain_L = ve.sallenKeyOnePoleLPF(p_cutoffLP_L) : ve.sallenKeyOnePoleHPF(p_cutoffHP_L);
 delay_L = de.sdelay(maxDelay, interpTime, p_delayTime_L);
 
 // Right channel
-voice_R = _ <: delayLoop_R * p_dryWet_R, *(1 - p_dryWet_R) :> *(p_volume);
+voice_R = _ <: (de.sdelay(maxDelay, interpTime, p_preDelay_R) : delayLoop_R) * p_dryWet_R, *(1 - p_dryWet_R) :> *(p_volume);
 delayLoop_R = *(p_drive) : aa.tanh1 : /(p_drive) : (+ : delay_R) ~ (*(p_feedback_R) : feedbackChain_R);
 feedbackChain_R = ve.sallenKeyOnePoleLPF(p_cutoffLP_R) : ve.sallenKeyOnePoleHPF(p_cutoffHP_R);
 delay_R = de.sdelay(maxDelay, interpTime, p_delayTime_R);
