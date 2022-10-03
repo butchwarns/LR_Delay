@@ -46,6 +46,7 @@ private:
     RotaryPairWithLabel dryWetRPWL;
     RotaryPairWithLabel feedbackRPWL;
     RotaryPairWithLabel delayTimeRPWL;
+    RotaryPairWithLabel preDelayRPWL;
     RotaryPairWithLabel cutoffLP_RPWL;
     RotaryPairWithLabel cutoffHP_RPWL;
 

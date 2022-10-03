@@ -34,6 +34,7 @@ LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvt
     addAndMakeVisible(&dryWetRPWL);
     addAndMakeVisible(&feedbackRPWL);
     addAndMakeVisible(&delayTimeRPWL);
+    addAndMakeVisible(&preDelayRPWL);
     addAndMakeVisible(&cutoffLP_RPWL);
     addAndMakeVisible(&cutoffHP_RPWL);
 
@@ -49,6 +50,9 @@ LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvt
 
     delayTimeRPWL.rotary1.setSliderStyle(SliderStyle::RotaryVerticalDrag);
     delayTimeRPWL.rotary2.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+
+    preDelayRPWL.rotary1.setSliderStyle(SliderStyle::RotaryVerticalDrag);
+    preDelayRPWL.rotary2.setSliderStyle(SliderStyle::RotaryVerticalDrag);
 
     cutoffLP_RPWL.rotary1.setSliderStyle(SliderStyle::RotaryVerticalDrag);
     cutoffLP_RPWL.rotary2.setSliderStyle(SliderStyle::RotaryVerticalDrag);
@@ -67,6 +71,9 @@ LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvt
     delayTimeRPWL.rotary1.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
     delayTimeRPWL.rotary2.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
 
+    preDelayRPWL.rotary1.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+    preDelayRPWL.rotary2.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
+
     cutoffLP_RPWL.rotary1.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
     cutoffLP_RPWL.rotary2.setTextBoxStyle(juce::Slider::TextBoxBelow, false, MIN_ROTARY_WIDTH, MIN_SLIDER_TEXTBOX_HEIGHT);
 
@@ -81,6 +88,9 @@ LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvt
 
     delayTimeRPWL.rotary1.setTextValueSuffix(" ms");
     delayTimeRPWL.rotary2.setTextValueSuffix(" ms");
+
+    preDelayRPWL.rotary1.setTextValueSuffix(" ms");
+    preDelayRPWL.rotary2.setTextValueSuffix(" ms");
 
     cutoffLP_RPWL.rotary1.setTextValueSuffix(" Hz");
     cutoffLP_RPWL.rotary2.setTextValueSuffix(" Hz");
@@ -99,6 +109,9 @@ LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvt
     delayTimeRPWL.label.setText("DELAY TIME", juce::NotificationType::dontSendNotification);
     delayTimeRPWL.label.setJustificationType(juce::Justification::centred);
 
+    preDelayRPWL.label.setText("PRE DELAY", juce::NotificationType::dontSendNotification);
+    preDelayRPWL.label.setJustificationType(juce::Justification::centred);
+
     cutoffLP_RPWL.label.setText("LP CUTOFF", juce::NotificationType::dontSendNotification);
     cutoffLP_RPWL.label.setJustificationType(juce::Justification::centred);
 
@@ -116,6 +129,9 @@ LR_RotaryGroup::LR_RotaryGroup(juce::AudioProcessorValueTreeState &apvts) : apvt
 
     delayTimeRPWL.sliderAttachment1.reset(new SliderAttachment(apvts, "delayTime_L", delayTimeRPWL.rotary1));
     delayTimeRPWL.sliderAttachment2.reset(new SliderAttachment(apvts, "delayTime_R", delayTimeRPWL.rotary2));
+
+    preDelayRPWL.sliderAttachment1.reset(new SliderAttachment(apvts, "preDelay_L", preDelayRPWL.rotary1));
+    preDelayRPWL.sliderAttachment2.reset(new SliderAttachment(apvts, "preDelay_R", preDelayRPWL.rotary2));
 
     cutoffLP_RPWL.sliderAttachment1.reset(new SliderAttachment(apvts, "cutoffLP_L", cutoffLP_RPWL.rotary1));
     cutoffLP_RPWL.sliderAttachment2.reset(new SliderAttachment(apvts, "cutoffLP_R", cutoffLP_RPWL.rotary2));
@@ -150,16 +166,18 @@ void LR_RotaryGroup::resized()
     FlexItem flexDryWetRPWL(dryWetRPWL);
     FlexItem flexFeedbackRPWL(feedbackRPWL);
     FlexItem flexDelayTimeRPWL(delayTimeRPWL);
+    FlexItem flexPreDelayRPWL(preDelayRPWL);
     FlexItem flexCutoffLP_RPWL(cutoffLP_RPWL);
     FlexItem flexCutoffHP_RPWL(cutoffHP_RPWL);
 
     flexDryWetRPWL = flexDryWetRPWL.withMinWidth(2 * MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
     flexFeedbackRPWL = flexFeedbackRPWL.withMinWidth(2 * MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
     flexDelayTimeRPWL = flexDelayTimeRPWL.withMinWidth(2 * MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
+    flexPreDelayRPWL = flexPreDelayRPWL.withMinWidth(2 * MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
     flexCutoffLP_RPWL = flexCutoffLP_RPWL.withMinWidth(2 * MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
     flexCutoffHP_RPWL = flexCutoffHP_RPWL.withMinWidth(2 * MIN_ROTARY_WIDTH).withMinHeight(MIN_SLIDER_WITH_LABEL_HEIGHT);
 
     //==============================================================================
     // Add to box and layout
-    fb.items.add(flexDryWetRPWL, flexFeedbackRPWL, flexDelayTimeRPWL, flexCutoffLP_RPWL, flexCutoffHP_RPWL); fb.performLayout(getLocalBounds());
+    fb.items.add(flexDryWetRPWL, flexFeedbackRPWL, flexDelayTimeRPWL, flexPreDelayRPWL, flexCutoffLP_RPWL, flexCutoffHP_RPWL); fb.performLayout(getLocalBounds());
 }
