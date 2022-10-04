@@ -44,7 +44,7 @@ JuceLibraryCode/
 # Builds and CMake
 Builds/
 builds_cmake/*
-!builds_cmake/build_cmake.sh
+!builds_cmake/*.sh
 CMakeLists.txt
 
 ################################################################################
