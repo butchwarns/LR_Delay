@@ -15,7 +15,7 @@ Functional work in progress. The GUI will probably get an overhaul someday and I
 A preset system as not yet been implemented.
  
 ## Screenshots
-![LR_Delay v0.1.0 User Interface](/pictures/LR_Delay_GUI_small.jpg?raw=true "LR_Delay v0.1.0 User Interface")
+![LR_Delay v0.1.0 User Interface](/pictures/LR_Delay_GUI.jpg "LR_Delay v0.1.0 User Interface")
 
 ## Tech/framework used
 *LR_Delay* is an audio plugin written in **JUCE**, so it can be compiled into most formats like **VST3** or **AU**.  
