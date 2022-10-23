@@ -15,7 +15,7 @@ Functional work in progress. The GUI will probably get an overhaul someday and I
 A preset system as not yet been implemented.
  
 ## Screenshots
-![LR_Delay v0.1.0 User Interface](/pictures/LR_Delay_GUI_small.jpg?raw=true "LR_Delay v0.1.0 User Interface")
+![LR_Delay v0.1.0 User Interface](/pictures/LR_Delay_GUI.jpg "LR_Delay v0.1.0 User Interface")
 
 ## Tech/framework used
 *LR_Delay* is an audio plugin written in **JUCE**, so it can be compiled into most formats like **VST3** or **AU**.  
@@ -29,7 +29,7 @@ The plugin is a simple stereo delay with mostly separated controls for the indiv
 Some effects in the feedback loop allow for tonal shaping of the "wet" parts of the signal.  
 By use of the *width* parameter, you can freely interpolate between a dual-mono (two taps) or a regular stereo.
 The delay line doesn't change pitch when the delay time is modulated.  
-Internal oversampling reduces aliasing from the feedback nonlinearity and helps with the virtaul analog filter responses.  
+Internal oversampling reduces aliasing from the feedback nonlinearities and helps with the virtual analog filter responses.  
 Very short delay times can create interesting timbres. (Be careful, as the output can get huge quickly!)
 
 ## Installation

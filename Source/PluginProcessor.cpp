@@ -62,6 +62,11 @@ LR_DelayAudioProcessor::LR_DelayAudioProcessor() : parameters(*this, &undoManage
     parameters.addParameterListener("delayTime_L", this);
     parameters.addParameterListener("delayTime_R", this);
 
+    preDelay_L = parameters.getRawParameterValue("preDelay_L");
+    preDelay_R = parameters.getRawParameterValue("preDelay_R");
+    parameters.addParameterListener("preDelay_L", this);
+    parameters.addParameterListener("preDelay_R", this);
+
     cutoffLP_L = parameters.getRawParameterValue("cutoffLP_L");
     cutoffLP_R = parameters.getRawParameterValue("cutoffLP_R");
     parameters.addParameterListener("cutoffLP_L", this);
@@ -175,6 +180,8 @@ void LR_DelayAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBloc
     parameterChanged("feedback_R", *feedback_R);
     parameterChanged("delayTime_L", *delayTime_L);
     parameterChanged("delayTime_R", *delayTime_R);
+    parameterChanged("preDelay_L", *preDelay_L);
+    parameterChanged("preDelay_R", *preDelay_R);
     parameterChanged("cutoffLP_L", *cutoffLP_L);
     parameterChanged("cutoffLP_R", *cutoffLP_R);
     parameterChanged("cutoffHP_L", *cutoffHP_L);
@@ -324,6 +331,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout LR_DelayAudioProcessor::getP
             std::make_unique<juce::AudioParameterFloat>("feedback_R", "FEEDBACK_R", juce::NormalisableRange<float>(0.0f, 100.0f, 0.1f), 0.0f),
             std::make_unique<juce::AudioParameterFloat>("delayTime_L", "DELAY_TIME_L", juce::NormalisableRange<float>(0.0f, 1500.0f, 0.1f, 0.75f), 0.0f),
             std::make_unique<juce::AudioParameterFloat>("delayTime_R", "DELAY_TIME_L", juce::NormalisableRange<float>(0.0f, 1500.0f, 0.1f, 0.75f), 0.0f),
+            std::make_unique<juce::AudioParameterFloat>("preDelay_L", "PRE_DELAY_L", juce::NormalisableRange<float>(0.0f, 1500.0f, 0.1f, 0.33f), 0.0f),
+            std::make_unique<juce::AudioParameterFloat>("preDelay_R", "PRE_DELAY_R", juce::NormalisableRange<float>(0.0f, 1500.0f, 0.1f, 0.33f), 0.0f),
             std::make_unique<juce::AudioParameterFloat>("cutoffLP_L", "CUTOFF_LP_L", juce::NormalisableRange<float>(20.0f, 20000.0f, 0.1f, 0.33f), 20000.0f),
             std::make_unique<juce::AudioParameterFloat>("cutoffLP_R", "CUTOFF_LP_R", juce::NormalisableRange<float>(20.0f, 20000.0f, 0.1f, 0.33f), 20000.0f),
             std::make_unique<juce::AudioParameterFloat>("cutoffHP_L", "CUTOFF_HP_L", juce::NormalisableRange<float>(20.0f, 20000.0f, 0.1f, 0.33f), 20.0f),

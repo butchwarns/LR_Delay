@@ -31,8 +31,7 @@ const float PHI = 1.618033988749;
 // Sliders and their labels
 const int MIN_SLIDER_LABEL_HEIGHT = 25;
 
-// const int MIN_ROTARY_WIDTH = 80;
-const int MIN_ROTARY_WIDTH = 100;
+const int MIN_ROTARY_WIDTH = 75;
 const int MIN_ROTARY_HEIGHT = MIN_ROTARY_WIDTH;
 
 const int MIN_SLIDER_TEXTBOX_HEIGHT = 25;

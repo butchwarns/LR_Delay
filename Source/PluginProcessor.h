@@ -104,6 +104,9 @@ private:
     std::atomic<float> *delayTime_L;
     std::atomic<float> *delayTime_R;
 
+    std::atomic<float> *preDelay_L;
+    std::atomic<float> *preDelay_R;
+
     std::atomic<float> *cutoffLP_L;
     std::atomic<float> *cutoffLP_R;
 

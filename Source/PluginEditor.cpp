@@ -31,7 +31,7 @@ LR_DelayAudioProcessorEditor::LR_DelayAudioProcessorEditor(LR_DelayAudioProcesso
 {
     // Set main window size behaviour
     const int minWidth = MIN_UTIL_WIDTH + MIN_LR_WIDTH;
-    const int minHeight = MIN_HEADER_HEIGHT + MIN_FOOTER_HEIGHT + 5 * MIN_SLIDER_WITH_LABEL_HEIGHT;
+    const int minHeight = MIN_HEADER_HEIGHT + MIN_FOOTER_HEIGHT + 6 * MIN_SLIDER_WITH_LABEL_HEIGHT;
 
     const juce::Rectangle<int> screenBounds = juce::Desktop::getInstance().getDisplays().getDisplayForPoint(juce::Point<int>(0, 0))->userArea;
     const int screenWidth = screenBounds.getWidth();
