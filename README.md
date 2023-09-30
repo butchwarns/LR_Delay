@@ -12,7 +12,6 @@ The project is currently in pre-release state and there might be breaking change
 
 ## Project status
 Functional work in progress. The GUI will probably get an overhaul someday and I do intend to add more features in the future.  
-A preset system as not yet been implemented.
  
 ## Screenshots
 ![LR_Delay v0.1.0 User Interface](/pictures/LR_Delay_GUI.jpg "LR_Delay v0.1.0 User Interface")
